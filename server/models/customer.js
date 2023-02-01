@@ -7,9 +7,9 @@ const Customer_Schema = mongoose.Schema({
         roll: { type: Number, required: true, unique: true },
         hostel: { type: String, enum: [''] },// TODO: Add hostels
     },
-    cart: [
-        { type: mongoose.Schema.Types.ObjectId, ref: "" } // TODO Add model name
-    ],
+    // cart: [
+    //     { type: mongoose.Schema.Types.ObjectId, ref: "" } // TODO Add model name
+    // ],
     fav_shops: [
         { type: mongoose.Schema.Types.ObjectId, ref: "" } // TODO Add model name
     ]
