@@ -49,7 +49,7 @@ const StartServer = () => {
     });
 
     /** Routes */
-    // router.use('/auth', authRouter);
+    router.use('/admin', require('./src/routes/admin'));
     // router.use('/user', authMiddleware, userRouter);
     // router.use('/trip', authMiddleware, tripRouter);
 

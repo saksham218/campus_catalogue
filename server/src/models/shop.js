@@ -25,7 +25,8 @@ const Shop_Schema = mongoose.Schema(
         menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
         approved: {
             status: { type: Boolean, default: false },
-            approver: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' }
+            approver: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', default: null },
+            date: { type: Date, default: null }
         }
     },
     {
