@@ -99,11 +99,17 @@ const rejectShop = async (req, res) => {
     res.status(200).json({ message: 'Shop Rejected', shop });
 };
 
+const getPendingShops = async (req, res) => {
+    const shops = await Shop.find({ 'approved.status': false });
+    res.status(200).json({ shops });
+};
+
 module.exports = {
     login,
     register,
     update,
     changePassword,
     approveShop,
-    rejectShop
+    rejectShop,
+    getPendingShops
 };

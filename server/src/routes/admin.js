@@ -9,5 +9,6 @@ router.put('/update', adminMiddleware, adminRoutes.update);
 router.put('/change-password', adminMiddleware, adminRoutes.changePassword);
 router.post('/approve-shop', adminMiddleware, adminRoutes.approveShop);
 router.post('/reject-shop', adminMiddleware, adminRoutes.rejectShop);
+router.get('/pending-shops', adminMiddleware, adminRoutes.getPendingShops);
 
 module.exports = router;
