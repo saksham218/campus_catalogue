@@ -8,9 +8,9 @@ const Customer_Schema = mongoose.Schema({
         hostel: {
             type: String,
             enum: ['Kameng', 'Barak', 'Lohit', 'Brahma', 'Disang', 'Manas', 'Dihing', 'Umiam', 'Siang', 'Kapili', 'Dhansiri', 'Subhansiri']
-        }
+        },
+        mobile_number: { type: Number }
     },
-    // cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "" }], // TODO Add model name
     fav_shops: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Shop' }]
 });
 
