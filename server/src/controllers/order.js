@@ -1,6 +1,6 @@
 const Order = require('../models/order');
 
-const getOrder = async (req, res) => {
+export const getOrder = async (req, res) => {
     const { id } = req.params.id
     try {
         const order = await Order.findById();
@@ -11,7 +11,7 @@ const getOrder = async (req, res) => {
     }
 };
 
-const getShop = async (req,res) => {
+export const getShop = async (req,res) => {
     const { id } = req.params.id
     try {
         const order = await Order.findById();
@@ -22,7 +22,7 @@ const getShop = async (req,res) => {
     }
 };
 
-const getUser = async (req, res) => {
+export const getUser = async (req, res) => {
     const { id } = req.params.id
     try {
         const order = await Order.findById();
@@ -34,7 +34,7 @@ const getUser = async (req, res) => {
 };
 
 
-const getItems = async (req, res) => {
+export const getItems = async (req, res) => {
     const { id } = req.params.id;
 
     try{
