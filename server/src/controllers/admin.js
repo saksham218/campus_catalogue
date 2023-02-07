@@ -71,36 +71,65 @@ const changePassword = async (req, res) => {
 };
 
 const approveShop = async (req, res) => {
-    const { shopId } = req.body;
-    if (!shopId) {
-        return res.status(400).json({ message: 'Invalid data' });
+    try {
+        const { shopId } = req.body;
+        if (!shopId) {
+            return res.status(400).json({ message: 'Invalid data' });
+        }
+        var shop = await Shop.findById(shopId);
+        if (!shop) {
+            return res.status(404).json({ message: 'Shop not found' });
+        }
+        if (shop.approved.status) {
+            return res.status(409).json({ message: 'Shop already approved' });
+        }
+        shop.approved.status = true;
+        shop.approved.date = Date.now();
+        shop.approved.approver = req.admin._id;
+        await shop.save();
+        res.status(200).json({ message: 'Shop Approved', shop });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-    var shop = await Shop.findById(shopId);
-    if (!shop) {
-        return res.status(404).json({ message: 'Shop not found' });
-    }
-    shop.approved.status = true;
-    shop.approved.date = Date.now();
-    shop.approved.approver = req.admin._id;
-    await shop.save();
-    res.status(200).json({ message: 'Shop Approved', shop });
 };
 
 const rejectShop = async (req, res) => {
-    const { shopId } = req.body;
-    if (!shopId) {
-        return res.status(400).json({ message: 'Invalid data' });
+    try {
+        const { shopId } = req.body;
+        if (!shopId) {
+            return res.status(400).json({ message: 'Invalid data' });
+        }
+        var shop = await Shop.findById(shopId);
+        if (!shop) {
+            return res.status(404).json({ message: 'Shop not found' });
+        }
+        if (shop.approved.status) {
+            return res.status(409).json({ message: 'Shop already approved' });
+        }
+        await shop.delete();
+        res.status(200).json({ message: 'Shop Rejected', shop });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-    var shop = await Shop.findById(shopId);
-    if (!shop) {
-        return res.status(404).json({ message: 'Shop not found' });
-    }
-    await shop.delete();
-    res.status(200).json({ message: 'Shop Rejected', shop });
 };
 
 const getPendingShops = async (req, res) => {
     const shops = await Shop.find({ 'approved.status': false });
+    res.status(200).json({ shops });
+};
+
+const getAdmin = async (req, res) => {
+    const admin = await Admin.findById(req.admin._id);
+    if (!admin) {
+        return res.status(404).json({ message: 'Admin not found' });
+    }
+    res.status(200).json({ admin });
+};
+
+const getApprovedShops = async (req, res) => {
+    const shops = await Shop.find({ 'approved.status': true, 'approved.admin': req.admin._id });
     res.status(200).json({ shops });
 };
 
@@ -111,5 +140,7 @@ module.exports = {
     changePassword,
     approveShop,
     rejectShop,
-    getPendingShops
+    getPendingShops,
+    getAdmin,
+    getApprovedShops
 };
