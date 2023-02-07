@@ -1,27 +1,15 @@
 import express from 'express';
 
-app = express();
+import {getOrder, getShop, getUser, getItems} from '..controllers/order';
 
+const router = express.Router();
 
-app.get('order/Order_name', (req, res) => {
+router.post('/order/getOrder', getOrder);
 
-});
+router.get('/order/getShop', getShop);
 
-app.get('order/Type', (req, res) => {});
+router.get('/order/getUser', getUser);
 
-app.get('order/Time', (req, res) => {});
+router.get('/order/getItems', getItems);
 
-app.get('order/Shop', (req, res) => {});
-
-app.get('order/User', (req,res) => {});
-
-app.get('order/Amount', (req, res) => {});
-
-app.get('order/items', (req, res) => {});
-
-app.get('order/status', (req,res) => {});
-
-app.get('order/payout_details', (req, res) => {});
-
-app.get('order/print_details', (req, res) => {});
-
+export default router;
