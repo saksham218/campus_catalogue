@@ -207,17 +207,22 @@ const Home = () => {
                 </div>
             )}
             {shopVisible && (
-                <div class="flex flex-col justify-center items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-                    <div>{shop.basic_info.name}</div>
-                    <div>{shop.basic_info.owner_name}</div>
-                    <div>{shop.basic_info.email}</div>
-                    <div>{shop.basic_info.phone}</div>
-                    <div>{shop.basic_info.category}</div>
-                    <div>{shop.basic_info.map_coordinates.lat}</div>
-                    <div>{shop.basic_info.map_coordinates.lon}</div>
-                    <div>{shop.basic_info.default_timings.open}</div>
-                    <div>{shop.basic_info.default_timings.close}</div>
-                </div>
+                <>
+                    <div onClick={() => setShopVisible(false)} className="cursor-pointer hover:text-blue-600">
+                        Go Back
+                    </div>
+                    <div class="flex flex-col justify-center items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
+                        <div>{shop.basic_info.name}</div>
+                        <div>{shop.basic_info.owner_name}</div>
+                        <div>{shop.basic_info.email}</div>
+                        <div>{shop.basic_info.phone}</div>
+                        <div>{shop.basic_info.category}</div>
+                        <div>{shop.basic_info.map_coordinates.lat}</div>
+                        <div>{shop.basic_info.map_coordinates.lon}</div>
+                        <div>{shop.basic_info.default_timings.open}</div>
+                        <div>{shop.basic_info.default_timings.close}</div>
+                    </div>
+                </>
             )}
         </div>
     );
