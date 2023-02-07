@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Order_Schema = mongoose.Schema(
     {
         num: { type: String, required: true },
+        uni_oid: { type: String, required: true },
         type: {
             type: String,
             enum: ['Product', 'Print', 'Service'],
