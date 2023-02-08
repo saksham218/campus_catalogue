@@ -1,8 +1,9 @@
 import express from 'express';
 
-app = express();
+import { getBasicInfo, getCart, getFavShops, updateCustomer, addCustomer } from '../controllers/custromer.js';
+const router = express.Router();
 
-app.get('/auth/microsoft',
+router.get('/auth/microsoft',
     passport.authenticate('microsoft', {
 
     }),
@@ -12,18 +13,15 @@ app.get('/auth/microsoft',
 
     });
 
+//TODO: add customer middleware
+router.post('/customer/new_customer', addCustomer);
 
-app.get('/customer/Basic_Info', (req, res) => {
+router.get('/customer/basic_info', getBasicInfo);
 
+router.get('/customer/cart', getCart);
 
-});
+router.get('/customer/fav_shops', getFavShops);
 
+router.patch('customer/update_info', updateCustomer);
 
-app.get('/customer/Cart', (req, res) => {
-
-
-});
-
-app.get('/customer/Fav_Shops', (req, res) => {
-
-});
+export default router;
