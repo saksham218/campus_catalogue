@@ -1,15 +1,24 @@
 import express from 'express';
 
-import {getOrder, getShop, getUser, getItems} from '..controllers/order';
+import { getOrder, updateOrderCustomer, updateOrderShop, addOrder, deleteOrder } from '..controllers/order';
 
 const router = express.Router();
 
-router.post('/order/getOrder', getOrder);
+//TODO: add customer and shop middleware
+router.get('/order/:id', getOrder);
 
-router.get('/order/getShop', getShop);
+//TODO: add customer middleware
+router.patch('/order/customer/:id', updateOrderCustomer);
 
-router.get('/order/getUser', getUser);
+//TODO: add shop middleware
+router.patch('/order/shop/:id', updateOrderShop);
 
-router.get('/order/getItems', getItems);
+//TODO: customer middleware
+router.post('/order', addOrder);
+
+//TODO: customer middleware
+router.delete('/order/:id', deleteOrder);
+
+
 
 export default router;

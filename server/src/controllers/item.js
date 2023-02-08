@@ -31,10 +31,10 @@ export const updateItem = async (req, res) => {
     if (item.shop !== req.shop._id)
         return res.status(401).send('This item does not belong to your shop');
 
-    if (!mongoose.Types.ObjectId.isValid(_id))
+    if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send('No item with that id');
 
-    const updatedItem = await Item.findByIdAndUpdate(_id, item, { new: true });
+    const updatedItem = await Item.findByIdAndUpdate(id, item, { new: true });
     res.json(updatedItem);
 }
 
@@ -42,7 +42,7 @@ export const deleteItem = async (req, res) => {
     const { id } = req.params;
     const item = Item.findById(id);
 
-    if (!item || !mongoose.Types.ObjectId.isValid(_id))
+    if (!item || !mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send('No item with that id');
 
     if (item.shop !== req.shop._id)
