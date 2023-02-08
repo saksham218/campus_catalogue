@@ -27,7 +27,7 @@ export const addOrder = async (req, res) => {
 export const updateOrderCustomer = async (req, res) => {
     const { id } = req.params;
     const order = req.body;
-    if (order.customer !== req.customer._id)
+    if (order.customer !== req.customer.id)
         return res.status(401).send('This order does not belong to you');
 
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -40,7 +40,7 @@ export const updateOrderCustomer = async (req, res) => {
 export const updateOrderShop = async (req, res) => {
     const { id } = req.params;
     const order = req.body;
-    if (order.shop !== req.shop._id)
+    if (order.shop !== req.shop.id)
         return res.status(401).send('This order does not belong to your shop');
 
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -57,7 +57,7 @@ export const deleteOrder = async (req, res) => {
     if (!order || !mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send('No order with that id');
 
-    if (order.customer !== req.customer._id)
+    if (order.customer !== req.customer.id)
         return res.status(401).send('This order does not belong to you');
 
     await order.delete();
