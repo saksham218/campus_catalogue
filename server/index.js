@@ -50,7 +50,7 @@ const StartServer = () => {
 
     /** Routes */
     router.use('/admin', require('./src/routes/admin'));
-    // router.use('/user', authMiddleware, userRouter);
+    router.use('/pay', require('./src/routes/payment'));
     // router.use('/trip', authMiddleware, tripRouter);
 
     /** Healthcheck */
