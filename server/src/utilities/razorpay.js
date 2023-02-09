@@ -1,4 +1,5 @@
 const { instance, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET } = require('../config/config');
+const { debug, error } = require('../utilities/logging');
 var request = require('request');
 
 const createCustomer = async (name, email, phone, gstin) => {
@@ -11,12 +12,11 @@ const createCustomer = async (name, email, phone, gstin) => {
             gstin: gstin
         })
         .then((data) => {
-            console.log(data);
-            return data;
+            return { status: true, data: data };
         })
         .catch((error) => {
-            console.log(error);
-            return error;
+            error(error);
+            return { status: false, error: error };
         });
 };
 
@@ -32,10 +32,12 @@ const createFundBankAccount = async (cust_id, acc_name, acc_no, ifsc) => {
             }
         })
         .then((data) => {
-            console.log(data);
+            debug(data);
+            return { status: true, data: data };
         })
         .catch((error) => {
-            console.log(error);
+            error(error);
+            return { status: false, error: error };
         });
 };
 
@@ -49,59 +51,81 @@ const createFundVPAAccount = async (cust_id, vpa) => {
             }
         })
         .then((data) => {
-            console.log(data);
+            debug(data);
+            return { status: true, data: data };
         })
         .catch((error) => {
-            console.log(error);
+            error(error);
+            return { status: false, error: error };
         });
 };
 
 const createPayout = async (customer_id, amount, currency = 'INR', queue_if_low_balance = true) => {
     // get all fund accounts
-    const data = await instance.fundAccount.fetch(customer_id);
-    // create a payout
-    let mode = '';
-    if (data && data.count > 0) {
-        const fundAccount = data.items[0];
-        if (fundAccount.account_type === 'bank_account') {
-            mode = 'IMPS';
-        } else if (fundAccount.account_type === 'vpa') {
-            mode = 'UPI';
-        }
-        var headers = {
-            'Content-Type': 'application/json'
-        };
-
-        var dataString = `{\n  "account_number": "7878780080316316",\n  "fund_account_id": ${fundAccount.id},\n  "amount": ${amount},\n  "currency": ${currency},\n  "mode": ${mode},\n  "purpose": "payout",\n  "queue_if_low_balance": ${queue_if_low_balance} \n}`;
-
-        var options = {
-            url: 'https://api.razorpay.com/v1/payouts',
-            method: 'POST',
-            headers: headers,
-            body: dataString,
-            auth: {
-                user: RAZORPAY_KEY_ID,
-                pass: RAZORPAY_KEY_SECRET
+    try {
+        const data = await instance.fundAccount.fetch(customer_id);
+        // create a payout
+        let mode = '';
+        if (data && data.count > 0) {
+            const fundAccount = data.items.where((item) => item.id === true).first();
+            if (fundAccount.account_type === 'bank_account') {
+                mode = 'IMPS';
+            } else if (fundAccount.account_type === 'vpa') {
+                mode = 'UPI';
             }
-        };
+            var headers = {
+                'Content-Type': 'application/json'
+            };
 
-        function callback(error, response, body) {
-            if (!error) {
-                console.log(body);
-                return body;
+            var dataString = `{\n  "account_number": "7878780080316316",\n  "fund_account_id": ${fundAccount.id},\n  "amount": ${amount},\n  "currency": ${currency},\n  "mode": ${mode},\n  "purpose": "payout",\n  "queue_if_low_balance": ${queue_if_low_balance} \n}`;
+
+            var options = {
+                url: 'https://api.razorpay.com/v1/payouts',
+                method: 'POST',
+                headers: headers,
+                body: dataString,
+                auth: {
+                    user: RAZORPAY_KEY_ID,
+                    pass: RAZORPAY_KEY_SECRET
+                }
+            };
+
+            function callback(error, response, body) {
+                if (!error) {
+                    console.log(body);
+                    return { status: true, data: body };
+                }
+                console.log(error);
+                return { status: false, error: error };
             }
-            console.log(error);
-            return error;
-        }
 
-        request(options, callback);
+            request(options, callback);
+        }
+    } catch (error) {
+        console.log(error);
+        return { status: false, error: error };
     }
-    // return data;
+};
+
+const createOrder = async (amount, currency = 'INR', receipt, payment_capture = 1) => {
+    try {
+        const data = await instance.orders.create({
+            amount: amount,
+            currency: currency, // INR
+            receipt: receipt,
+            payment_capture: payment_capture
+        });
+        return { status: true, data: data };
+    } catch (error) {
+        console.log(error);
+        return { status: false, error: error };
+    }
 };
 
 module.exports = {
     createCustomer,
     createFundBankAccount,
     createFundVPAAccount,
-    createPayout
+    createPayout,
+    createOrder
 };

@@ -7,6 +7,7 @@ const Shop_Schema = mongoose.Schema(
             owner_name: { type: String, required: true },
             email: { type: String, required: true, unique: true },
             phone: { type: Number, required: true, unique: true },
+            address: { type: String, required: true },
             map_coordinates: {
                 lat: { type: String },
                 lon: { type: String }
@@ -21,7 +22,23 @@ const Shop_Schema = mongoose.Schema(
                 enum: ['Canteen', 'Restaurant', 'Juice Center', 'Stationary', 'Rental', 'Bakery', 'Other']
             }
         },
-        payment: { type: Object },
+        payment: {
+            vpa: [{ id: { type: String }, is_default: { type: Boolean, default: false }, fund_account_id: { type: String } }],
+            bank_account: [
+                {
+                    accno: { type: String },
+                    ifsc: { type: String },
+                    acc_holder_name: { type: String },
+                    is_default: { type: Boolean, default: false },
+                    fund_account_id: { type: String }
+                }
+            ]
+        },
+        razorpay: {
+            customer_id: { type: String, default: null },
+            default_fund_account: { type: String, default: null },
+            last_payment: { type: Date, default: 0000000000000 }
+        },
         menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
         approved: {
             status: { type: Boolean, default: false },

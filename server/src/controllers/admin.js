@@ -3,6 +3,7 @@ const Shop = require('../models/shop');
 const bcrypt = require('bcrypt');
 const config = require('../config/config');
 const { generateToken } = require('../utilities/admintoken');
+const { configureShopAfterApproval } = require('../utilities/payment');
 const saltRounds = config.SALT_ROUNDS;
 
 const login = async (req, res) => {
@@ -82,6 +83,10 @@ const approveShop = async (req, res) => {
         }
         if (shop.approved.status) {
             return res.status(409).json({ message: 'Shop already approved' });
+        }
+        const data = await configureShopAfterApproval(shop);
+        if (!data.status) {
+            return res.status(400).json({ message: data.error });
         }
         shop.approved.status = true;
         shop.approved.date = Date.now();
