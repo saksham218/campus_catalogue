@@ -5,6 +5,7 @@ const Customer_Schema = mongoose.Schema({
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         roll: { type: Number, required: true, unique: true },
+        img: { type: String, required: false},
         hostel: {
             type: String,
             enum: ['Kameng', 'Barak', 'Lohit', 'Brahma', 'Disang', 'Manas', 'Dihing', 'Umiam', 'Siang', 'Kapili', 'Dhansiri', 'Subhansiri']

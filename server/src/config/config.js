@@ -9,6 +9,10 @@ const SALT_ROUNDS = process.env.SALT_ROUNDS || 10;
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID;
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+const MICROSOFT_CLIENT_ID = process.env.MICROSOFT_CLIENT_ID
+const MICROSOFT_CLIENT_SECRET = process.env.MICROSOFT_CLIENT_SECRET
 
 var instance = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -21,5 +25,9 @@ module.exports = {
     JWT_SECRET,
     instance,
     RAZORPAY_KEY_ID,
-    RAZORPAY_KEY_SECRET
+    RAZORPAY_KEY_SECRET,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    MICROSOFT_CLIENT_ID,
+    MICROSOFT_CLIENT_SECRET,
 };
