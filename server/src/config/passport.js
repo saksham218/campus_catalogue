@@ -8,12 +8,16 @@ const chalk = require('../utilities/logging')
 const models = require("../models/customer");
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  process.nextTick(() => {
+    done(null, user);
+  })
 });
 
 passport.deserializeUser((id, done) => {
-  done(null, id)
-});
+  process.nextTick(() => {
+    done(null, id);
+  }
+)});
 
 const googleStrategy = new GoogleStrategy({
     clientID: config.GOOGLE_CLIENT_ID,
@@ -22,7 +26,6 @@ const googleStrategy = new GoogleStrategy({
     passReqToCallback: true, // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
   async (req, token, refreshToken, profile, done) => {
-    console.log(profile);
     return done(null, profile);
     // models.User.findOne({ where: { googleId: profile.id } }).then(
     //   async (userExist) => {
@@ -76,7 +79,6 @@ const microsoftStrategy = new MicrosoftStrategy({
     tokenURL: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log(profile)
     return done(null, profile)
     // User.findOrCreate({ userId: profile.id }, function (err, user) {
     //   return done(err, user);

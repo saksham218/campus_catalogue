@@ -1,22 +1,19 @@
 const Shop = require('../models/shop');
-const { verifyToken } = require('../utilities/shoptoken');
 
 const shopMiddleware = async (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (!token) {
+
+    if (!req.user) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-    const data = await verifyToken(token);
-    if (data.valid) {
-        const shop = await Shop.findById(data.shop._id);
-        if (!shop) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
-        req.shop = shop;
-        next();
-    } else {
-        return res.status(401).json({ message: 'Unauthorized', error: data.error });
-    }
-};
 
-module.exports = { shopMiddleware };
+    const email = req.user.emails[0].value;
+
+    const shop = await Shop.find({basic_info: {email: email}});
+
+    if (!shop) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    req.user.shop = shop;
+    next()
+}
