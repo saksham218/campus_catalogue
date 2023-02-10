@@ -16,4 +16,6 @@ const customerMiddleware = async (req, res, next) => {
 
   req.user.customer = customer;
   next()
-}
+};
+
+module.exports = { customerMiddleware};
