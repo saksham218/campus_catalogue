@@ -16,4 +16,6 @@ const shopMiddleware = async (req, res, next) => {
 
     req.user.shop = shop;
     next()
-}
+};
+
+module.exports = { shopMiddleware };
