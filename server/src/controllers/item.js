@@ -1,6 +1,6 @@
 const Item = require('../models/item');
 
-export const getItem = async (req, res) => {
+const getItem = async (req, res) => {
     const { id } = req.params;
     try {
         const item = await Item.findById(id);
@@ -11,7 +11,7 @@ export const getItem = async (req, res) => {
     }
 }
 
-export const addItem = async (req, res) => {
+const addItem = async (req, res) => {
     const item = req.body;
     item.shop = req.shop._id;
 
@@ -25,7 +25,7 @@ export const addItem = async (req, res) => {
     }
 }
 
-export const updateItem = async (req, res) => {
+const updateItem = async (req, res) => {
     const { id } = req.params;
     const item = req.body;
     if (item.shop !== req.shop._id)
@@ -38,7 +38,7 @@ export const updateItem = async (req, res) => {
     res.json(updatedItem);
 }
 
-export const deleteItem = async (req, res) => {
+const deleteItem = async (req, res) => {
     const { id } = req.params;
     const item = Item.findById(id);
 
@@ -52,3 +52,4 @@ export const deleteItem = async (req, res) => {
     res.json({ message: 'Item deleted successfully' });
 }
 
+module.exports = { getItem, addItem, updateItem, deleteItem };

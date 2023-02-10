@@ -2,7 +2,7 @@ const Customer = require('../models/customer');
 const Order = require('../models/order');
 
 //TODO: modify addCustomer according to outlook response
-export const addCustomer = async (req, res) => {
+const addCustomer = async (req, res) => {
 
     const customer = req.body;
 
@@ -17,7 +17,7 @@ export const addCustomer = async (req, res) => {
 
 }
 
-export const getBasicInfo = async (req, res) => {
+const getBasicInfo = async (req, res) => {
     const { _id } = req.customer;
 
     try {
@@ -31,7 +31,7 @@ export const getBasicInfo = async (req, res) => {
     }
 }
 
-export const getFavShops = async (req, res) => {
+const getFavShops = async (req, res) => {
     const { _id } = req.customer;
     try {
 
@@ -44,7 +44,7 @@ export const getFavShops = async (req, res) => {
     }
 }
 
-export const getCart = async (req, res) => {
+const getCart = async (req, res) => {
     const { _id } = req.customer;
     try {
         cust_orders = Order.find({ customer: _id, status: 'Unplaced' });
@@ -55,7 +55,7 @@ export const getCart = async (req, res) => {
     }
 }
 
-export const updateCustomer = async (req, res) => {
+const updateCustomer = async (req, res) => {
     const { _id } = req.customer;
     const customer = req.body;
 
@@ -66,3 +66,5 @@ export const updateCustomer = async (req, res) => {
     res.json(updatedItem);
 
 }
+
+module.exports = {addCustomer, getBasicInfo, getCart, getFavShops, updateCustomer}

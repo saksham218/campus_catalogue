@@ -1,5 +1,5 @@
-import Shop from '../models/shop';
-import Timing from '../models/timing';
+const Shop = require('../models/shop');
+const Timing = require('../models/timing');
 
 const getTodayTimings = (req, res) => {
     const timing = Timing.findOne({ shop: req.shop._id, 'date.from': { $lte: new Date() }, 'date.to': { $gte: new Date() } });

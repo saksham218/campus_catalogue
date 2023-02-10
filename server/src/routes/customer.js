@@ -1,6 +1,6 @@
-import express from 'express';
+const express = require('express');
 
-import { getBasicInfo, getCart, getFavShops, updateCustomer, addCustomer } from '../controllers/custromer.js';
+const { getBasicInfo, getCart, getFavShops, updateCustomer, addCustomer } = require('../controllers/customer.js');
 const router = express.Router();
 
 //TODO: add customer middleware
@@ -14,4 +14,4 @@ router.get('/fav_shops', getFavShops);
 
 router.patch('/update_info', updateCustomer);
 
-export default router;
+module.exports = router;

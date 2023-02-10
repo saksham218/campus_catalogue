@@ -1,6 +1,6 @@
 const Order = require('../models/order');
 
-export const getOrder = async (req, res) => {
+const getOrder = async (req, res) => {
     const { id } = req.params.id
     try {
         const order = await Order.findById(id);
@@ -11,7 +11,7 @@ export const getOrder = async (req, res) => {
     }
 };
 
-export const addOrder = async (req, res) => {
+const addOrder = async (req, res) => {
     const order = req.body;
 
     const newOrder = new Order(order);
@@ -24,7 +24,7 @@ export const addOrder = async (req, res) => {
     }
 };
 
-export const updateOrderCustomer = async (req, res) => {
+const updateOrderCustomer = async (req, res) => {
     const { id } = req.params;
     const order = req.body;
     if (order.customer !== req.customer.id)
@@ -37,7 +37,7 @@ export const updateOrderCustomer = async (req, res) => {
     res.json(updatedOrder);
 };
 
-export const updateOrderShop = async (req, res) => {
+const updateOrderShop = async (req, res) => {
     const { id } = req.params;
     const order = req.body;
     if (order.shop !== req.shop.id)
@@ -50,7 +50,7 @@ export const updateOrderShop = async (req, res) => {
     res.json(updatedOrder);
 };
 
-export const deleteOrder = async (req, res) => {
+const deleteOrder = async (req, res) => {
     const { id } = req.params;
     const order = Order.findById(id);
 
@@ -64,6 +64,7 @@ export const deleteOrder = async (req, res) => {
     res.json({ message: 'Order deleted successfully' });
 };
 
+module.exports = { getOrder, updateOrderCustomer, updateOrderShop, addOrder, deleteOrder };
 
 
 

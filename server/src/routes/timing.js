@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 const timingRoutes = require('../controllers/timing');
 
 const router = express.Router();
@@ -11,5 +11,6 @@ router.post('/', timingRoutes.addTiming);
 
 router.patch('/:timing_id', timingRoutes.updateTiming);
 
-router.delete('/:timing_id', timingRoutes.deleteTimng);
+router.delete('/:timing_id', timingRoutes.deleteTiming);
 
+module.exports = router;
