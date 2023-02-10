@@ -40,7 +40,7 @@ const Shop_Schema = mongoose.Schema(
                 id: { type: String },
                 mode: { type: String }
             },
-            last_payment: { type: Date, default: 0000000000000 }
+            due_payment: { type: Number, default: 0 }
         },
         menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
         approved: {

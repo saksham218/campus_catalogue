@@ -6,7 +6,9 @@ const firstDetails = (req, res) => {
     let { name, owner_name, email, phone, lat, lon, open, close, category, payment } = req.body;
     /*
         payment: {
-            vpa :["vpa1","vpa2"],
+            vpa :[{
+                
+            }],
             bank :[{
                 "accno": "1234567890",
                 "ifsc": "ABC1234567",

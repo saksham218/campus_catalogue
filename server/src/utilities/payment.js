@@ -46,23 +46,18 @@ const configureShopAfterApproval = async (shop) => {
     shop.razorpay.customer_id = customer_response.data.id;
     shop.razorpay.default_fund_account.id = default_fund_account;
     shop.razorpay.default_fund_account.mode = default_mode;
+    await shop.save();
     return { status: true, data: shop };
 };
 
 const withdraw = async (shop) => {
-    const orders = Order.find({ shop_id: shop._id, status: 'completed', createdAt: { $gt: shop.razorpay.last_payment } }).sort({ createdAt: 1 });
-    var total_amount = 0;
-    var last_Date = orders[orders.length - 1].createdAt;
-    for (var i = 0; i < orders.length; i++) {
-        total_amount += orders[i].total_amount;
-    }
-    const data = await razorpay.createPayout(shop.razorpay.default_fund_account.id, shop.razorpay.default_fund_account.mode, total_amount, 'INR', true);
+    const data = await razorpay.createPayout(shop.razorpay.default_fund_account.id, shop.razorpay.default_fund_account.mode, shop.razorpay.due_payment, 'INR', true);
 
     if (!data.status) {
         return { status: false, error: data.error };
     }
 
-    shop.razorpay.last_payment = last_Date;
+    shop.razorpay.due_payment = 0;
     await shop.save();
     return { status: true, data: data.data };
 };
