@@ -9,6 +9,7 @@ const configureShopAfterApproval = async (shop) => {
         return { status: false, error: customer.error };
     }
     var default_fund_account = '';
+    var default_mode = '';
     var fund_accounts = [];
     // create fund accounts
     for (var i = 0; i < shop.payment.bank_account.length; i++) {
@@ -21,6 +22,7 @@ const configureShopAfterApproval = async (shop) => {
         fund_accounts.push(fund_bank_account_response.data);
         if (bank_account.is_default) {
             default_fund_account = fund_bank_account_response.data.id;
+            default_mode = 'IMPS';
         }
     }
     for (var i = 0; i < shop.payment.vpa.length; i++) {
@@ -33,6 +35,7 @@ const configureShopAfterApproval = async (shop) => {
         shop.payment.vpa[i].fund_account_id = fund_vpa_account_response.data.id;
         if (vpa.is_default) {
             default_fund_account = fund_vpa_account_response.data.id;
+            default_mode = 'UPI';
         }
     }
     if (default_fund_account == '') {
@@ -41,7 +44,8 @@ const configureShopAfterApproval = async (shop) => {
 
     // update shop
     shop.razorpay.customer_id = customer_response.data.id;
-    shop.razorpay.default_fund_account = default_fund_account;
+    shop.razorpay.default_fund_account.id = default_fund_account;
+    shop.razorpay.default_fund_account.mode = default_mode;
     return { status: true, data: shop };
 };
 
@@ -52,8 +56,49 @@ const withdraw = async (shop) => {
     for (var i = 0; i < orders.length; i++) {
         total_amount += orders[i].total_amount;
     }
+    const data = await razorpay.createPayout(shop.razorpay.default_fund_account.id, shop.razorpay.default_fund_account.mode, total_amount, 'INR', true);
+
+    if (!data.status) {
+        return { status: false, error: data.error };
+    }
+
+    shop.razorpay.last_payment = last_Date;
+    await shop.save();
+    return { status: true, data: data.data };
+};
+
+const changeDefaultFundAccount = async (shop, fund_account_id) => {
+    // check if fund_account_id is valid
+    var fund_account = shop.payment.bank_account.find((account) => account.fund_account_id == fund_account_id);
+    if (fund_account == undefined) {
+        fund_account = shop.payment.vpa.find((account) => account.fund_account_id == fund_account_id);
+        if (fund_account == undefined) {
+            return { status: false, message: 'Invalid fund account id' };
+        }
+    }
+    // remove default from all accounts and add default to fund_account_id
+    var is_bank_account = false;
+    for (var i = 0; i < shop.payment.bank_account.length; i++) {
+        shop.payment.bank_account[i].is_default = false;
+        if (shop.payment.bank_account[i].fund_account_id == fund_account_id) {
+            shop.payment.bank_account[i].is_default = true;
+            is_bank_account = true;
+        }
+    }
+    for (var i = 0; i < shop.payment.vpa.length; i++) {
+        shop.payment.vpa[i].is_default = false;
+        if (shop.payment.vpa[i].fund_account_id == fund_account_id) {
+            shop.payment.vpa[i].is_default = true;
+        }
+    }
+    shop.razorpay.default_fund_account.id = fund_account_id;
+    shop.razorpay.default_fund_account.mode = is_bank_account ? 'IMPS' : 'UPI';
+    await shop.save();
+    return { status: true, data: shop };
 };
 
 module.exports = {
-    configureShopAfterApproval
+    configureShopAfterApproval,
+    withdraw,
+    changeDefaultFundAccount
 };

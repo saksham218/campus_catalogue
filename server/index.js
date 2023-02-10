@@ -6,8 +6,8 @@ const config = require('./src/config/config');
 const Logging = require('./src/utilities/logging');
 const router = express();
 const passport = require('passport');
-const session  = require('express-session');
-const strategies = require('./src/config/passport')
+const session = require('express-session');
+const strategies = require('./src/config/passport');
 
 /** Connect to Mongo */
 mongoose
@@ -37,11 +37,13 @@ const StartServer = () => {
     router.use(express.urlencoded({ extended: true }));
     router.use(express.json());
     router.use(cors());
-    router.use(session({
-        secret: 'hehe',
-        resave: false,
-        saveUninitialized: true,
-    }));
+    router.use(
+        session({
+            secret: 'hehe',
+            resave: false,
+            saveUninitialized: true
+        })
+    );
     router.use(passport.initialize());
     router.use(passport.session());
     passport.use(strategies.googleStrategy);
@@ -62,11 +64,8 @@ const StartServer = () => {
 
     /** Routes */
     router.use('/admin', require('./src/routes/admin'));
-<<<<<<< HEAD
-=======
-    router.use('/pay', require('./src/routes/payment'));
+    router.use('/shop', require('./src/routes/shop'));
     router.use('/auth', require('./src/routes/auth'));
->>>>>>> 19010473ac5fa3acef9b4f95f08a937b4bfa3b8b
     // router.use('/trip', authMiddleware, tripRouter);
 
     /** Healthcheck */

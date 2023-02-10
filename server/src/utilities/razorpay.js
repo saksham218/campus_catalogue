@@ -60,47 +60,35 @@ const createFundVPAAccount = async (cust_id, vpa) => {
         });
 };
 
-const createPayout = async (customer_id, amount, currency = 'INR', queue_if_low_balance = true) => {
-    // get all fund accounts
+const createPayout = async (fund_account_id, mode, amount, currency = 'INR', queue_if_low_balance = true) => {
     try {
-        const data = await instance.fundAccount.fetch(customer_id);
-        // create a payout
-        let mode = '';
-        if (data && data.count > 0) {
-            const fundAccount = data.items.where((item) => item.id === true).first();
-            if (fundAccount.account_type === 'bank_account') {
-                mode = 'IMPS';
-            } else if (fundAccount.account_type === 'vpa') {
-                mode = 'UPI';
+        var headers = {
+            'Content-Type': 'application/json'
+        };
+
+        var dataString = `{\n  "account_number": "7878780080316316",\n  "fund_account_id": ${fund_account_id},\n  "amount": ${amount},\n  "currency": ${currency},\n  "mode": ${mode},\n  "purpose": "payout",\n  "queue_if_low_balance": ${queue_if_low_balance} \n}`;
+
+        var options = {
+            url: 'https://api.razorpay.com/v1/payouts',
+            method: 'POST',
+            headers: headers,
+            body: dataString,
+            auth: {
+                user: RAZORPAY_KEY_ID,
+                pass: RAZORPAY_KEY_SECRET
             }
-            var headers = {
-                'Content-Type': 'application/json'
-            };
+        };
 
-            var dataString = `{\n  "account_number": "7878780080316316",\n  "fund_account_id": ${fundAccount.id},\n  "amount": ${amount},\n  "currency": ${currency},\n  "mode": ${mode},\n  "purpose": "payout",\n  "queue_if_low_balance": ${queue_if_low_balance} \n}`;
-
-            var options = {
-                url: 'https://api.razorpay.com/v1/payouts',
-                method: 'POST',
-                headers: headers,
-                body: dataString,
-                auth: {
-                    user: RAZORPAY_KEY_ID,
-                    pass: RAZORPAY_KEY_SECRET
-                }
-            };
-
-            function callback(error, response, body) {
-                if (!error) {
-                    console.log(body);
-                    return { status: true, data: body };
-                }
-                console.log(error);
-                return { status: false, error: error };
+        function callback(error, response, body) {
+            if (!error) {
+                console.log(body);
+                return { status: true, data: body };
             }
-
-            request(options, callback);
+            console.log(error);
+            return { status: false, error: error };
         }
+
+        request(options, callback);
     } catch (error) {
         console.log(error);
         return { status: false, error: error };

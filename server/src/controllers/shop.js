@@ -1,5 +1,6 @@
-import Shop from '../models/shop.js';
-import Item from '../models/item.js';
+const Shop = require('../models/shop.js');
+const Item = require('../models/item.js');
+const payment = require('../utilities/payment');
 
 const firstDetails = (req, res) => {
     let { name, owner_name, email, phone, lat, lon, open, close, category, payment } = req.body;
@@ -81,9 +82,32 @@ const getShop = (req, res) => {
     res.status(200).json({ message: 'Shop fetched successfully', shop: shop });
 };
 
+const withdrawMoney = async (req, res) => {
+    const shop = req.shop;
+    const data = await payment.withdraw(shop);
+    if (!data.status) {
+        res.status(500).json({ message: 'Error withdrawing money' });
+    } else {
+        res.status(200).json({ message: 'Money withdrawn successfully' });
+    }
+};
+
+const changeDefaultFundAccount = async (req, res) => {
+    const shop = req.shop;
+    const { fund_account_id } = req.body;
+    const data = await payment.changeDefaultFundAccount(shop, fund_account_id);
+    if (!data.status) {
+        res.status(500).json({ message: 'Error changing default fund account' });
+    } else {
+        res.status(200).json({ message: 'Default fund account changed successfully', shop: data.data });
+    }
+};
+
 module.exports = {
     firstDetails,
     secondDetails,
     getMenu,
-    getShop
+    getShop,
+    withdrawMoney,
+    changeDefaultFundAccount
 };

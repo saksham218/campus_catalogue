@@ -36,7 +36,10 @@ const Shop_Schema = mongoose.Schema(
         },
         razorpay: {
             customer_id: { type: String, default: null },
-            default_fund_account: { type: String, default: null },
+            default_fund_account: {
+                id: { type: String },
+                mode: { type: String }
+            },
             last_payment: { type: Date, default: 0000000000000 }
         },
         menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],

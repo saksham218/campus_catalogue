@@ -5,11 +5,11 @@ const router = express.Router();
 
 //TODO: add shop middleware
 
-router.post('/shop', shopRoutes.firstDetails);
+router.post('/', shopRoutes.firstDetails);
+router.patch('/', shopRoutes.secondDetails);
+router.get('/', shopRoutes.getShop);
+router.get('/menu', shopRoutes.getMenu);
+router.post('/withdraw', shopRoutes.withdrawMoney);
+router.post('/default-account', shopRoutes.changeDefaultFundAccount);
 
-router.patch('/shop', shopRoutes.secondDetails);
-
-router.get('/shop', shopRoutes.getShop);
-
-router.get('/shop/menu', shopRoutes.getMenu);
-
+module.exports = router;
