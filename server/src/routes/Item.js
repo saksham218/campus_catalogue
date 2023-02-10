@@ -1,12 +1,13 @@
 const express = require('express')
 
-const { getItem, addItem, updateItem, deleteItem } = require('../controllers/item')
+const { getItem, addItem, updateItem, deleteItem } = require('../controllers/item');
+const { shopMiddleware } = require('../middlewares/shop');
 const router = express.Router();
 
 router.get('/:id', getItem);
 //TODO: add shop middleware to post, patch, delete
-router.post('/:id', addItem);
-router.patch('/:id', updateItem);
-router.delete('/:id', deleteItem);
+router.post('/:id',shopMiddleware, addItem);
+router.patch('/:id',shopMiddleware, updateItem);
+router.delete('/:id',shopMiddleware, deleteItem);
 
 module.exports = router;
