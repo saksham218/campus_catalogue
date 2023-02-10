@@ -5,19 +5,19 @@ import { getOrder, updateOrderCustomer, updateOrderShop, addOrder, deleteOrder }
 const router = express.Router();
 
 //TODO: add customer and shop middleware
-router.get('/order/:id', getOrder);
+router.get('/:id', getOrder);
 
 //TODO: add customer middleware
-router.patch('/order/customer/:id', updateOrderCustomer);
+router.patch('/customer/:id', updateOrderCustomer);
 
 //TODO: add shop middleware
-router.patch('/order/shop/:id', updateOrderShop);
+router.patch('/shop/:id', updateOrderShop);
 
 //TODO: customer middleware
-router.post('/order', addOrder);
+router.post('/', addOrder);
 
 //TODO: customer middleware
-router.delete('/order/:id', deleteOrder);
+router.delete('/:id', deleteOrder);
 
 
 

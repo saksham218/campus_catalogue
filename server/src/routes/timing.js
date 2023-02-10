@@ -5,11 +5,11 @@ const router = express.Router();
 
 //TODO : add shop middleware
 
-router.get('/timings', timingRoutes.getTodayTimings);
+router.get('/', timingRoutes.getTodayTimings);
 
-router.post('/timings', timingRoutes.addTiming);
+router.post('/', timingRoutes.addTiming);
 
-router.patch('/timings/:timing_id', timingRoutes.updateTiming);
+router.patch('/:timing_id', timingRoutes.updateTiming);
 
-router.delete('/timings/:timing_id', timingRoutes.deleteTimng);
+router.delete('/:timing_id', timingRoutes.deleteTimng);
 
