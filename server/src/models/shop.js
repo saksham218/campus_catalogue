@@ -8,6 +8,7 @@ const Shop_Schema = mongoose.Schema(
             email: { type: String, required: true, unique: true },
             phone: { type: Number, required: true, unique: true },
             address: { type: String, required: true },
+            gstin: { type: String, required: true, unique: true },
             map_coordinates: {
                 lat: { type: String },
                 lon: { type: String }
@@ -23,24 +24,25 @@ const Shop_Schema = mongoose.Schema(
             }
         },
         payment: {
-            vpa: [{ id: { type: String }, is_default: { type: Boolean, default: false }, fund_account_id: { type: String } }],
+            vpa: [{ id: { type: String,default: null },
+                is_default: { type: Boolean, default: false },
+                fund_account_id: { type: String,default:null } }],
             bank_account: [
                 {
-                    accno: { type: String },
-                    ifsc: { type: String },
-                    acc_holder_name: { type: String },
+                    accno: { type: String,default:null },
+                    ifsc: { type: String ,default:null},
+                    acc_holder_name: { type: String ,default:null},
                     is_default: { type: Boolean, default: false },
-                    fund_account_id: { type: String }
+                    fund_account_id: { type: String ,default:null}
                 }
             ]
         },
         razorpay: {
             customer_id: { type: String, default: null },
             default_fund_account: {
-                id: { type: String },
-                mode: { type: String }
+                id: { type: String, default: null },
+                mode: { type: String, default: null }
             },
-            due_payment: { type: Number, default: 0 }
         },
         menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
         approved: {

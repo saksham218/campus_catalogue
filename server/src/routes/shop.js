@@ -6,7 +6,7 @@ const router = express.Router();
 
 //TODO: add shop middleware
 
-router.post('/', shopMiddleware, shopRoutes.firstDetails);
+router.post('/', shopRoutes.firstDetails);
 router.patch('/', shopMiddleware,shopRoutes.secondDetails);
 router.get('/', shopMiddleware,shopRoutes.getShop);
 router.get('/menu', shopMiddleware,shopRoutes.getMenu);

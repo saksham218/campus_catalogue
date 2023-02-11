@@ -22,9 +22,12 @@ router.get(
     
     const email = req.user.emails[0].value;
   
-    const shop = await Shop.findOne({basic_info: {email: email}});
+    const shop = await Shop.findOne({"basic_info.email": email});
     if(!shop) {
-      //create shop and redirect to take details
+      //redirect to take details
+      const token = shop_token.generateToken({basic_info: {email: email}});
+      debug(`Generated token: ${token}`);
+      res.redirect(`http://localhost:3000/shop-form?token=${token}`);
     }
     else {
       if(shop.approved.status) {
@@ -34,6 +37,7 @@ router.get(
         res.redirect(`http://localhost:3000/?token=${token}`);
       } else {
         //redirect to shop not approved page
+        res.redirect(`http://localhost:3000/shop-not-approved`);
       }
   }
 }
