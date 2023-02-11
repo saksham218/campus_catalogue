@@ -8,13 +8,13 @@ const shopMiddleware = async (req, res, next) => {
 
     const email = req.user.emails[0].value;
 
-    const shop = await Shop.find({basic_info: {email: email}});
+    const shop = await Shop.find({ basic_info: { email: email } });
 
     if (!shop) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    req.user.shop = shop;
+    req.shop = shop;
     next()
 };
 

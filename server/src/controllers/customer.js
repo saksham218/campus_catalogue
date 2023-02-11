@@ -18,8 +18,8 @@ const getBasicInfo = async (req, res) => {
 
 const getFavShops = async (req, res) => {
     const { _id } = req.customer;
-    try {
 
+    try {
         const customer = await Customer.findById(_id);
         console.log(customer);
         res.status(200).json(customer.fav_shops);
@@ -31,8 +31,9 @@ const getFavShops = async (req, res) => {
 
 const getCart = async (req, res) => {
     const { _id } = req.customer;
+
     try {
-        cust_orders = Order.find({ customer: _id, status: 'Unplaced' });
+        cust_orders = await Order.find({ customer: _id, status: 'Unplaced' });
         res.status(200).json({ data: cust_orders });
 
     } catch (error) {
@@ -40,16 +41,27 @@ const getCart = async (req, res) => {
     }
 }
 
-const updateCustomer = async (req, res) => {
-    const { _id } = req.customer;
-    const customer = req.body;
+const updateBasicInfo = async (req, res) => {
+    const customer = req.customer;
+    const { hostel, mobile_num, img } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(_id))
-        return res.status(404).send('No customer with that id');
+    customer.basic_info = { ...customer.basic_info, hostel, mobile_num, img };
 
-    const updatedCustomer = await Customer.findByIdAndUpdate(id, item, { new: true });
-    res.json(updatedItem);
+    await customer.save();
+    res.json(customer);
 
 }
 
-module.exports = {getBasicInfo, getCart, getFavShops, updateCustomer}
+const updateFavShops = async (req, res) => {
+    const customer = req.customer;
+    const { fav_shop } = req.body;
+
+    customer.fav_shops.push(fav_shop);
+
+    await customer.save();
+    res.json(customer);
+
+
+}
+
+module.exports = { getBasicInfo, getCart, getFavShops, updateBasicInfo, updateFavShops }

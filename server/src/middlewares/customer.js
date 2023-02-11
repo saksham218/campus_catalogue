@@ -19,4 +19,4 @@ const customerMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = { customerMiddleware};
+module.exports = { customerMiddleware };
