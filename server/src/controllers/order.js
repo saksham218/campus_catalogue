@@ -2,11 +2,16 @@ const Order = require('../models/order');
 const { createOrder, refundPayment } = require('../utilities/razorpay');
 
 const getOrder = async (req, res) => {
-    const { id } = req.params.id;
+    const { id } = req.params;
     try {
-        const order = await Order.findById(id);
-        console.log(order);
-        res.status(200).json(order);
+        const orderFromDB = await Order.findById(id);
+        if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id))
+            return res.status(404).send('No order with that id');
+        if (orderFromDB.customer !== req.customer.id)
+            return res.status(401).send('This order does not belong to you');
+
+        console.log(orderFromDB);
+        res.status(200).json(orderFromDB);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -48,11 +53,13 @@ const updateOrderCustomer = async (req, res) => {
     const { items } = req.body;
     const orderFromDB = await Order.findById(id);
 
-    if (orderFromDB.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).send('No order with that id');
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+    if (orderFromDB.customer !== req.customer.id)
+        return res.status(401).send('This order does not belong to you');
 
-    if (order.status === 'unplaced') {
+    if (orderFromDB.status === 'unplaced') {
         orderFromDB.items = items;
         await orderFromDB.save();
         return res.json(updatedOrder);
@@ -64,9 +71,11 @@ const updateOrderCustomer = async (req, res) => {
 const placeOrder = async (req, res) => {
     const { id } = req.params;
     const orderFromDB = await Order.findById(id);
+
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
     if (orderFromDB.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
 
     if (orderFromDB.status === 'unplaced') {
         const data = await createOrder(orderFromDB.total, 'INR', orderFromDB.num, 1);
@@ -83,9 +92,10 @@ const placeOrder = async (req, res) => {
 const cancelOrder = async (req, res) => {
     const { id } = req.params;
     const orderFromDB = await Order.findById(id);
-    if (orderFromDB.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
+    if (orderFromDB.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
 
     if (orderFromDB.status === 'pending') {
         //refund money
@@ -106,9 +116,10 @@ const updateOrderShop = async (req, res) => {
     const { status } = req.body;
 
     const orderFromDB = await Order.findById(id);
-    if (orderFromDB.shop !== req.shop.id) return res.status(401).send('This order does not belong to your shop');
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
+    if (orderFromDB.shop !== req.shop.id) return res.status(401).send('This order does not belong to your shop');
 
     if (orderFromDB.status === 'Unplaced') return res.status(401).send('You can only update placed orders');
     if (orderFromDB.status === 'Cancelled') return res.status(401).send('You can only update uncancelled orders');
@@ -146,9 +157,11 @@ const deliverOrder = async (req, res) => {
     const { id } = req.params;
     const { otp } = req.body;
     const orderFromDB = await Order.findById(id);
+
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
     if (orderFromDB.shop !== req.shop.id) return res.status(401).send('This order does not belong to your shop');
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
 
     if (orderFromDB.status === 'Ready' && orderFromDB.otp === otp) {
         orderFromDB.status = 'Delivered';
@@ -160,14 +173,14 @@ const deliverOrder = async (req, res) => {
 
 const deleteOrder = async (req, res) => {
     const { id } = req.params;
-    const order = Order.findById(id);
+    const orderFromDB = await Order.findById(id);
 
-    if (!order || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
 
-    if (order.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
+    if (orderFromDB.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
 
-    if (order.status === 'unplaced') {
-        await order.delete();
+    if (orderFromDB.status === 'unplaced') {
+        await orderFromDB.delete();
         return res.json({ message: 'Order deleted successfully' });
     }
 

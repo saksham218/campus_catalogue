@@ -14,7 +14,7 @@ const customerMiddleware = async (req, res, next) => {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
-  req.user.customer = customer;
+  req.customer = customer;
   next()
 };
 
