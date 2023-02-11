@@ -5,7 +5,7 @@ function PrivateRoute({ children, ...rest }) {
         <Route
             {...rest}
             render={() => {
-                return localStorage.getItem('admin_token') !== null ? children : <Redirect to="/login" />;
+                return localStorage.getItem('admin_token') !== null ? children : <Redirect to="/register" />;
             }}
         />
     );

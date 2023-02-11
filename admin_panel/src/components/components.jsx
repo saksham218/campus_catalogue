@@ -1,37 +1,14 @@
 import styled from "styled-components";
-// const show = keyframes`
-//   0%, 49.99% {
-// 		opacity: 0;
-// 		z-index: 1;
-// 	}
-
-// 	50%, 100% {
-// 		opacity: 1;
-// 		z-index: 5;
-// 	}
-// `;
-
-// const hide = keyframes`
-//   0%, 49.99% {
-//     opacity: 1;
-//     z-index: 5;
-//   }
-
-//   50%, 100% {
-//     opacity: 0;
-//     z-index: 1;
-//   }
-// `
 
 export const Container = styled.div`
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  border-radius: 0.625rem;
+  box-shadow: 0 0.875rem 1.75rem rgba(0, 0, 0, 0.25), 0 0.635rem 0.635rem rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 678px;
+  width: 42.375rem;
   max-width: 100%;
-  min-height: 400px;
+  min-height: 25rem;
 `;
 
 export const SignUpContainer = styled.div`
@@ -80,6 +57,11 @@ export const Title = styled.h1`
   margin: 0;
 `;
 
+export const Title_1 = styled.h1`
+  font-weight: bold;
+  margin-bottom:1rem;
+`;
+
 export const Input = styled.input`
   background-color: #eee;
   border: none;
@@ -110,6 +92,7 @@ export const Button = styled.button`
 export const GhostButton = styled(Button)`
   background-color: transparent;
   border-color: #ffffff;
+  margin-top:0.4rem;
 `;
 
 export const Anchor = styled.a`
@@ -155,7 +138,7 @@ export const OverlayPanel = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 40px;
+  padding: 0 2.5rem;
   text-align: center;
   top: 0;
   height: 100%;
@@ -175,9 +158,9 @@ export const RightOverlayPanel = styled(OverlayPanel)`
   ${props => (props.signingIn !== true ? `transform: translateX(20%);` : null)}
 `;
 export const Paragraph = styled.p`
-  font-size: 14px;
+  font-size:0.875rem;
   font-weight: 100;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  margin: 20px 0 30px;
+  line-height: 1.25rem;
+  letter-spacing: 0.031rem;
+  margin: 2rem 0 1.875rem;
 `;

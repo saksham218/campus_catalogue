@@ -1,9 +1,9 @@
-import React from "react";
 import * as Components from "../components/components";
 import "../css/signup.css";
+import {useState} from 'react'
 
 function Signup() {
-  const [signIn, toggle] = React.useState(true);
+  const [signIn, toggle] = useState(true);
   return (
     <Components.Container>
       <Components.SignUpContainer signingIn={signIn}>
@@ -21,7 +21,7 @@ function Signup() {
           <Components.Title>Sign in</Components.Title>
           <Components.Input type="email" placeholder="Email" />
           <Components.Input type="password" placeholder="Password" />
-          <Components.Anchor href="#">Forgot your password?</Components.Anchor>
+          <Components.Anchor href="/reset">Forgot your password?</Components.Anchor>
           <Components.Button>Sign In</Components.Button>
         </Components.Form>
       </Components.SignInContainer>
