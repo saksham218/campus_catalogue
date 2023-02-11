@@ -8,6 +8,7 @@ const router = express();
 const passport = require('passport');
 const session = require('express-session');
 const strategies = require('./src/config/passport');
+const { customerMiddleware } = require('./src/middlewares/customer');
 
 /** Connect to Mongo */
 mongoose
@@ -70,9 +71,13 @@ const StartServer = () => {
     router.use('/order', require('./src/routes/order'));
     router.use('/shop', require('./src/routes/shop'));
     router.use('/timing', require('./src/routes/timing'));
+    router.use('/user', require('./src/routes/user'));
 
     /** Healthcheck */
-    router.get('/ping', (req, res) => res.status(200).json({ hello: 'world' }));
+    router.get('/ping', customerMiddleware, (req, res) => {
+        console.log(req.user);
+        res.status(200).json({ hello: 'world' })
+    });
 
     http.createServer(router).listen(config.PORT, () => {
         Logging.verbose(`Server is running on port ${config.PORT}`);

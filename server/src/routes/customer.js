@@ -5,7 +5,6 @@ const { customerMiddleware } = require('../middlewares/customer.js');
 const router = express.Router();
 
 //TODO: add customer middleware
-router.post('/new_customer', customerMiddleware,addCustomer);
 
 router.get('/basic_info', customerMiddleware, getBasicInfo);
 

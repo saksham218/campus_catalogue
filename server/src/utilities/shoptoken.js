@@ -4,7 +4,7 @@ const Shop = require('../models/shop');
 
 const generateToken = (shop) => {
     const payload = {
-        email: shop.email
+        email: shop.basic_info.email
     };
     return jwt.sign(payload, config.JWT_SECRET, { expiresIn: '1d' });
 };
@@ -13,7 +13,7 @@ const verifyToken = async (token) => {
     try {
         var decoded = jwt.verify(token, config.JWT_SECRET);
         var email = decoded.email;
-        const shop = await Shop.findOne({ email });
+        const shop = await Shop.findOne({"basic_info.email": email});
         if (!shop) {
             return { error: 'shop not found', shop: null, valid: false };
         }

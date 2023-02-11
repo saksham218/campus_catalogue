@@ -2,20 +2,6 @@ const Customer = require('../models/customer');
 const Order = require('../models/order');
 
 //TODO: modify addCustomer according to outlook response
-const addCustomer = async (req, res) => {
-
-    const customer = req.body;
-
-    const newCustomer = new Customer(customer);
-
-    try {
-        await newCustomer.save();
-        res.status(201).json(newCustomer);
-    } catch (error) {
-        res.status(409).json({ message: error.message })
-    }
-
-}
 
 const getBasicInfo = async (req, res) => {
     const { _id } = req.customer;
@@ -23,7 +9,6 @@ const getBasicInfo = async (req, res) => {
     try {
 
         const customer = await Customer.findById(_id);
-        console.log(customer);
         res.status(200).json(customer.basic_info);
 
     } catch (error) {
@@ -67,4 +52,4 @@ const updateCustomer = async (req, res) => {
 
 }
 
-module.exports = {addCustomer, getBasicInfo, getCart, getFavShops, updateCustomer}
+module.exports = {getBasicInfo, getCart, getFavShops, updateCustomer}
