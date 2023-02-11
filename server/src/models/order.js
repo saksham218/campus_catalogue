@@ -26,6 +26,7 @@ const Order_Schema = mongoose.Schema(
             razorpay_payment_id: { type: String },
             razorpay_order_id: { type: String },
             razorpay_signature: { type: String },
+            refund: { type: Object }
         },
         print: [
             {

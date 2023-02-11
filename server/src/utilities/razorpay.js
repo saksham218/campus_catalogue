@@ -81,16 +81,16 @@ const createPayout = async (fund_account_id, mode, amount, currency = 'INR', que
 
         function callback(error, response, body) {
             if (!error) {
-                console.log(body);
+                debug(body);
                 return { status: true, data: body };
             }
-            console.log(error);
+            error(error);
             return { status: false, error: error };
         }
 
         request(options, callback);
     } catch (error) {
-        console.log(error);
+        error(error);
         return { status: false, error: error };
     }
 };
@@ -105,7 +105,21 @@ const createOrder = async (amount, currency = 'INR', receipt, payment_capture = 
         });
         return { status: true, data: data };
     } catch (error) {
-        console.log(error);
+        error(error);
+        return { status: false, error: error };
+    }
+};
+
+const refundPayment = async (payment_id, amount, order_id) => {
+    try {
+        const data = await instance.payments.refund(payment_id, {
+            amount: amount,
+            speed: 'normal',
+            receipt: order_id
+        });
+        return { status: true, data: data };
+    } catch (error) {
+        error(error);
         return { status: false, error: error };
     }
 };
@@ -115,5 +129,6 @@ module.exports = {
     createFundBankAccount,
     createFundVPAAccount,
     createPayout,
-    createOrder
+    createOrder,
+    refundPayment
 };
