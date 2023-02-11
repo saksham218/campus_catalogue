@@ -5,7 +5,6 @@ const Order = require('../models/order');
 const addCustomer = async (req, res) => {
 
     const customer = req.body;
-
     const newCustomer = new Customer(customer);
 
     try {
@@ -67,4 +66,4 @@ const updateCustomer = async (req, res) => {
 
 }
 
-module.exports = {addCustomer, getBasicInfo, getCart, getFavShops, updateCustomer}
+module.exports = { addCustomer, getBasicInfo, getCart, getFavShops, updateCustomer }

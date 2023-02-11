@@ -49,7 +49,7 @@ const deleteItem = async (req, res) => {
         return res.status(401).send('This item does not belong to your shop');
 
     await item.delete();
-    res.json({ message: 'Item deleted successfully' });
+    res.status(201).json({ message: 'Item deleted successfully' });
 }
 
 module.exports = { getItem, addItem, updateItem, deleteItem };

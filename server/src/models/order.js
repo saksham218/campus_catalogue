@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Order_Schema = mongoose.Schema(
     {
         num: { type: String, required: true },
-        uni_oid: { type: String, required: true },
+        otp: { type: Number },
         type: {
             type: String,
             enum: ['Product', 'Print', 'Service'],
@@ -22,7 +22,11 @@ const Order_Schema = mongoose.Schema(
             enum: ['Unplaced', 'Pending', 'Accepted', 'Ready', 'Rejected', 'Delivered', 'Cancelled'],
             default: 'Unplaced'
         },
-        payment: { type: Object },
+        payment: {
+            razorpay_payment_id: { type: String },
+            razorpay_order_id: { type: String },
+            razorpay_signature: { type: String },
+        },
         print: [
             {
                 layout: { type: String, enum: ['Landscape', 'Portrait'] },
