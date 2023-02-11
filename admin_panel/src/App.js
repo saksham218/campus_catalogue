@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import PrivateRoute from './components/private_route';
 import Home from './pages/Home';
+import Signup from './pages/Signup';
 function App() {
     return (
         <div>
@@ -10,6 +11,9 @@ function App() {
                 <Switch>
                     <Route path="/login">
                         <Login />
+                    </Route>
+                    <Route path="/register">
+                        <Signup/>
                     </Route>
                     <Route path="/signup">
                         <Register />
