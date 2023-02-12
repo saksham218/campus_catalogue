@@ -64,19 +64,19 @@ const StartServer = () => {
     // });
 
     /** Routes */
-    router.use('/admin', require('./src/routes/admin'));
-    router.use('/auth', require('./src/routes/auth'));
-    router.use('/customer', require('./src/routes/customer'));
-    router.use('/item', require('./src/routes/item'))
+    router.use('/admin', require('./src/routes/admin')); // tested
+    router.use('/auth', require('./src/routes/auth')); // tested
+    router.use('/customer', require('./src/routes/customer')); // tested
+    router.use('/item', require('./src/routes/item'));
     router.use('/order', require('./src/routes/order'));
-    router.use('/shop', require('./src/routes/shop'));
+    router.use('/shop', require('./src/routes/shop')); // tested
     router.use('/timing', require('./src/routes/timing'));
     router.use('/user', require('./src/routes/user'));
 
     /** Healthcheck */
     router.get('/ping', customerMiddleware, (req, res) => {
         console.log(req.user);
-        res.status(200).json({ hello: 'world' })
+        res.status(200).json({ hello: 'world' });
     });
 
     http.createServer(router).listen(config.PORT, () => {
