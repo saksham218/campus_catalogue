@@ -1,4 +1,5 @@
 const Shop = require('../models/shop.js');
+const Order= require('../models/order.js');
 const Item = require('../models/item.js');
 const payment = require('../utilities/payment');
 const jwt = require('jsonwebtoken');
@@ -118,11 +119,39 @@ const changeDefaultFundAccount = async (req, res) => {
     }
 };
 
+const getPendingOrders = async (req, res) => {
+    const shop = req.shop;
+    try{
+    const orders = await Order.find({ shop: shop._id, status: 'Pending' });
+    res.status(200).json({ message: 'Orders fetched successfully', orders: orders });
+    }catch(err){
+        res.status(500).json({ message: 'Error fetching orders' });
+    }
+}
+
+const getAllOrders = async (req, res) => {
+    const shop = req.shop;
+    try{
+        const orders = await Order.find({
+            shop: shop._id, status: {
+                $in: ['Accepted', 'Rejected', 'Delivered', 'Ready']
+            }
+        });
+        
+        res.status(200).json({ message: 'Orders fetched successfully', orders: orders });
+
+    }catch(err){
+        res.status(500).json({ message: 'Error fetching orders' });
+    }
+}
+
 module.exports = {
     firstDetails,
     secondDetails,
     getMenu,
     getShop,
     withdrawMoney,
-    changeDefaultFundAccount
+    changeDefaultFundAccount,
+    getAllOrders,
+    getPendingOrders
 };
