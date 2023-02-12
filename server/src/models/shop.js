@@ -48,7 +48,6 @@ const Shop_Schema = mongoose.Schema(
                 mode: { type: String, default: '' }
             }
         },
-        menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
         approved: {
             status: { type: Boolean, default: false },
             approver: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', default: null },

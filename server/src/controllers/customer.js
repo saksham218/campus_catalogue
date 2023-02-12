@@ -1,4 +1,5 @@
 const Customer = require('../models/customer');
+const Item = require('../models/item');
 const Order = require('../models/order');
 const Shop = require('../models/shop');
 const { debug } = require('../utilities/logging');
@@ -60,4 +61,14 @@ const updateBasicInfo = async (req, res) => {
     res.json(customer);
 };
 
-module.exports = { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop };
+const getShopMenu = async (req, res) => {
+    try {
+        const { shopId } = req.params;
+        const items = await Item.find({ shop: shopId });
+        res.status(200).json(items);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+module.exports = { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop, getShopMenu };

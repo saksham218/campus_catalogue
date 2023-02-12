@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop } = require('../controllers/customer.js');
+const { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop, getShopMenu } = require('../controllers/customer.js');
 const { customerMiddleware } = require('../middlewares/customer.js');
 const router = express.Router();
 
@@ -11,6 +11,8 @@ router.get('/basic_info', customerMiddleware, getBasicInfo);
 router.get('/cart', customerMiddleware, getCart);
 
 router.get('/fav_shops', customerMiddleware, getFavShops);
+
+router.get('/shop_menu/:shopId', customerMiddleware, getShopMenu);
 
 router.post('/fav_shops', customerMiddleware, addFavoriteShop);
 

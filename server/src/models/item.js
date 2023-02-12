@@ -8,7 +8,8 @@ const Item_Schema = mongoose.Schema(
         price: { type: Number, required: true },
         category: {
             type: String,
-            enum: ['Product', 'Meal', 'Service', 'Print']
+            enum: ['Product', 'Meal', 'Service', 'Print'],
+            required: true
         },
         available: { type: Boolean, default: true }
     },
