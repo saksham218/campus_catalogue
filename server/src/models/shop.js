@@ -24,25 +24,29 @@ const Shop_Schema = mongoose.Schema(
             }
         },
         payment: {
-            vpa: [{ id: { type: String,default: null },
-                is_default: { type: Boolean, default: false },
-                fund_account_id: { type: String,default:null } }],
+            vpa: [
+                {
+                    id: { type: String, default: null },
+                    is_default: { type: Boolean, default: false },
+                    fund_account_id: { type: String, default: '' }
+                }
+            ],
             bank_account: [
                 {
-                    accno: { type: String,default:null },
-                    ifsc: { type: String ,default:null},
-                    acc_holder_name: { type: String ,default:null},
+                    accno: { type: String, default: null },
+                    ifsc: { type: String, default: null },
+                    acc_holder_name: { type: String, default: null },
                     is_default: { type: Boolean, default: false },
-                    fund_account_id: { type: String ,default:null}
+                    fund_account_id: { type: String, default: '' }
                 }
             ]
         },
         razorpay: {
-            customer_id: { type: String, default: null },
+            customer_id: { type: String, default: '' },
             default_fund_account: {
-                id: { type: String, default: null },
-                mode: { type: String, default: null }
-            },
+                id: { type: String, default: '' },
+                mode: { type: String, default: '' }
+            }
         },
         menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
         approved: {

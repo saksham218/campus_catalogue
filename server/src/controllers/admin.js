@@ -92,7 +92,7 @@ const approveShop = async (req, res) => {
         shop.approved.date = Date.now();
         shop.approved.approver = req.admin._id;
         await shop.save();
-        res.status(200).json({ message: 'Shop Approved', shop });
+        res.status(200).json({ message: 'Shop Approved', data });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal Server Error' });

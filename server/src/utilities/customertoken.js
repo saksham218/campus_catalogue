@@ -4,16 +4,16 @@ const Customer = require('../models/customer');
 
 const generateToken = (customer) => {
     const payload = {
-      email: customer.basic_info.email
+        email: customer.basic_info.email
     };
-    return jwt.sign(payload, config.JWT_SECRET, { expiresIn: '10h' });
+    return jwt.sign(payload, config.JWT_SECRET, { expiresIn: '10d' });
 };
 
 const verifyToken = async (token) => {
     try {
         var decoded = jwt.verify(token, config.JWT_SECRET);
         var email = decoded.email;
-        const customer = await Customer.findOne({"basic_info.email": email});
+        const customer = await Customer.findOne({ 'basic_info.email': email });
         if (!customer) {
             return { error: 'customer not found', customer: null, valid: false };
         }

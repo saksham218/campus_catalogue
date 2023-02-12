@@ -1,12 +1,13 @@
 const razorpay = require('./razorpay');
 const Order = require('../models/order');
+const { debug } = require('./logging');
 
 const configureShopAfterApproval = async (shop) => {
     // create customer
     var customer_response = await razorpay.createCustomer(shop.basic_info.name, shop.basic_info.email, shop.basic_info.phone, shop.basic_info.gstin);
-
+    // return { status: true, data: customer_response };
     if (!customer_response.status) {
-        return { status: false, error: customer.error };
+        return { status: false, error: customer_response.error };
     }
     var default_fund_account = '';
     var default_mode = '';
@@ -41,7 +42,6 @@ const configureShopAfterApproval = async (shop) => {
     if (default_fund_account == '') {
         default_fund_account = fund_accounts[0].id;
     }
-
     // update shop
     shop.razorpay.customer_id = customer_response.data.id;
     shop.razorpay.default_fund_account.id = default_fund_account;

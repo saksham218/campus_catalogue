@@ -6,14 +6,14 @@ const generateToken = (shop) => {
     const payload = {
         email: shop.basic_info.email
     };
-    return jwt.sign(payload, config.JWT_SECRET, { expiresIn: '1d' });
+    return jwt.sign(payload, config.JWT_SECRET, { expiresIn: '10d' });
 };
 
 const verifyToken = async (token) => {
     try {
         var decoded = jwt.verify(token, config.JWT_SECRET);
         var email = decoded.email;
-        const shop = await Shop.findOne({"basic_info.email": email});
+        const shop = await Shop.findOne({ 'basic_info.email': email });
         if (!shop) {
             return { error: 'shop not found', shop: null, valid: false };
         }
