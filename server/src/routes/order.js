@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { getOrderShop, getOrderCustomer, updateOrderCustomer, placeOrder, updateOrderShop, addOrder, deleteOrder, deliverOrder, cancelOrder, readyOrder } = require('../controllers/order');
+const { getOrderShop, getOrderCustomer, updateOrderCustomer, placeOrder, updateOrderShop, addOrder, deleteOrder, deliverOrder, cancelOrder, readyOrder , createPrintOrder,addPrintOrder,getFile,downloadFile} = require('../controllers/order');
 const { customerMiddleware } = require('../middlewares/customer');
 const { shopMiddleware } = require('../middlewares/shop');
 
@@ -35,5 +35,17 @@ router.patch('/ready/:id', shopMiddleware, readyOrder);
 
 //customer middleware
 router.patch('/cancel/:id', customerMiddleware, cancelOrder);
+
+// customer middleware
+router.post('/print', customerMiddleware, createPrintOrder);
+
+// customer middleware
+router.post('/print/:id', customerMiddleware, addPrintOrder);
+
+// shop middleware
+router.get('/print/:id/:index', shopMiddleware, getFile);
+
+// shop middleware
+router.get('/print/:id/:index/download', shopMiddleware, downloadFile);
 
 module.exports = router;
