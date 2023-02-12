@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import '../css/signup.css'
 import * as Components from '../components/components'
 
