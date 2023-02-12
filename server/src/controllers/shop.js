@@ -6,7 +6,7 @@ const config = require('../config/config');
 const { debug } = require('../utilities/logging.js');
 
 const firstDetails = async (req, res) => {
-    let { name, owner_name, phone, address,gstin,lat, lon, open, close,image, category, payment,token } = req.body;
+    let { name, owner_name, phone, address, gstin, lat, lon, open, close, image, category, payment, token } = req.body;
     /*
         payment: {
             vpa :[{
@@ -21,14 +21,12 @@ const firstDetails = async (req, res) => {
             }],
         }
         */
-   debug(payment.vpa);
-   debug(payment.bank_account);
-   try {
-       var decoded = jwt.verify(token, config.JWT_SECRET);
-       var email = decoded.email;
-       const shop = await Shop.findOne({ "basic_info.email": email });
-       if (shop) {
-           // debug(shop);
+    try {
+        var decoded = jwt.verify(token, config.JWT_SECRET);
+        var email = decoded.email;
+        const shop = await Shop.findOne({ 'basic_info.email': email });
+        if (shop) {
+            // debug(shop);
             res.status(400).json({ message: 'Shop already exists' });
         } else {
             const shop = new Shop({
@@ -48,7 +46,7 @@ const firstDetails = async (req, res) => {
                         close: close
                     },
                     image: image,
-                    category: category,
+                    category: category
                 },
                 payment: {
                     vpa: payment.vpa,
@@ -57,7 +55,7 @@ const firstDetails = async (req, res) => {
             });
             shop.save()
                 .then((result) => {
-                    res.status(200).json({ message: 'Shop created successfully',result });
+                    res.status(200).json({ message: 'Shop created successfully', result });
                 })
                 .catch((error) => {
                     res.status(500).json({ message: 'Error creating shop' });
@@ -68,40 +66,34 @@ const firstDetails = async (req, res) => {
     }
 };
 
-const secondDetails = (req, res) => {
+const secondDetails = async (req, res) => {
     const shop = req.shop;
-    const { name, owner_name, phone, lat, lon, open, close, image } = req.body;
-    Shop.findByIdAndUpdate(shop._id, {
-        basic_info: {
-            name: name || shop.basic_info.name,
-            owner_name: owner_name || shop.basic_info.owner_name,
-            phone: phone || shop.basic_info.phone,
-            map_coordinates: {
-                lat: lat || shop.basic_info.map_coordinates.lat,
-                lon: lon || shop.basic_info.map_coordinates.lon
-            },
-            default_timings: {
-                open: open || shop.basic_info.default_timings.open,
-                close: close || shop.basic_info.default_timings.close
-            },
-            image: image || shop.basic_info.image
-        }
-    })
+    const { name, owner_name, phone, address, lat, lon, open, close, image } = req.body;
+    shop.basic_info.name = name || shop.basic_info.name;
+    shop.basic_info.owner_name = owner_name || shop.basic_info.owner_name;
+    shop.basic_info.phone = phone || shop.basic_info.phone;
+    shop.basic_info.address = address || shop.basic_info.address;
+    shop.basic_info.map_coordinates.lat = lat || shop.basic_info.map_coordinates.lat;
+    shop.basic_info.map_coordinates.lon = lon || shop.basic_info.map_coordinates.lon;
+    shop.basic_info.default_timings.open = open || shop.basic_info.default_timings.open;
+    shop.basic_info.default_timings.close = close || shop.basic_info.default_timings.close;
+    shop.basic_info.image = image || shop.basic_info.image;
+    shop.save()
         .then((result) => {
-            res.status(200).json({ message: 'Shop updated successfully', shop: result });
+            res.status(200).json({ message: 'Shop updated successfully', result: result.basic_info });
         })
         .catch((error) => {
             res.status(500).json({ message: 'Error updating shop' });
         });
 };
 
-const getMenu = (req, res) => {
-    const items = Item.find({ shop: req.shop._id });
+const getMenu = async (req, res) => {
+    const items = await Item.find({ shop: req.shop._id });
     res.status(200).json({ message: 'Items fetched successfully', items: items });
 };
 
-const getShop = (req, res) => {
-    const shop = Shop.findById(req.shop._id).populate('menu').populate('approved.approver');
+const getShop = async (req, res) => {
+    const shop = await Shop.findById(req.shop._id).populate('menu').populate('approved.approver');
     res.status(200).json({ message: 'Shop fetched successfully', shop: shop });
 };
 

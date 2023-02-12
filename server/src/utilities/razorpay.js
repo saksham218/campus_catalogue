@@ -1,6 +1,6 @@
 const { instance, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET } = require('../config/config');
 const { debug, error } = require('../utilities/logging');
-var request = require('request');
+const axios = require('axios');
 
 const createCustomer = async (name, email, phone, gstin) => {
     try {
@@ -51,36 +51,31 @@ const createFundVPAAccount = async (cust_id, vpa) => {
 
 const createPayout = async (fund_account_id, mode, amount, currency = 'INR', queue_if_low_balance = true) => {
     try {
-        var headers = {
-            'Content-Type': 'application/json'
-        };
-
-        var dataString = `{\n  "account_number": "7878780080316316",\n  "fund_account_id": ${fund_account_id},\n  "amount": ${amount},\n  "currency": ${currency},\n  "mode": ${mode},\n  "purpose": "payout",\n  "queue_if_low_balance": ${queue_if_low_balance} \n}`;
-
-        var options = {
+        const data = await axios({
+            method: 'post',
             url: 'https://api.razorpay.com/v1/payouts',
-            method: 'POST',
-            headers: headers,
-            body: dataString,
             auth: {
-                user: RAZORPAY_KEY_ID,
-                pass: RAZORPAY_KEY_SECRET
+                username: RAZORPAY_KEY_ID,
+                password: RAZORPAY_KEY_SECRET
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                account_number: '7878780080316316',
+                fund_account_id: fund_account_id,
+                amount: amount,
+                currency: currency,
+                mode: mode,
+                purpose: 'payout',
+                queue_if_low_balance: queue_if_low_balance
             }
-        };
-
-        function callback(err, response, body) {
-            if (!err) {
-                debug(body);
-                return { status: true, data: body };
-            }
-            error(err);
-            return { status: false, error: err };
-        }
-
-        request(options, callback);
+        });
+        debug(data.data);
+        return { status: true, data: data };
     } catch (err) {
-        error(err);
-        return { status: false, error: err };
+        error(err.response.data.error);
+        return { status: false, error: err.response.data.error };
     }
 };
 

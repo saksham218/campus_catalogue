@@ -52,11 +52,10 @@ const configureShopAfterApproval = async (shop) => {
 
 const withdraw = async (shop) => {
     const data = await razorpay.createPayout(shop.razorpay.default_fund_account.id, shop.razorpay.default_fund_account.mode, shop.razorpay.due_payment, 'INR', true);
-
+    // debug(data);
     if (!data.status) {
         return { status: false, error: data.error };
     }
-
     shop.razorpay.due_payment = 0;
     await shop.save();
     return { status: true, data: data.data };

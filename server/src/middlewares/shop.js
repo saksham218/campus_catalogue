@@ -4,21 +4,21 @@ const { verifyToken } = require('../utilities/shoptoken');
 const shopMiddleware = async (req, res, next) => {
     const token = req.headers['authorization'];
     if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ message: 'Token not Provided' });
     }
     const data = await verifyToken(token);
     if (data.valid) {
-      const shop = await Shop.findById(data.shop._id);
-      if (!shop) {
-          return res.status(401).json({ message: 'Unauthorized' });
-      }
-      if (!shop.approved.status) {
-        return res.status(401).json({ message: 'Unapproved' });
-      }
-      req.shop = shop;
-      next();
+        const shop = await Shop.findById(data.shop._id);
+        if (!shop) {
+            return res.status(401).json({ message: 'Shop doesnt exists' });
+        }
+        if (!shop.approved.status) {
+            return res.status(401).json({ message: 'Unapproved' });
+        }
+        req.shop = shop;
+        next();
     } else {
-      return res.status(401).json({ message: 'Unauthorized', error: data.error });
+        return res.status(401).json({ message: 'Unauthorized', error: data.error });
     }
 };
 
