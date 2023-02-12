@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 const config = require('./src/config/config');
 const Logging = require('./src/utilities/logging');
 const router = express();
@@ -38,6 +39,7 @@ const StartServer = () => {
     router.use(express.urlencoded({ extended: true }));
     router.use(express.json());
     router.use(cors());
+    router.use(fileUpload());
     router.use(
         session({
             secret: 'hehe',
@@ -67,7 +69,7 @@ const StartServer = () => {
     router.use('/admin', require('./src/routes/admin')); // tested
     router.use('/auth', require('./src/routes/auth')); // tested
     router.use('/customer', require('./src/routes/customer')); // tested
-    router.use('/item', require('./src/routes/item'));
+    router.use('/item', require('./src/routes/item')); // tested
     router.use('/order', require('./src/routes/order'));
     router.use('/shop', require('./src/routes/shop')); // tested
     router.use('/timing', require('./src/routes/timing'));

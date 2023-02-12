@@ -1,14 +1,16 @@
 const Order = require('../models/order');
 const { createOrder, refundPayment } = require('../utilities/razorpay');
-
+const Item = require('../models/item');
+const path = require('path');
+const fs = require('fs');
+const mongoose = require('mongoose');
+const pdf = require('pdf-page-counter');
 const getOrder = async (req, res) => {
     const { id } = req.params;
     try {
         const orderFromDB = await Order.findById(id);
-        if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id))
-            return res.status(404).send('No order with that id');
-        if (orderFromDB.customer !== req.customer.id)
-            return res.status(401).send('This order does not belong to you');
+        if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+        if (orderFromDB.customer.toString() !== req.customer._id.toString()) return res.status(401).send('This order does not belong to you');
 
         console.log(orderFromDB);
         res.status(200).json(orderFromDB);
@@ -53,11 +55,9 @@ const updateOrderCustomer = async (req, res) => {
     const { items } = req.body;
     const orderFromDB = await Order.findById(id);
 
-    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id))
-        return res.status(404).send('No order with that id');
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
 
-    if (orderFromDB.customer !== req.customer.id)
-        return res.status(401).send('This order does not belong to you');
+    if (orderFromDB.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
 
     if (orderFromDB.status === 'unplaced') {
         orderFromDB.items = items;
@@ -75,7 +75,6 @@ const placeOrder = async (req, res) => {
     if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
 
     if (orderFromDB.customer !== req.customer.id) return res.status(401).send('This order does not belong to you');
-
 
     if (orderFromDB.status === 'unplaced') {
         const data = await createOrder(orderFromDB.total, 'INR', orderFromDB.num, 1);
@@ -162,7 +161,6 @@ const deliverOrder = async (req, res) => {
 
     if (orderFromDB.shop !== req.shop.id) return res.status(401).send('This order does not belong to your shop');
 
-
     if (orderFromDB.status === 'Ready' && orderFromDB.otp === otp) {
         orderFromDB.status = 'Delivered';
         await orderFromDB.save();
@@ -187,4 +185,101 @@ const deleteOrder = async (req, res) => {
     res.status(401).send('You can only delete unplaced orders');
 };
 
-module.exports = { getOrder, updateOrderCustomer, updateOrderShop, addOrder, deleteOrder, placeOrder, deliverOrder, cancelOrder };
+const createPrintOrder = async (req, res) => {
+    const { shop } = req.body;
+    var customer = req.customer;
+    const num = 'ord_' + Date.now().toString();
+    var total = 0;
+    const newOrder = new Order({
+        num,
+        type: 'Print',
+        shop: shop,
+        customer: customer.id,
+        total
+    });
+    newOrder
+        .save()
+        .then((order) => {
+            fs.mkdir(path.join(__dirname, '../..', 'uploads', order._id.toString()), (err) => {
+                if (err) {
+                    return res.status(409).json({ message: err.message });
+                }
+                res.status(201).json(order);
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(409).json({ message: err.message });
+        });
+};
+
+const addPrintOrder = async (req, res) => {
+    const { id } = req.params;
+    var { layout, color, paper, copies } = req.body;
+    color = color === '1' ? true : false;
+    copies = parseInt(copies);
+    const order = await Order.findById(id);
+
+    if (!order || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
+    if (order.customer.toString() !== req.customer._id.toString()) return res.status(401).send('This order does not belong to you');
+
+    if (order.status !== 'Unplaced') return res.status(401).send('You can only add items to unplaced orders');
+
+    let file;
+    let uploadPath;
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send('No files were uploaded.');
+    }
+    file = req.files.file;
+    uploadPath = path.join(__dirname, '../..', 'uploads', id, file.name);
+    console.log(uploadPath);
+
+    // Use the mv() method to place the file somewhere on your server
+    file.mv(uploadPath, async function (err) {
+        if (err) return res.status(500).send(err);
+        order.print.push({ layout, color, paper, copies, path: uploadPath, mimetype: file.mimetype });
+        const colorP = await Item.findOne({ shop: order.shop, category: 'Color_Print' });
+        const bnwP = await Item.findOne({ shop: order.shop, category: 'Print' });
+        const cp = colorP ? colorP.price : 5;
+        const bp = bnwP ? bnwP.price : 2;
+        const buff = fs.readFileSync(uploadPath);
+        var numpages = 1;
+        if (file.mimetype === 'application/pdf') {
+            numpages = (await pdf(buff)).numpages;
+        }
+        if (color) {
+            order.total += cp * copies * numpages;
+        } else {
+            order.total += bp * copies * numpages;
+        }
+        await order.save();
+        res.json({ message: 'File uploaded successfully', order });
+    });
+};
+
+const getFile = async (req, res) => {
+    const { id, index } = req.params;
+
+    const orderFromDB = await Order.findById(id);
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
+    if (orderFromDB.shop.toString() !== req.shop._id.toString()) return res.status(401).send('This order does not belong to your shop');
+    const print = orderFromDB.print[index];
+    const data = fs.readFileSync(print.path);
+    res.contentType(print.mimetype);
+    res.send(data);
+};
+
+const downloadFile = async (req, res) => {
+    const { id, index } = req.params;
+
+    const orderFromDB = await Order.findById(id);
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
+    if (orderFromDB.shop.toString() !== req.shop._id.toString()) return res.status(401).send('This order does not belong to your shop');
+    const print = orderFromDB.print[index];
+    res.download(print.path);
+};
+
+module.exports = { getOrder, updateOrderCustomer, updateOrderShop, addOrder, deleteOrder, placeOrder, deliverOrder, cancelOrder, createPrintOrder, addPrintOrder, getFile, downloadFile };

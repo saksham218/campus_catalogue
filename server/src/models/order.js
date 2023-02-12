@@ -15,7 +15,7 @@ const Order_Schema = mongoose.Schema(
             ref: 'Customer',
             required: true
         },
-        total: { type: Number, required: true },
+        total: { type: Number, required: true, default: 0 },
         items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
         status: {
             type: String,
@@ -31,9 +31,11 @@ const Order_Schema = mongoose.Schema(
         print: [
             {
                 layout: { type: String, enum: ['Landscape', 'Portrait'] },
-                color: { type: String, enum: ['Color', 'Black & White'] },
+                color: { type: Boolean },
                 paper: { type: String, enum: ['A4', 'A3', 'A2', 'A1', 'A0'] },
-                copies: { type: Number }
+                copies: { type: Number },
+                mimetype: { type: String },
+                path: { type: String }
             }
         ]
     },
