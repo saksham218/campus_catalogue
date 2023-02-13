@@ -18,7 +18,7 @@ const shopMiddleware = async (req, res, next) => {
         req.shop = shop;
         next();
     } else {
-        return res.status(401).json({ message: 'Unauthorized', error: data.error });
+        return res.status(401).json({ message: 'Unauthorized11', error: data.error });
     }
 };
 
