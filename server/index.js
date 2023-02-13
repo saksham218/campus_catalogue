@@ -70,7 +70,7 @@ const StartServer = () => {
     router.use('/auth', require('./src/routes/auth')); // tested
     router.use('/customer', require('./src/routes/customer')); // tested
     router.use('/item', require('./src/routes/item')); // tested
-    router.use('/order', require('./src/routes/order'));
+    router.use('/order', require('./src/routes/order')); //tested
     router.use('/shop', require('./src/routes/shop')); // tested
     router.use('/timing', require('./src/routes/timing'));
     router.use('/user', require('./src/routes/user'));
