@@ -4,16 +4,13 @@ const mongoose = require('mongoose');
 const { createOrder, refundPayment } = require('../utilities/razorpay');
 const path = require('path');
 const fs = require('fs');
-const mongoose = require('mongoose');
 const pdf = require('pdf-page-counter');
 const getOrderShop = async (req, res) => {
     const { id } = req.params;
     try {
         const orderFromDB = await Order.findById(id);
-        if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id))
-            return res.status(404).send('No order with that id');
-        if (orderFromDB.shop.toString() !== req.shop.id.toString())
-            return res.status(401).send('This order does not belong to you');
+        if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+        if (orderFromDB.shop.toString() !== req.shop.id.toString()) return res.status(401).send('This order does not belong to you');
         res.status(200).json(orderFromDB);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -24,16 +21,14 @@ const getOrderCustomer = async (req, res) => {
     const { id } = req.params;
     try {
         const orderFromDB = await Order.findById(id);
-        if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id))
-            return res.status(404).send('No order with that id');
-        if (orderFromDB.customer.toString() !== req.customer.id.toString())
-            return res.status(401).send('This order does not belong to you');
-        
+        if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+        if (orderFromDB.customer.toString() !== req.customer.id.toString()) return res.status(401).send('This order does not belong to you');
+
         res.status(200).json(orderFromDB);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
-}
+};
 
 //TODO: see what we get in req.body
 // req.body: type, shop, items, print
@@ -73,11 +68,9 @@ const updateOrderCustomer = async (req, res) => {
 
     if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
 
-    if (orderFromDB.customer.toString() !== req.customer.id.toString())
-        return res.status(401).send('This order does not belong to you');
+    if (orderFromDB.customer.toString() !== req.customer.id.toString()) return res.status(401).send('This order does not belong to you');
 
     if (orderFromDB.status === 'Unplaced') {
-        
         orderFromDB.items = items;
 
         var total = 0;
@@ -103,7 +96,6 @@ const placeOrder = async (req, res) => {
     if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
 
     if (orderFromDB.customer.toString() !== req.customer.id.toString()) return res.status(401).send('This order does not belong to you');
-
 
     if (orderFromDB.status === 'Unplaced') {
         const data = await createOrder(orderFromDB.total, 'INR', orderFromDB.num, 1);
@@ -189,14 +181,13 @@ const readyOrder = async (req, res) => {
 
     if (orderFromDB.shop.toString() !== req.shop.id.toString()) return res.status(401).send('This order does not belong to your shop');
 
-
     if (orderFromDB.status === 'Accepted') {
         orderFromDB.status = 'Ready';
         await orderFromDB.save();
         return res.json(orderFromDB);
     }
     res.status(401).send('Ready only Accpeted orders');
-}
+};
 
 const deliverOrder = async (req, res) => {
     const { id } = req.params;
@@ -211,7 +202,7 @@ const deliverOrder = async (req, res) => {
         orderFromDB.status = 'Delivered';
         await orderFromDB.save();
 
-        return res.status(201).json(orderFromDB)
+        return res.status(201).json(orderFromDB);
     }
     res.status(401).send('Incorrect OTP');
 };
@@ -329,4 +320,19 @@ const downloadFile = async (req, res) => {
     res.download(print.path);
 };
 
-module.exports = { getOrderShop, getOrderCustomer, updateOrderCustomer, updateOrderShop, addOrder, deleteOrder, placeOrder, deliverOrder, cancelOrder,readyOrder, createPrintOrder, addPrintOrder, getFile, downloadFile };
+module.exports = {
+    getOrderShop,
+    getOrderCustomer,
+    updateOrderCustomer,
+    updateOrderShop,
+    addOrder,
+    deleteOrder,
+    placeOrder,
+    deliverOrder,
+    cancelOrder,
+    readyOrder,
+    createPrintOrder,
+    addPrintOrder,
+    getFile,
+    downloadFile
+};
