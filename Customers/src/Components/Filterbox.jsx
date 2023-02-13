@@ -66,84 +66,84 @@ const Button = styled(motion.div)`
 `
 
 const Filterbox = (props) => {
-  
-  var color1='white',textcolor1='black';
-  var color2='white',textcolor2='black';
-  var color3='white',textcolor3='black';
-  
-  const [status,setStatus] = useState(0);
-  const [status2,setStatus2] = useState(0);
-  const [status3,setStatus3] = useState(0);
 
-  if (status%2==1){
-    color1='black';
-    textcolor1='white';
-  }
-  else{
-    color1='white';
-    textcolor1='black';
-  }
+  var color1 = 'white', textcolor1 = 'black';
+  var color2 = 'white', textcolor2 = 'black';
+  var color3 = 'white', textcolor3 = 'black';
 
-  if (status2%2==1){
-    color2='black';
-    textcolor2='white';
+  const [status, setStatus] = useState(0);
+  const [status2, setStatus2] = useState(0);
+  const [status3, setStatus3] = useState(0);
+
+  if (status % 2 == 1) {
+    color1 = 'black';
+    textcolor1 = 'white';
   }
-  else{
-    color2='white';
-    textcolor2='black';
+  else {
+    color1 = 'white';
+    textcolor1 = 'black';
   }
 
-  if (status3%2==1){
-    color3='black';
-    textcolor3='white';
+  if (status2 % 2 == 1) {
+    color2 = 'black';
+    textcolor2 = 'white';
   }
-  else{
-    color3='white';
-    textcolor3='black';
+  else {
+    color2 = 'white';
+    textcolor2 = 'black';
+  }
+
+  if (status3 % 2 == 1) {
+    color3 = 'black';
+    textcolor3 = 'white';
+  }
+  else {
+    color3 = 'white';
+    textcolor3 = 'black';
   }
 
   return (
     <Box
-    className='container'
-    variants={container}
-    initial="hidden"
-    animate="visible"
-    transition={{ease: easeOut}}
+      className='container'
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      transition={{ ease: easeOut }}
     >
       <Heading_Text
-      className='item'
-      variants= {item}
+        className='item'
+        variants={item}
       >
         Filter:
       </Heading_Text>
       <Row2>
-        <Button style={{backgroundColor:color1,color:textcolor1}}
-        onClick= {()=>setStatus(prevStatus => {console.log(prevStatus);return (prevStatus+1);})}
-        className='item'
-        variants= {item}
-        whileHover={{scale: 1.05,backgroundColor: "black",color: "white"}}
-        whileTap={{scale: 0.8}}
+        <Button style={{ backgroundColor: color1, color: textcolor1 }}
+          onClick={() => setStatus(prevStatus => { console.log(prevStatus); return (prevStatus + 1); })}
+          className='item'
+          variants={item}
+          whileHover={{ scale: 1.05, backgroundColor: "black", color: "white" }}
+          whileTap={{ scale: 0.8 }}
         // transition={{type: spring}}
         >
           {props.status}
         </Button>
-        <Button style={{backgroundColor:color2,color:textcolor2}}
-        onClick= {()=>setStatus2(prevStatus => {console.log(prevStatus);return (prevStatus+1);})}
-        className='item'
-        variants={item}
-        whileHover={{scale: 1.05,backgroundColor: "black",color: "white"}}
-        whileTap={{scale: 0.8}}
+        <Button style={{ backgroundColor: color2, color: textcolor2 }}
+          onClick={() => setStatus2(prevStatus => { console.log(prevStatus); return (prevStatus + 1); })}
+          className='item'
+          variants={item}
+          whileHover={{ scale: 1.05, backgroundColor: "black", color: "white" }}
+          whileTap={{ scale: 0.8 }}
         // transition={{type: spring}}
         >
           {props.type}
         </Button>
       </Row2>
-      <Button style={{backgroundColor:color3,color:textcolor3}}
-      onClick= {()=>setStatus3(prevStatus => {console.log(prevStatus);return (prevStatus+1);})}
-      className= 'item'
-      variants={item}
-      whileHover={{scale: 1.05,backgroundColor: "black",color: "white"}}
-      whileTap={{scale: 0.8}}
+      <Button style={{ backgroundColor: color3, color: textcolor3 }}
+        onClick={() => setStatus3(prevStatus => { console.log(prevStatus); return (prevStatus + 1); })}
+        className='item'
+        variants={item}
+        whileHover={{ scale: 1.05, backgroundColor: "black", color: "white" }}
+        whileTap={{ scale: 0.8 }}
       // transition={{type: spring}}
       >
         {props.service}
