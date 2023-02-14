@@ -11,7 +11,7 @@ const login = async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({ message: 'Invalid data' });
     }
-    const admin = await Admin.findOne({ email });
+    const admin = await Admin.findOne({ email }).select('+password');
     if (!admin) {
         return res.status(404).json({ message: 'Admin not found' });
     }
@@ -57,7 +57,7 @@ const changePassword = async (req, res) => {
     if (!oldPassword || !newPassword) {
         return res.status(400).json({ message: 'Invalid data' });
     }
-    const admin = await Admin.findById(req.admin._id);
+    const admin = await Admin.findById(req.admin._id).select('+password');
     if (!admin) {
         return res.status(404).json({ message: 'Admin not found' });
     }

@@ -5,6 +5,7 @@ const { createOrder, refundPayment } = require('../utilities/razorpay');
 const path = require('path');
 const fs = require('fs');
 const pdf = require('pdf-page-counter');
+const { deleteOrderFolder } = require('../utilities/order');
 const getOrderShop = async (req, res) => {
     const { id } = req.params;
     try {
@@ -216,6 +217,9 @@ const deleteOrder = async (req, res) => {
     if (orderFromDB.customer.toString() !== req.customer.id.toString()) return res.status(401).send('This order does not belong to you');
 
     if (orderFromDB.status === 'Unplaced') {
+        if (orderFromDB.type === 'Print') {
+            deleteOrderFolder(orderFromDB);
+        }
         await orderFromDB.delete();
         return res.json({ message: 'Order deleted successfully' });
     }
