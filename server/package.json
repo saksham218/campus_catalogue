@@ -26,7 +26,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-microsoft": "^1.0.0",
     "pdf-page-counter": "^1.0.3",
-    "razorpay": "^2.8.4"
+    "razorpay": "^2.8.4",
+    "socket.io": "^4.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

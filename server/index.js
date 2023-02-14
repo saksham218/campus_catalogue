@@ -13,6 +13,8 @@ const strategies = require('./src/config/passport');
 const { customerMiddleware } = require('./src/middlewares/customer');
 const Order = require('./src/models/order');
 const { deleteOrderFolder } = require('./src/utilities/order');
+const shoptoken = require('./src/utilities/shoptoken');
+const usertoken = require('./src/utilities/customertoken');
 
 /** Connect to Mongo */
 mongoose
@@ -101,7 +103,66 @@ const StartServer = () => {
         }
     );
 
-    http.createServer(router).listen(config.PORT, () => {
+    const httpServer = http.createServer(router);
+    const io = require('socket.io')(httpServer, {
+        cors: {
+            origin: '*'
+        }
+    });
+    io.on('connection', (socket) => {
+        Logging.info('Socket connected');
+        socket.on('disconnect', () => {
+            Logging.info('Socket disconnected');
+        });
+    });
+    const userIO = io.of('/wuser');
+    const shopIO = io.of('/wshop');
+
+    userIO.on('connection', async (socket) => {
+        const token = socket.handshake.headers.authorization;
+        if (token) {
+            const data = await usertoken.verifyToken(token);
+            if (data.valid) {
+                socket.customer = data.customer;
+            } else {
+                socket.disconnect();
+            }
+        } else {
+            socket.disconnect();
+        }
+        Logging.info(`Customer ${socket.customer.basic_info.name} connected`);
+        socket.on('disconnect', () => {
+            Logging.info(`Customer ${socket.customer.basic_info.name} disconnected`);
+        });
+        socket.on('order', (data) => {
+            Logging.info(`Customer ${socket.customer.basic_info.name} placed order`);
+            Logging.info(data);
+        });
+    });
+
+    shopIO.on('connection', async (socket) => {
+        const token = socket.handshake.headers.authorization;
+        if (token) {
+            const data = await shoptoken.verifyToken(token);
+            if (data.valid) {
+                socket.shop = data.shop;
+            } else {
+                socket.disconnect();
+            }
+        } else {
+            socket.disconnect();
+        }
+        Logging.info(`Shop ${socket.shop.basic_info.name} connected`);
+        socket.on('disconnect', () => {
+            Logging.info(`Shop ${socket.shop.basic_info.name} disconnected`);
+        });
+        socket.on('order', (data) => {
+            Logging.info(`Shop ${socket.shop.basic_info.name} placed order`);
+            Logging.info(data);
+        });
+    });
+
+    httpServer.listen(config.PORT, () => {
         Logging.verbose(`Server is running on port ${config.PORT}`);
     });
 };

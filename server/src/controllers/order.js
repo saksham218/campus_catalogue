@@ -187,7 +187,7 @@ const readyOrder = async (req, res) => {
         await orderFromDB.save();
         return res.json(orderFromDB);
     }
-    res.status(401).send('Ready only Accpeted orders');
+    res.status(401).send('Ready only Accepted orders');
 };
 
 const deliverOrder = async (req, res) => {
