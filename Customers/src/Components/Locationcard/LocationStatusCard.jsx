@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Locator from "../assets/Locator.png";
+import Locator from "../../assets/Locator.png";
 
 const Container = styled.div`
     width: 11vw;

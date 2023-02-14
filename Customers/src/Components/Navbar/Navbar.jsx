@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from "../assets/Profile.png";
-import ProfileText from "../assets/ProfileText.png";
-import Cart from "../assets/Cart.png";
-import Notifications from "../assets/Notifications.png";
-import User from "../assets/User.png";
+import Profile from "../../assets/Profile.png";
+import ProfileText from "../../assets/ProfileText.png";
+import Cart from "../../assets/Cart.png";
+import Notifications from "../../assets/Notifications.png";
+import User from "../../assets/User.png";
 
 const Navbar = styled.div`
     width: 84vw;
