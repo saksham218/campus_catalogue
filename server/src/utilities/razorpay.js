@@ -8,7 +8,7 @@ const createCustomer = async (name, email, phone, gstin) => {
             name: name,
             contact: phone,
             email: email,
-            fail_existing: 1,
+            fail_existing: 0,
             gstin: gstin
         });
         return { status: true, data: data };

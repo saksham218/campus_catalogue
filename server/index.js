@@ -2,6 +2,8 @@ const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
+var cron = require('node-cron');
 const config = require('./src/config/config');
 const Logging = require('./src/utilities/logging');
 const router = express();
@@ -9,6 +11,8 @@ const passport = require('passport');
 const session = require('express-session');
 const strategies = require('./src/config/passport');
 const { customerMiddleware } = require('./src/middlewares/customer');
+const Order = require('./src/models/order');
+const { deleteOrderFolder } = require('./src/utilities/order');
 
 /** Connect to Mongo */
 mongoose
@@ -38,6 +42,7 @@ const StartServer = () => {
     router.use(express.urlencoded({ extended: true }));
     router.use(express.json());
     router.use(cors());
+    router.use(fileUpload());
     router.use(
         session({
             secret: 'hehe',
@@ -67,8 +72,8 @@ const StartServer = () => {
     router.use('/admin', require('./src/routes/admin')); // tested
     router.use('/auth', require('./src/routes/auth')); // tested
     router.use('/customer', require('./src/routes/customer')); // tested
-    router.use('/item', require('./src/routes/item'));
-    router.use('/order', require('./src/routes/order'));
+    router.use('/item', require('./src/routes/item')); // tested
+    router.use('/order', require('./src/routes/order')); //tested
     router.use('/shop', require('./src/routes/shop')); // tested
     router.use('/timing', require('./src/routes/timing'));
     router.use('/user', require('./src/routes/user'));
@@ -78,6 +83,23 @@ const StartServer = () => {
         console.log(req.user);
         res.status(200).json({ hello: 'world' });
     });
+
+    /** Cron Jobs to delete orders every day at 6am */
+    cron.schedule(
+        '0 6 * * *',
+        async () => {
+            const orders = await Order.find({ type: 'Print', status: { $in: ['Rejected', 'Cancelled', 'Delivered'] } });
+            for (let i = 0; i < orders.length; i++) {
+                const order = orders[i];
+                deleteOrderFolder(order);
+            }
+            Logging.debug('Cron Job ran successfully');
+        },
+        {
+            scheduled: true,
+            timezone: 'Asia/Kolkata'
+        }
+    );
 
     http.createServer(router).listen(config.PORT, () => {
         Logging.verbose(`Server is running on port ${config.PORT}`);

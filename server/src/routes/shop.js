@@ -12,5 +12,7 @@ router.get('/', shopMiddleware,shopRoutes.getShop);
 router.get('/menu', shopMiddleware,shopRoutes.getMenu);
 router.post('/withdraw', shopMiddleware,shopRoutes.withdrawMoney);
 router.post('/default-account', shopMiddleware, shopRoutes.changeDefaultFundAccount);
+router.get('/pending-orders', shopMiddleware, shopRoutes.getPendingOrders);
+router.get('/all-orders', shopMiddleware, shopRoutes.getAllOrders);
 
 module.exports = router;
