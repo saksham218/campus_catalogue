@@ -1,5 +1,5 @@
 {
-  "name": "customers",
+  "name": "shops",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,13 +12,8 @@
     "test": "cypress open"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
-    "framer-motion": "^9.0.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
-    "react-router-dom": "^6.8.1",
-    "styled-components": "^5.3.6"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -26,7 +21,7 @@
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-interactions": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
-    "@storybook/builder-vite": "^0.4.1",
+    "@storybook/builder-vite": "^0.4.2",
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "@types/react": "^18.0.27",
