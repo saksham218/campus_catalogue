@@ -1,7 +1,7 @@
 import Checkout from './checkout';
 
 
-export default{
+export default {
 
     title: 'Checkout',
     component: Checkout,

@@ -8,4 +8,4 @@ export default {
     },
 }
 
-export const dropzone = () => <Dropzone/>
+export const drop = () => <Dropzone/>
