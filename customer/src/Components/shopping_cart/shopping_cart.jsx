@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import cart from '../../assets/shop.jpg';
 import remove from '../../assets/Path.png'
-import styled from "styled-components";
 
 const Container = styled.div`
 background-color: grey;
