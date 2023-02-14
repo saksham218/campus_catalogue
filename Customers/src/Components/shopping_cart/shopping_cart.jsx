@@ -88,7 +88,7 @@ const Delete_btn=styled.img`
     left:0.4vw;
 `
 const shopping_cart = (props) => {
-    const [counter,setcounter]=useState(0)
+    const [counter,setcounter]=useState(1)
 
     props.title
     return (
@@ -104,7 +104,7 @@ const shopping_cart = (props) => {
                 <Shop_name>{props.Shop_name?props.Shop_name:"Shop name"}</Shop_name>
                 <Price>{props.price?props.price:"$ 25"}</Price>
                 <Counter>
-                    <button disabled={counter<1} onClick={()=>setcounter(counter-1)}>-</button>
+                    <button disabled={counter<2} onClick={()=>setcounter(counter-1)}>-</button>
                     <button >{counter}</button>
                     <button onClick={()=>setcounter(counter+1)}>+</button>
                 </Counter>
