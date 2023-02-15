@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import shopimg from '../Assets/shopimg.png';
+import { motion,spring } from 'framer-motion';
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+import { BsFillPinMapFill } from 'react-icons/bs';
 
 const container = {
     hidden: { opacity: 0, scale: 0.5 },
@@ -26,12 +27,13 @@ const container = {
   };
 
 const Container = styled.div`
-    width: 11vw;
-    height: 45vw;
+    width: 20vw;
+    height: 58.5vw;
     /* position: fixed; */
     display: flex;
     flex-direction: column;
     gap: 2vw;
+    align-items: center;
     /* justify-content: center; */
     padding: 1vw;
     background-color: white;
@@ -40,8 +42,7 @@ const Container = styled.div`
 
 const Header = styled(motion.div)`
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     gap: 0.8vw;
 `
 
@@ -62,7 +63,11 @@ const Button = styled(motion.div)`
     padding-left: 20px;
     padding-right: 20px;
     max-width: fit-content;
-    cursor: pointer;
+    /* cursor: pointer; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     :hover{
         box-shadow: 0.1vw black;
@@ -88,6 +93,7 @@ const Other_Text = styled.div`
 const Rate = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 0.5vw;
   justify-content: space-between;
   align-items: center;
 `
@@ -100,6 +106,12 @@ const Pin = styled.button`
   font-weight: 400;
   font-size: 16px;
   color: #5A5A5A;
+  background-color: white;
+
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
 `
 
 const ShopDescription = (props) => {
@@ -121,11 +133,19 @@ const ShopDescription = (props) => {
             <Other_Text>
                 {props.shoptype}
             </Other_Text>
+            <br></br>
+            <Heading_Text>
+                {props.phone}
+            </Heading_Text>
             <Heading_Text>
                 {props.adress}
             </Heading_Text>
             <br></br>
-            <Button whileHover={{scale: 1.05}} transition={{type: spring}} ><Heading_Text >{props.status}</Heading_Text></Button>
+            <div style={{display: 'flex',alignItems: "center",justifyContent: "center"}} >
+            <Button whileHover={{scale: 1.05}} transition={{type: spring}} >
+              <Heading_Text >{props.status}</Heading_Text>
+            </Button>
+            </div>
         </Description>
         <Other_Text
         className='item'
@@ -138,7 +158,7 @@ const ShopDescription = (props) => {
           {props.noofreviews} reviews
         </Rate>
         <Pin>
-          Pin this Shop
+          <BsFillPinMapFill/>  Pin this Shop
         </Pin>
         <Heading_Text>
           Services:

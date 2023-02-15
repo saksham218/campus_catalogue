@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from "../../assets/Profile.png";
-import ProfileText from "../../assets/ProfileText.png";
-import Cart from "../../assets/Cart.png";
-import Notifications from "../../assets/Notifications.png";
-import User from "../../assets/User.png";
+import Profile from "../Assets/Profile.png";
+import ProfileText from "../Assets/ProfileText.png";
+import Cart from "../Assets/Cart.png";
+import Notifications from "../Assets/Notifications.png";
+import User from "../Assets/User.png";
 
 const Navbar = styled.div`
-    width: 84vw;
+    /* width: 82vw; */
     height: 5vw;
     display: flex;
     flex-direction: row;
@@ -28,14 +28,16 @@ const Description = styled.div`
     flex-grow: 1;
 `
 
-const Option = styled.div`
+const Option = styled.button`
     display: flex;
     height: 4.5vw;
     padding: 0.3vw;
     flex-direction: row;
     align-items: center;
     gap: 0.65vw;
-    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    /* cursor: pointer; */
 
     :hover{
         border-bottom: 2.5px solid black;

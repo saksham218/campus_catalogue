@@ -13,6 +13,8 @@ const Box = styled(motion.div)`
     width: 60vw;
 
     background: #D9D9D9;
+
+    border: 1px solid #5A5A5A;
 `
 
 const Item = styled.div`

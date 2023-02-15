@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import shopimg from "../../assets/Shop.png";
+import shopimg from "../Assets/Shop.png";
 import { motion,spring } from 'framer-motion';
 
 const container = {
@@ -25,22 +25,22 @@ const container = {
   };
 
 const Card = styled(motion.div)`
-    height: 15vw;
-    width: 19vw;
+    height: 18vw;
+    width: 25.2vw;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    padding: 1.4vw;
+    padding: 1.68vw;
     background-color: white;
     text-align: left;
-    gap: 1vw;
+    gap: 1.2vw;
 `
 
 const Header = styled(motion.div)`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.8vw;
+    gap: 0.96vw;
 `
 
 const Description = styled(motion.div)`
@@ -52,15 +52,14 @@ const Button = styled(motion.div)`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 19.2px;
     border: 2px solid black;
     border-radius: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 24px;
+    padding-right: 24px;
     max-width: fit-content;
-    cursor: pointer;
 
     :hover{
         box-shadow: 0.1vw black;
@@ -71,7 +70,7 @@ const Heading_Text = styled(motion.div)`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 24px;
     color: #000000;
 `
 
@@ -79,7 +78,7 @@ const Other_Text = styled.div`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 19.2px;
     color: #5A5A5A;
 `
 
