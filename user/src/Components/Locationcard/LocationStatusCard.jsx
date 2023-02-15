@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Locator from "../Assets/Locator.png";
+import Locator from "../../Assets/Locator.png";
 import { motion,spring,easeOut} from 'framer-motion';
 
 const container = {
