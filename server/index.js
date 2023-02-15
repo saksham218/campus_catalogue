@@ -118,6 +118,9 @@ const StartServer = () => {
     const userIO = io.of('/wuser');
     const shopIO = io.of('/wshop');
 
+    var customers = {};
+    var shops = {};
+
     userIO.on('connection', async (socket) => {
         const token = socket.handshake.headers.authorization;
         if (token) {
@@ -130,13 +133,35 @@ const StartServer = () => {
         } else {
             socket.disconnect();
         }
-        Logging.info(`Customer ${socket.customer.basic_info.name} connected`);
+        customers[socket.customer._id] = socket;
         socket.on('disconnect', () => {
-            Logging.info(`Customer ${socket.customer.basic_info.name} disconnected`);
+            delete customers[socket.customer._id];
         });
-        socket.on('order', (data) => {
-            Logging.info(`Customer ${socket.customer.basic_info.name} placed order`);
-            Logging.info(data);
+        socket.on('order', async (data) => {
+            const { order_id } = data;
+            if (!order_id || !mongoose.Types.ObjectId.isValid(order_id)) {
+                socket.emit('error', 'Invalid order id');
+                return;
+            }
+            const order = await Order.findById(order_id).populate('items');
+            if (!order) {
+                socket.emit('error', 'Order not found');
+                return;
+            }
+            if (order.customer.toString() !== socket.customer._id.toString()) {
+                socket.emit('error', 'Its not your order');
+                return;
+            }
+            if (order.status !== 'Pending') {
+                socket.emit('error', 'Order already accepted or rejected or unplaced');
+                return;
+            }
+            if (shops[order.shop]) {
+                shops[order.shop].emit('order', order);
+                socket.emit('success', 'Order sent successfully');
+                return;
+            }
+            socket.emit('error', 'Shop not connected');
         });
     });
 
@@ -152,13 +177,9 @@ const StartServer = () => {
         } else {
             socket.disconnect();
         }
-        Logging.info(`Shop ${socket.shop.basic_info.name} connected`);
+        shops[socket.shop._id] = socket;
         socket.on('disconnect', () => {
-            Logging.info(`Shop ${socket.shop.basic_info.name} disconnected`);
-        });
-        socket.on('order', (data) => {
-            Logging.info(`Shop ${socket.shop.basic_info.name} placed order`);
-            Logging.info(data);
+            delete shops[socket.shop._id];
         });
     });
 
