@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import shopimg from "../Assets/Shop.png";
+import shopimg from "../../Assets/Shop.png";
 import { motion,spring } from 'framer-motion';
 
 const container = {

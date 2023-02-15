@@ -2,7 +2,7 @@ import styled from "styled-components";
 import shop from '../../assets/shop.jpg';
 import { BsFillGeoAltFill } from "react-icons/bs";
 import ReactStars from "react-rating-stars-component";
-
+import Rating from '@mui/material/Rating';
 
 const Container = styled.div`
 display: grid;
@@ -94,13 +94,14 @@ font-size: 1.3vw;
 font-family: sans-serif;
 font-weight: lighter;
 color: black;
-top: 0.5vw;
+top: 0.7vw;
 margin-left: 2vw;
-left: 4.5vw;
+left: 7.5vw;
 opacity: 0.5;
+position: absolute;
 `
 
-const Rating = styled.div`
+const Ratings = styled.div`
 position: absolute;
 top: 20.3vw;
 left: 37vw;
@@ -184,14 +185,23 @@ top: 2vw;
 left:9vw;
 opacity: 0.9;
 `
+const Location = styled.div`
+position: absolute;
+top: 0.8vw;
+left: 6.5vw;
+max-width:2vw;
+max-height:2vw;
 
+`
 const Review = (props) => {
 
     return (
         <Container>
             <Image src={shop} />
             <Button>
-                <BsFillGeoAltFill />
+                <Location>
+                   <BsFillGeoAltFill/>
+                </Location>
                 <SubHead_4>{props.SubHead_3 ? props.SubHead_3 : "Pin this shop"}</SubHead_4>
 
             </Button>
@@ -202,13 +212,15 @@ const Review = (props) => {
             <SubHead_2>{props.SubHead_2 ? props.SubHead_2 : "core-1 Building near Lecture Hall"}</SubHead_2>
             <Open>{props.Open ? props.Open : "open now"}</Open>
             <SubHead_3>{props.SubHead_3 ? props.SubHead_3 : "550 m away from Disang Hostel"}</SubHead_3>
-            <Rating>
+            <Ratings>
                 <ReactStars
                     count={5}
                     size={24}
-                    activeColor="black"
+                    activeColor="black" 
                 />
-            </Rating>
+                {/* <Rating name="half-rating" defaultValue={2.5} precision={0.5} /> */}
+
+            </Ratings>
 
             <Heading_3>{props.Heading_3 ? props.Heading_3 : "Services:"}</Heading_3>
             <SubHead_5>{props.SubHead_5 ? props.SubHead_5 : "Oiling, air pump, new cycles, break change, puncture, new bell.."}</SubHead_5>
