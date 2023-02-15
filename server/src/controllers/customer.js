@@ -23,6 +23,11 @@ const getFavShops = async (req, res) => {
     res.status(200).json(customer.fav_shops);
 };
 
+const getAllShop = async (req, res) => {
+    const shops = await Shop.find({ 'approved.status': true });
+    res.status(200).json(shops);
+};
+
 const addFavoriteShop = async (req, res) => {
     const { shopId } = req.body;
     // if shop is present then remove it else add it
@@ -71,4 +76,4 @@ const getShopMenu = async (req, res) => {
     }
 };
 
-module.exports = { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop, getShopMenu };
+module.exports = { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop, getShopMenu, getAllShop };
