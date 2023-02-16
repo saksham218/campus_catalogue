@@ -15,7 +15,8 @@ const Shop_Schema = mongoose.Schema(
             },
             default_timings: {
                 open: { type: Date, required: true },
-                close: { type: Date, required: true }
+                close: { type: Date, required: true },
+                is_open: { type: Boolean, default: true }
             },
             image: { type: String }, //TODO: check encoding
             category: {

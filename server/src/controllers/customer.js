@@ -2,6 +2,7 @@ const Customer = require('../models/customer');
 const Item = require('../models/item');
 const Order = require('../models/order');
 const Shop = require('../models/shop');
+const Timing = require('../models/timing');
 const { debug } = require('../utilities/logging');
 
 //TODO: modify addCustomer according to outlook response
@@ -25,6 +26,15 @@ const getFavShops = async (req, res) => {
 
 const getAllShop = async (req, res) => {
     const shops = await Shop.find({ 'approved.status': true });
+    const timings = await Timing.find({ shop: { $in: shops.map((shop) => shop._id) }, 'date.from': { $lte: new Date() }, 'date.to': { $gte: new Date() } });
+    shops.forEach((shop) => {
+        const timing = timings.find((timing) => timing.shop == shop._id);
+        if (timing) {
+            shop.basic_info.default_timings.open = timing.date.from;
+            shop.basic_info.default_timings.close = timing.date.to;
+            shop.basic_info.default_timings.is_open = timing.is_open;
+        }
+    });
     res.status(200).json(shops);
 };
 
