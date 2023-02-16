@@ -7,6 +7,7 @@ const shop_token = require('../utilities/shoptoken');
 const { debug } = require('../utilities/logging');
 const Customer = require('../models/customer');
 const Shop = require('../models/shop');
+const config = require('../config/config');
 
 router.get(
   "/google",
@@ -27,17 +28,17 @@ router.get(
       //redirect to take details
       const token = shop_token.generateToken({basic_info: {email: email}});
       debug(`Generated token: ${token}`);
-      res.redirect(`http://localhost:3000/shop-form?token=${token}`);
+      res.redirect(`${config.FRONTEND_URL}/shop-form?token=${token}`);
     }
     else {
       if(shop.approved.status) {
         //generate token
         const token = shop_token.generateToken(shop);
         debug(`Generated token: ${token}`);
-        res.redirect(`http://localhost:3000/?token=${token}`);
+        res.redirect(`${config.FRONTEND_URL}/?token=${token}`);
       } else {
         //redirect to shop not approved page
-        res.redirect(`http://localhost:3000/shop-not-approved`);
+        res.redirect(`${config.FRONTEND_URL}/shop-not-approved`);
       }
   }
 }
@@ -72,13 +73,13 @@ router.get('/microsoft/callback',
       //generate token
       const token = customer_token.generateToken(new_customer);
       debug(`Generated token: ${token}`);
-      res.redirect(`http://localhost:3000/?token=${token}`);
+      res.redirect(`${config.FRONTEND_URL}/?token=${token}`);
     }
     else {
       //generate token
       const token = customer_token.generateToken(customer);
       debug(`Generated token: ${token}`);
-      res.redirect(`http://localhost:3000/?token=${token}`);
+      res.redirect(`${config.FRONTEND_URL}/?token=${token}`);
     }
   }
 );
