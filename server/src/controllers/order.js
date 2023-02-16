@@ -1,7 +1,7 @@
 const Order = require('../models/order');
 const Item = require('../models/item');
 const mongoose = require('mongoose');
-const { createOrder, refundPayment } = require('../utilities/razorpay');
+const { createOrder, refundPayment, verifyPayment } = require('../utilities/razorpay');
 const path = require('path');
 const fs = require('fs');
 const pdf = require('pdf-page-counter');
@@ -102,12 +102,34 @@ const placeOrder = async (req, res) => {
         const data = await createOrder(orderFromDB.total, 'INR', orderFromDB.num, 1);
         if (!data.status) return res.status(409).json({ message: data.error.message });
         orderFromDB.payment.razorpay_order_id = data.data.id;
-        orderFromDB.status = 'Pending';
         await orderFromDB.save();
         return res.json(orderFromDB);
     }
 
     res.status(401).send('You can only place unplaced orders');
+};
+
+const acknowledgeOrder = async (req, res) => {
+    const { id } = req.params;
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const orderFromDB = await Order.findById(id);
+
+    if (!orderFromDB || !mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No order with that id');
+
+    if (orderFromDB.customer.toString() !== req.customer.id.toString()) return res.status(401).send('This order does not belong to you');
+
+    if (orderFromDB.status === 'Unplaced') {
+        const data = await verifyPayment(razorpay_order_id, razorpay_payment_id, razorpay_signature);
+        if (!data.status) return res.status(409).json({ message: data.error.message });
+        if (orderFromDB.payment.razorpay_order_id !== razorpay_order_id) return res.status(409).json({ message: 'Order id does not match' });
+        orderFromDB.status = 'Pending';
+        orderFromDB.payment.razorpay_payment_id = razorpay_payment_id;
+        orderFromDB.payment.razorpay_signature = razorpay_signature;
+        await orderFromDB.save();
+        return res.json(orderFromDB);
+    }
+
+    res.status(401).send('You can only acknowledge unplaced orders');
 };
 
 const cancelOrder = async (req, res) => {
@@ -338,5 +360,6 @@ module.exports = {
     createPrintOrder,
     addPrintOrder,
     getFile,
-    downloadFile
+    downloadFile,
+    acknowledgeOrder
 };

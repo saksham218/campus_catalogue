@@ -1,6 +1,7 @@
 const { instance, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET } = require('../config/config');
 const { debug, error } = require('../utilities/logging');
 const axios = require('axios');
+const crypto = require('crypto-js');
 
 const createCustomer = async (name, email, phone, gstin) => {
     try {
@@ -108,11 +109,28 @@ const refundPayment = async (payment_id, amount, order_id) => {
     }
 };
 
+const verifyPayment = async (payment_id, order_id, signature) => {
+    try {
+        const data = order_id + '|' + payment_id;
+        const hmac = crypto.HmacSHA256(data, RAZORPAY_KEY_SECRET);
+        const digest = crypto.enc.Base64.stringify(hmac);
+        if (digest === signature) {
+            return { status: true, data: data };
+        } else {
+            return { status: false, error: 'Payment verification failed' };
+        }
+    } catch (err) {
+        error(err);
+        return { status: false, error: err.error };
+    }
+};
+
 module.exports = {
     createCustomer,
     createFundBankAccount,
     createFundVPAAccount,
     createPayout,
     createOrder,
-    refundPayment
+    refundPayment,
+    verifyPayment
 };
