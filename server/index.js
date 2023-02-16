@@ -81,7 +81,7 @@ const StartServer = () => {
     router.use('/user', require('./src/routes/user'));
 
     /** Healthcheck */
-    router.get('/ping', customerMiddleware, (req, res) => {
+    router.get('/', (req, res) => {
         console.log(req.user);
         res.status(200).json({ hello: 'world' });
     });
