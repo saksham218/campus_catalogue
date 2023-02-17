@@ -5,6 +5,8 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 const Page = styled.div`
   background-color: #c8c8c8;
@@ -77,6 +79,43 @@ const ShopDetails2 = () => {
   const [day5, setday5] = useState(false);
   const [day6, setday6] = useState(false);
   const [day7, setday7] = useState(false);
+
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  var contents = (
+    <Container>
+      <Items>
+        <Subtitle>Item Name</Subtitle>
+        <Input type="text" placeholder="Enter Item Name" />
+      </Items>
+      <Items>
+        <Subtitle>Item Price</Subtitle>
+        <Input type="text" placeholder="Enter Item Price" />
+      </Items>
+      <Items>
+        <Subtitle>Preparation Time in min</Subtitle>
+        <Input type="text" placeholder="Enter Preparation Time" />
+      </Items>
+      <Items>
+        <Subtitle>Upload Pictures from device</Subtitle>
+        <Input type="file" />
+      </Items>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={checked}
+            onChange={handleChange}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        }
+        label="Available"
+      />
+    </Container>
+  );
 
   return (
     <Page>
@@ -183,19 +222,11 @@ const ShopDetails2 = () => {
             </Button>
           </div>
         </Items>
-        <Items>
-          <Subtitle>List Services</Subtitle>
-          <Input placeholder="Enter Services Name (seperated with comma)" />
-        </Items>
-        <Items>
-          <Subtitle>Upload Shop Images</Subtitle>
-          <Input type="file" />
-        </Items>
-        <button
-          style={{backgroundColor: "#9B9B9B",border: "none", borderRadius: "0.5vw"}}
-        >
-          SAVE
-        </button>
+        <Title>Add Items to catalogue</Title>
+        <hr width="110%"></hr>
+        {contents}
+        <button>Add more items</button>
+        <button>SAVE</button>
       </Container>
     </Page>
   );
