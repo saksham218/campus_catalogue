@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ShopDescription from "../Components/ShopDescription";
-import ItemCard from "../Components/ItemCard";
+import ItemCard from "../Components/ItemCard2";
 import Navbar1 from '../Components/Navbar/Navbar';
 
 import { AiOutlineArrowRight } from 'react-icons/ai';
@@ -36,21 +36,16 @@ const Desktop8 = () => {
     <Page>
         <Navbar1 />
         <MainContents>
-            <ShopDescription shopname="Core 1 Stationery" shoptype="Stationery Store" phone="1234567890" adress="Core-1 building near lecture hall, IITG" status="Open Now" distance="800m" checkpoint="Central Library" noofreviews="14" services={["Color Printing","Framing","Paper Cutting"]} />
+            <ShopDescription shopname="Lohit Canteen" shoptype="Canteen" phone="1234567890" adress="Lohit Hostel IITG" status="Open Now" distance="800m" checkpoint="Disang" noofreviews="14" services={["Food"]} />
             <Container>
-                <a href="#" style={{textDecoration: "none", height: "4vw",display: "flex", flexDirection: "column", alignItems: "center",justifyContent: "center"}} >
-                    <div style={{backgroundColor: "#16153D", color:"white", textAlign: "left", width: "60vw", padding: "0vw 1.25vw"}} >
-                        <h1 style={{textDecoration: "none",display: "flex",alignItems: "center"}}>Send Items For Print <AiOutlineArrowRight/> </h1>
-                    </div>
-                </a>
                 <div style={{backgroundColor: "white", textAlign: "left", width: "60vw", padding: "0.5vw 1.25vw 0.5vw 1.25vw"}} >
-                    <h1>Catalogue</h1>
+                    <h1>Menu</h1>
                 </div>
-                <ItemCard itemname="Item Name" shopname="Core 1 Stationery" cost="$ XXX" availability="Available" />
-                <ItemCard itemname="Item Name" shopname="Core 1 Stationery" cost="$ XXX" availability="Available" />
-                <ItemCard itemname="Item Name" shopname="Core 1 Stationery" cost="$ XXX" availability="Available" />
-                <ItemCard itemname="Item Name" shopname="Core 1 Stationery" cost="$ XXX" availability="Available" />
-                <ItemCard itemname="Item Name" shopname="Core 1 Stationery" cost="$ XXX" availability="Available" />
+                <ItemCard itemname="Item Name" shopname="Lohit Canteen" cost="$ XXX" availability="Available" preptime="20mins"/>
+                <ItemCard itemname="Item Name" shopname="Lohit Canteen" cost="$ XXX" availability="Available" preptime="20mins"/>
+                <ItemCard itemname="Item Name" shopname="Lohit Canteen" cost="$ XXX" availability="Available" preptime="20mins"/>
+                <ItemCard itemname="Item Name" shopname="Lohit Canteen" cost="$ XXX" availability="Available" preptime="20mins"/>
+                <ItemCard itemname="Item Name" shopname="Lohit Canteen" cost="$ XXX" availability="Available" preptime="20mins"/>
             </Container>
         </MainContents>
     </Page>

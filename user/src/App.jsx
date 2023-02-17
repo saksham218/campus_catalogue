@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
+import OpeningPage from './Pages/OpeningPage';
 function App() {
   return (
     <div>
@@ -13,6 +14,8 @@ function App() {
         <Routes>
           <Route exact path="/recovery-password" element={< ForgotPassword/>} />
           <Route exact path="/" element={<Signup />} />
+          <Route exact path="/d" element={<OpeningPage/>} />
+
         </Routes>
       </Router>
     </div>
