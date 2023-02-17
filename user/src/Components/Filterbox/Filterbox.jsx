@@ -118,7 +118,7 @@ const Filterbox = (props) => {
       </Heading_Text>
       <Row2>
         <Button style={{backgroundColor:color1,color:textcolor1}}
-        onClick= {()=>setStatus(prevStatus => {console.log(prevStatus);return (prevStatus+1);})}
+        onClick= {()=>setStatus(prevStatus => {return (prevStatus+1);})}
         className='item'
         variants= {item}
         whileHover={{scale: 1.05,backgroundColor: "black",color: "white"}}
@@ -128,7 +128,7 @@ const Filterbox = (props) => {
           {props.status}
         </Button>
         <Button style={{backgroundColor:color2,color:textcolor2}}
-        onClick= {()=>setStatus2(prevStatus => {console.log(prevStatus);return (prevStatus+1);})}
+        onClick= {()=>setStatus2(prevStatus => {return (prevStatus+1);})}
         className='item'
         variants={item}
         whileHover={{scale: 1.05,backgroundColor: "black",color: "white"}}
@@ -139,7 +139,7 @@ const Filterbox = (props) => {
         </Button>
       </Row2>
       <Button style={{backgroundColor:color3,color:textcolor3}}
-      onClick= {()=>setStatus3(prevStatus => {console.log(prevStatus);return (prevStatus+1);})}
+      onClick= {()=>setStatus3(prevStatus => {return (prevStatus+1);})}
       className= 'item'
       variants={item}
       whileHover={{scale: 1.05,backgroundColor: "black",color: "white"}}
