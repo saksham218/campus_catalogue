@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import shopimg from "../../Assets/Shop.png";
+import shopimg from "../Assets/Shop.png";
 import { motion,spring } from 'framer-motion';
 
 const container = {
@@ -96,27 +96,27 @@ function Cards(props) {
         className='item'
         variants= {item}
         >
-            <img src={shopimg} alt={props.shopname} />
-            <Heading_Text>{props.shopname}</Heading_Text>
+            <img src={shopimg} alt={props.name} />
+            <Heading_Text>{props.name}</Heading_Text>
         </Header>
         <Description
         className='item'
         variants= {item}
         >
             <Other_Text>
-                {props.shoptype}
+                {props.category}
             </Other_Text>
             <Heading_Text>
-                {props.adress}
+                {props.address}
             </Heading_Text>
             <br></br>
-            <Button whileHover={{scale: 1.05}} transition={{type: spring}} ><Heading_Text >{props.status}</Heading_Text></Button>
+            <Button whileHover={{scale: 1.05}} transition={{type: spring}} ><Heading_Text >{props.status?props.status:"Open Now"}</Heading_Text></Button>
         </Description>
         <Other_Text
         className='item'
         variants= {item}
         >
-            {props.distance} away from {props.checkpoint}
+            {props.distance?props.distance:"800"} away from {props.checkpoint?props.checkpoint:"Library"}
         </Other_Text>
     </Card>
   );
