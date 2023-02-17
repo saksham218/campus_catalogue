@@ -68,7 +68,7 @@ const ItemCard = (props) => {
                     {props.preptime?props.preptime:"20mins"}
                 </NormalText>
                 <br></br>
-                <button style={{borderRadius: "0.52vw",backgroundColor: "none"}} onClick={()=>{text="Added"}} >
+                <button style={{borderRadius: "0.52vw",backgroundColor: "none",padding: "0.1vw 0.5vw"}} onClick={()=>{text="Added"}} >
                     {text}
                 </button>
             </Description>

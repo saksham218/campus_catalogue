@@ -27,12 +27,13 @@ const Button = styled.div`
   font-size: 16px;
   border: 2px solid black;
   border-radius: 20px;
+  padding: 0.1vw 0.5vw;
   
   position: absolute;
   right: 0;
   bottom: 0;
 
-  background-color: white;
+  background-color: transparent;
   `
 
 function TrendingShopCard(props) {
@@ -49,4 +50,4 @@ function TrendingShopCard(props) {
   );
 }
 
-export default TrendingShopCard
+export default TrendingShopCard;
