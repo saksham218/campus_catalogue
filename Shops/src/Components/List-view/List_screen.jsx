@@ -267,8 +267,8 @@ color: black;
     return (
 
         <Tab_section variants={drop} initial="hidden" animate="visible" drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
-            <Box sx={{ bgcolor: 'background.paper', width: "59.7vw", }}>
-                <AppBar position="static" variant="fullWidth" sx={{ bgcolor: "#D9D9D9" }}>
+            <Box sx={{ bgcolor: 'background.paper', width: "59.7vw",}}>
+                <AppBar position="static" variant="fullWidth" sx={{ bgcolor: "#3A2A68"}}>
                     <Tabs
                         value={value}
                         onChange={handleChange}
@@ -278,9 +278,9 @@ color: black;
                         aria-label="full width tabs example"
                         className="tab"
                     >
-                        <Tab label="Order Request" {...a11yProps(0)} sx={{ color: "black" }} />
-                        <Tab label="Accepted Orders" {...a11yProps(1)} sx={{ color: "black" }} />
-                        <Tab label="Completed" {...a11yProps(2)} sx={{ color: "black" }} />
+                        <Tab label="Order Request" {...a11yProps(0)} sx={{ color: "white" }} />
+                        <Tab label="Accepted Orders" {...a11yProps(1)} sx={{ color: "white" }} />
+                        <Tab label="Completed" {...a11yProps(2)} sx={{ color: "white" }} />
                     </Tabs>
                 </AppBar>
 

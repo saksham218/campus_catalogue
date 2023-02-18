@@ -9,7 +9,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 19.4vw;
-    margin-top: 9vw;
+    margin-top: 3vw;
     align-items: flex-start;
     justify-content: center;
     position: relative;
