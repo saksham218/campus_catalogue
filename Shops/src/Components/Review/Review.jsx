@@ -139,6 +139,7 @@ left: 37vw;
 height: 11vw;
 width: 27vw;
 background-color: white;
+overflow: scroll;
 `
 
 const Text_1 = styled.strong`
@@ -169,6 +170,8 @@ top: 27.5vw;
 left:5vw;
 border-radius: 0.7vw;
 `
+
+
 const Heading_4 = styled.strong`
 font-size: 1.3vw;
 font-family: sans-serif;
@@ -233,7 +236,7 @@ const Review = (props) => {
                 <Profile src={shop} />
                 <Heading_5>{props.Heading_5 ? props.Heading_5 : "Customer Name"}</Heading_5>
                 <Text_1>
-                    {props.Text ? props.Text : "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                    {props.Text ? props.Text : "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"}
                 </Text_1>
             </Review_Section>
 
