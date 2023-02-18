@@ -83,6 +83,7 @@ const List_screen = (props) => {
    left: 20vw;
     top: 10vw;
     position: absolute;
+    top: 20vw;
     /* scale: 1.4; */
    `
 
