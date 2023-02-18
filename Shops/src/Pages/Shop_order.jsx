@@ -6,7 +6,6 @@ import styled from "styled-components";
 const Pages = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: #d9d9d9;
     `
 
 const Shop_Order = () => {
