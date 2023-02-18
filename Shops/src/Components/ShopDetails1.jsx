@@ -6,6 +6,10 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2vw;
+    padding: 2vw;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 80vw;
 `
 
 const Header = styled.div`
@@ -34,7 +38,14 @@ const Input = styled.input`
     background: #F7F9FC;
     border: 1px solid #e4e2f038;
     box-sizing: border-box;
-
+    border-radius: 10px;
+    padding: 1vw;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    color: black;
+    height: 4vw;
 `
 
 const ShopDetails1 = () => {

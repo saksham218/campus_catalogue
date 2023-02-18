@@ -4,12 +4,12 @@ import shopimg from "../assets/Shop.png";
 
 const Card = styled.div`
   width: 35.6vw;
-  height: 8.4vw;
+  height: 6vw;
   padding: 2vw;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1vw;
+  /* gap: 1vw; */
   /* align-items: center; */
   background-color: #D9D9D9;
   border-radius: 2px;
@@ -32,8 +32,8 @@ const Button = styled.div`
   padding: 0.5vw 1vw;
   
   position: absolute;
-  right: 2vw;
-  bottom: 1vw;
+  right: 2.5vw;
+  bottom: 2vw;
 
   background-color: transparent;
   `

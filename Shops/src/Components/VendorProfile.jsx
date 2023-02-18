@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import VendorPic from "../Assets/VendorPic";
+import VendorPic from "../Assets/VendorPic.png";
 
 const Box = styled.div`
     background: #fff;
     border-radius: 8px;
 
-    width: 22.4vw;
-    height: 33.5vw;
+    width: 24vw;
+    height: 30vw;
+
+    padding: 1vw;
 
     display: flex;
     flex-direction: column;
@@ -18,14 +20,33 @@ const Box = styled.div`
 
 `
 
+const Title = styled.div`
+    font-family: 'Inter',sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    color: black;
+
+    display: flex;
+    gap: 1vw;
+`
+
+const NormalText = styled.div`
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: black;
+`
+
 const VendorProfile = (props) => {
   return (
     <Box>
-        {VendorPic}
+        <img src={VendorPic} alt="" />
         <h1>{props.name?props.name:"Vendor Name"}</h1>
         <br></br>
-        <h2>PH No.--- {props.phone?props.phone:"1234567890"}</h2>
-        <h2>EMAIL--- {props.email?props.email:"xxxxxxxxxxxx@gmail.com"}</h2>
+        <Title>PH No.--- <NormalText>{props.phone?props.phone:"1234567890"}</NormalText></Title>
+        <Title>EMAIL--- <NormalText>{props.email?props.email:"xxxxxxxxxxxx@gmail.com"}</NormalText></Title>
     </Box>
   )
 }

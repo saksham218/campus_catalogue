@@ -15,7 +15,13 @@ const Container = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 2vw;
+  padding: 2vw;
+  border-radius: 1.6vw;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 80vw;
 `;
 
 const Items = styled.div`
@@ -41,7 +47,7 @@ const Subtitle = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  /* width: 100%; */
   height: 4.8vw;
   border: 1px solid #c8c8c8;
   border-radius: 0.8vw;
@@ -51,6 +57,7 @@ const Input = styled.input`
   color: #000000;
   font-family: "Inter", sans-serif;
   font-style: normal;
+  width: 50vw;
 `;
 
 const Button = styled.button`
@@ -64,6 +71,7 @@ const Button = styled.button`
   font-weight: 500;
   color: #000000;
   font-family: "Inter", sans-serif;
+  border: 1px solid #000000;
 `;
 
 const ShopDetails2 = () => {
@@ -79,12 +87,11 @@ const ShopDetails2 = () => {
   const [day7, setday7] = useState(false);
 
   return (
-    <Page>
       <Container>
         <Title>Add Shop Details</Title>
         <Items>
           <Subtitle>Select your working hours</Subtitle>
-          <div style={{ display: "flex", gap: "1.4vw" }}>
+          <div style={{ display: "flex", gap: "1.4vw",alignItems: "center" }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
                 label="Start Time"
@@ -95,7 +102,7 @@ const ShopDetails2 = () => {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            -
+            -----
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
                 label="End Time"
@@ -192,12 +199,11 @@ const ShopDetails2 = () => {
           <Input type="file" />
         </Items>
         <button
-          style={{backgroundColor: "#9B9B9B",border: "none", borderRadius: "0.5vw"}}
+          style={{backgroundColor: "#9B9B9B",border: "none", borderRadius: "0.5vw", padding: "0.5vw  3vw"}}
         >
-          SAVE
+          <h2>SAVE</h2>
         </button>
       </Container>
-    </Page>
   );
 };
 
