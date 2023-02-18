@@ -26,7 +26,6 @@ const Desktop_5 = () => {
             <Checkout />
             <Cart>
                 <Shopping_cart />
-
             </Cart>
         </Page>
 

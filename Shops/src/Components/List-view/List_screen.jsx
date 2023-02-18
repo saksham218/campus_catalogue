@@ -357,10 +357,7 @@ color: black;
                         </Order_time>
                         <Reason whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}} placeholder={props.Reason ? props.Reason : "Reason to Cancellation"} />
                     </Contents>
-
-
                 </TabPanel>
-
                 <TabPanel value={value} index={2} dir={theme.direction}>
                     <Contents>
                         <Completed whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
@@ -391,7 +388,6 @@ color: black;
                             {props.order_time ? props.order_time : "Order Time"}
                         </Order_time>
                     </Contents>
-
                 </TabPanel>
             </Box>
 
