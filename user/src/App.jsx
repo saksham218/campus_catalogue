@@ -4,26 +4,27 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import PrivateRoute from './components/private_route';
 // import Home from './pages/Home';
 import React from 'react';
-// import Signup from './pages/Signup';
-// import ForgotPassword from './pages/ForgotPassword';
+import Forgot_password from './pages/ForgotPassword';
 import OpeningPage from './Pages/OpeningPage';
 import Desktop17 from './Pages/Desktop17';
 import SplashScreen from './Pages/SplashScreen';
 import Desktop9 from './Pages/Desktop9';
 import Desktop8 from './Pages/Desktop8';
 import Wireframe1 from './Pages/Wireframe1';
+import SignIn from './pages/Signup';
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-          {/* <Route exact path="/recovery-password" element={< ForgotPassword/>} /> */}
+          <Route exact path="/recovery" element={< Forgot_password/>} />
           <Route exact path="/" element={<Wireframe1/>} />
           <Route exact path="/d" element={<OpeningPage/>} />
           <Route exact path="/a" element={<Desktop17/>} />
           <Route exact path="/l" element={<SplashScreen/>} />
           <Route exact path="/b" element={<Desktop9/>} />
           <Route exact path="/c" element={<Desktop8/>} />
+          <Route exact path="/signin" element={<SignIn/>} />
         </Routes>
       </Router>
     </div>
