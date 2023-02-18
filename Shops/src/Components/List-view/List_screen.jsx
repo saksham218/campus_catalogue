@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import Typography from '@mui/material/Typography';
 import profile from '../../Assets/Shop.jpg';
-import {motion,spring} from 'framer-motion';
+import { motion, spring } from 'framer-motion';
+import { border } from "@mui/system";
 
 
 function TabPanel(props) {
@@ -50,6 +51,7 @@ const List_screen = (props) => {
     const [value, setValue] = useState(0);
     const [accepted, setAccepted] = useState('Accept');
     const [completed, setCompleted] = useState('Mark as Complete');
+    const [cancelled, setCancelled] = useState('Cancel');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -59,17 +61,19 @@ const List_screen = (props) => {
         setValue(index);
     };
 
-    const drop={
-        hidden: { opacity: 0, scale: 0.5,y:"-50vh" },
+
+
+    const drop = {
+        hidden: { opacity: 0, scale: 0.5, y: "-50vh" },
         visible: {
             opacity: 1,
             scale: 1,
-            y:"0",
+            y: "0",
             transition: {
                 duration: 0.3,
                 type: "spring",
-                damping:25,
-                stiffness:200,
+                damping: 25,
+                stiffness: 200,
             }
         }
     };
@@ -80,9 +84,9 @@ const List_screen = (props) => {
     top: 10vw;
     position: absolute;
     /* scale: 1.4; */
-   ` 
+   `
 
-    const Profile = styled.img`
+    const Profile = styled(motion.img)`
     width: 7vw;
    height: 7vw;  
    position: absolute;
@@ -91,7 +95,7 @@ const List_screen = (props) => {
    border-radius: 3.7vw;
    background-color: green;
 `;
-    const Contact = styled.strong`
+    const Contact = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 11vw;
@@ -99,7 +103,7 @@ const List_screen = (props) => {
     font-style: normal;
     font-weight: 500;
     `
-    const Location = styled.strong`
+    const Location = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 11vw;
@@ -107,21 +111,21 @@ const List_screen = (props) => {
     font-style: normal;
     font-weight: 500;
     `
-    const Name = styled.strong`
+    const Name = styled(motion.strong)`
     font-size:1.7vw;
     position: absolute;
     left: 11vw;
     top: 6vw;
     font-style: normal;
     `
-    const Completed = styled.strong`
+    const Completed = styled(motion.strong)`
      font-size:1.7vw;
      position: absolute;
      left: 11vw;
      top: 6vw;
      font-style: normal;
      `
-    const Category = styled.strong`
+    const Category = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 11vw;
@@ -130,14 +134,14 @@ const List_screen = (props) => {
     font-style: normal;
     `
 
-    const OTP = styled.div`
+    const OTP = styled(motion.div)`
     position: absolute;
     left: 11vw;
     top: 20vw;
     font-size: 1.4vw;
     `
 
-    const Number = styled.div`
+    const Number = styled(motion.div)`
     position: absolute;
     left: 14.5vw;
     top: 20vw;
@@ -160,19 +164,19 @@ const List_screen = (props) => {
     border-color:black;
     `
 
-const Accept = styled(motion.button)`
+    const Accept = styled(motion.button)`
 position: absolute;
 left: 10.5vw;
 top: 25vw;
 width: 15vw;
 height: 3vw;
-background: #484848;
+background:white;
 border-radius: 0.4vw;
-border: none;
+border-color: black;
 font-size: 1.2vw;
 font-weight: 500;
 font-style: normal;
-color: white;
+color: black;
 /* :hover{
     transform: scale(1.3);
     transition: 0.6s;
@@ -183,18 +187,18 @@ color: white;
     position: absolute;
     left: 30vw;
     top: 25vw;
-    width: 7vw;
+    width: 9vw;
     height: 3vw;
-    background:white;
+    background: white;
     border-radius: 0.4vw;
     /* border: none; */
     font-size: 1.2vw;
     font-weight: 500;
     font-style: normal;
-    color: #000000;
+    color:black;
     border-color:black;
     `
-    const Reason = styled.input`
+    const Reason = styled(motion.input)`
     position: absolute;
     left: 10.5vw;
     top: 33vw;
@@ -210,7 +214,7 @@ color: white;
     border-radius: 0.3vw;
     `
 
-    const Order_no = styled.strong`
+    const Order_no = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 38.5vw;
@@ -219,7 +223,7 @@ color: white;
     font-weight: 500;
     `
 
-    const Item_name = styled.strong`
+    const Item_name = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 38.5vw;
@@ -228,7 +232,7 @@ color: white;
     font-style: normal;
     font-weight: 500;
     `
-    const Order_time = styled.strong`
+    const Order_time = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 38.5vw;
@@ -236,7 +240,7 @@ color: white;
     font-style: normal;
     font-weight: 500;
     `
-    const Customer_Name = styled.strong`
+    const Customer_Name = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 11vw;
@@ -244,7 +248,7 @@ color: white;
     font-style: normal;
     font-weight: 500;
     `
-    const CN = styled.strong`
+    const CN = styled(motion.strong)`
     font-size:1.5vw;
     position: absolute;
     left: 38.5vw;
@@ -253,7 +257,7 @@ color: white;
     font-style: normal;
     font-weight: 500;
     `
-    const Contents=styled.div`
+    const Contents = styled.div`
     position: relative;
     display: flexbox;
     margin-top: -6vw;
@@ -261,7 +265,7 @@ color: white;
 
     return (
 
-        <Tab_section variants={drop} initial="hidden" animate="visible">
+        <Tab_section variants={drop} initial="hidden" animate="visible" drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
             <Box sx={{ bgcolor: 'background.paper', width: "59.7vw", }}>
                 <AppBar position="static" variant="fullWidth" sx={{ bgcolor: "#D9D9D9" }}>
                     <Tabs
@@ -281,112 +285,112 @@ color: white;
 
                 <TabPanel value={value} index={0} dir={theme.direction} sx={{}}>
                     <Contents>
-                        <Profile src={profile} />
-                        <Name>
+                        <Profile src={profile} whileHover={{ scale: 1.2,backgroundColor:"#484848",color:"white",border:"none"  }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}} />
+                        <Name whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {props.name ? props.name : "Shop Name"}
                         </Name>
-                        <Category>
+                        <Category whileHover={{ scale: 1.2  }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {props.category ? props.category : "Category"}
                         </Category>
-                        <Contact>
+                        <Contact whileHover={{ scale: 1.2}} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {props.contact ? props.contact : "Contact Number"}
                         </Contact>
-                        <Location>
+                        <Location whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {props.location ? props.location : "Location"}
                         </Location>
-                        <Accept onClick={()=>{setAccepted('Accepted!')}} whileHover={{scale:1.2}} whileTap={{scale:0.8}}>
+                        <Accept onClick={() => { setAccepted('Accepted!') }} whileHover={{ scale: 1.2,backgroundColor:"#484848",color:"white",border:"none"  }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {accepted}
                         </Accept>
-                        <Cancel whileHover={{scale:1.2}} whileTap={{scale:0.8}}>
-                            {props.cancel ? props.cancel : "Cancel"}
+                        <Cancel whileHover={{ scale: 1.2,backgroundColor:"#484848",color:"white",border:"none"  }} whileTap={{ scale: 0.8 }} onClick={()=>setCancelled('Cancelled!')} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {cancelled}
                         </Cancel>
-                        <Order_no>
+                        <Order_no whileHover={{ scale: 1.2}} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {props.order_no ? props.order_no : "Order No:"}
                         </Order_no>
-                        <Item_name>
+                        <Item_name whileHover={{ scale: 1.2}} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {props.iteam_name ? props.iteam_name : "Item Name"}
                         </Item_name>
-                        <Order_time>
+                        <Order_time whileHover={{ scale: 1.2}} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
                             {props.order_time ? props.order_time : "Order Time"}
                         </Order_time>
-                        <Reason placeholder={props.Reason ? props.Reason : "Reason to Cancellation"} />
+                        <Reason whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}} placeholder={props.Reason ? props.Reason : "Reason to Cancellation"} />
 
                     </Contents>
 
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction} >
-                <Contents>
-                <Profile src={profile} />
-                    <Name>
-                        {props.name ? props.name : "Shop Name"}
-                    </Name>
-                    <Category>
-                        {props.category ? props.category : "Category"}
-                    </Category>
-                    <Contact>
-                        {props.contact ? props.contact : "Contact Number"}
-                    </Contact>
-                    <Location>
-                        {props.location ? props.location : "Location"}
-                    </Location>
-                    <OTP>
-                        {props.otp ? props.otp : "OTP:"}
-                    </OTP>
-                    <Number>
-                        {props.number ? props.number : "123456"}
-                    </Number>
-                    <Mark whileHover={{scale:1.2}} whileTap={{scale:0.8}} onClick={()=>setCompleted('Completed!')}>
-                       {completed}
-                    </Mark>
-                    <Cancel whileHover={{scale:1.2}} whileTap={{scale:0.8}}>
-                        {props.cancel ? props.cancel : "Cancel"}
-                    </Cancel>
-                    <Order_no>
-                        {props.order_no ? props.order_no : "Order No:"}
-                    </Order_no>
-                    <Item_name>
-                        {props.iteam_name ? props.iteam_name : "Item Name"}
-                    </Item_name>
-                    <Order_time>
-                        {props.order_time ? props.order_time : "Order Time"}
-                    </Order_time>
-                    <Reason placeholder={props.Reason ? props.Reason : "Reason to Cancellation"} />  
-                </Contents>
+                    <Contents>
+                        <Profile src={profile} whileHover={{ scale: 1.2}} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}/>
+                        <Name whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.name ? props.name : "Shop Name"}
+                        </Name>
+                        <Category whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.category ? props.category : "Category"}
+                        </Category>
+                        <Contact whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.contact ? props.contact : "Contact Number"}
+                        </Contact>
+                        <Location whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.location ? props.location : "Location"}
+                        </Location>
+                        <OTP whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.otp ? props.otp : "OTP:"}
+                        </OTP>
+                        <Number whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.number ? props.number : "123456"}
+                        </Number>
+                        <Mark whileHover={{ scale: 1.2,backgroundColor:"#484848",color:"white",border:"none" }} whileTap={{ scale: 0.8 }} onClick={() => setCompleted('Completed!')} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {completed}
+                        </Mark>
+                        <Cancel whileHover={{ scale: 1.2,backgroundColor:"#484848",color:"white",border:"none"  }} whileTap={{ scale: 0.8 }} onClick={()=>setCancelled('Cancelled!')} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {cancelled}
+                        </Cancel>
+                        <Order_no whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.order_no ? props.order_no : "Order No:"}
+                        </Order_no>
+                        <Item_name whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.iteam_name ? props.iteam_name : "Item Name"}
+                        </Item_name>
+                        <Order_time whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.order_time ? props.order_time : "Order Time"}
+                        </Order_time>
+                        <Reason whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}} placeholder={props.Reason ? props.Reason : "Reason to Cancellation"} />
+                    </Contents>
 
-                   
-                                  </TabPanel>
+
+                </TabPanel>
 
                 <TabPanel value={value} index={2} dir={theme.direction}>
                     <Contents>
-                    <Completed>
-                        {props.name ? props.name : "Completed"}
-                    </Completed>
-                    <Customer_Name>
-                        {props.name ? props.name : "Customer Name"}
-                    </Customer_Name>
-                    <CN>
-                        {props.name ? props.name : "Customer Name"}
-                    </CN>
-                    <Category>
-                        {props.category ? props.category : "Category"}
-                    </Category>
-                    <Contact>
-                        {props.contact ? props.contact : "Contact Number"}
-                    </Contact>
-                    <Location>
-                        {props.location ? props.location : "Location"}
-                    </Location>
-                    <Order_no>
-                        {props.order_no ? props.order_no : "Order No:"}
-                    </Order_no>
-                    <Item_name>
-                        {props.iteam_name ? props.iteam_name : "Item Name"}
-                    </Item_name>
-                    <Order_time>
-                        {props.order_time ? props.order_time : "Order Time"}
-                    </Order_time>
+                        <Completed whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.name ? props.name : "Completed"}
+                        </Completed>
+                        <Customer_Name whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.name ? props.name : "Customer Name"}
+                        </Customer_Name>
+                        <CN whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.name ? props.name : "Customer Name"}
+                        </CN>
+                        <Category whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.category ? props.category : "Category"}
+                        </Category>
+                        <Contact whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.contact ? props.contact : "Contact Number"}
+                        </Contact>
+                        <Location whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.location ? props.location : "Location"}
+                        </Location>
+                        <Order_no whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.order_no ? props.order_no : "Order No:"}
+                        </Order_no>
+                        <Item_name whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.iteam_name ? props.iteam_name : "Item Name"}
+                        </Item_name>
+                        <Order_time whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} drag dragConstraints={{left:0.5,right:0.5,top:0,bottom:0}}>
+                            {props.order_time ? props.order_time : "Order Time"}
+                        </Order_time>
                     </Contents>
-                   
+
                 </TabPanel>
             </Box>
 
