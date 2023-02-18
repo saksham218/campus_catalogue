@@ -11,8 +11,6 @@ import Filterbox from "../Components/Filterbox/Filterbox";
 import MainPage from "../Assets/MainPage.png";
 import { Backend_URL } from "../../../admin_panel/src/utilities/config";
 
-project=[];
-
 const Page = styled.div`
   display: flex;
   flex-direction: column;

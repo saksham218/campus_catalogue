@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import ShopDescription from "../Components/ShopDescription";
-import ItemCard from "../Components/ItemCard2";
+import ItemCard from "../Components/ItemCard";
 import Navbar1 from "../Components/Navbar/Navbar";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -37,17 +37,48 @@ const Desktop8 = () => {
       <Navbar1 />
       <MainContents>
         <ShopDescription
-          shopname="Lohit Canteen"
-          shoptype="Canteen"
+          shopname="Core 1 Stationery"
+          shoptype="Stationery Store"
           phone="1234567890"
-          adress="Lohit Hostel IITG"
+          adress="Core-1 building near lecture hall, IITG"
           status="Open Now"
           distance="800m"
-          checkpoint="Disang"
+          checkpoint="Central Library"
           noofreviews="14"
-          services={["Food"]}
+          services={["Color Printing", "Framing", "Paper Cutting"]}
         />
         <Container>
+          <a
+            href="#"
+            style={{
+              textDecoration: "none",
+              height: "4vw",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#16153D",
+                color: "white",
+                textAlign: "left",
+                width: "60vw",
+                padding: "0vw 1.25vw",
+              }}
+            >
+              <h1
+                style={{
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                Send Items For Print <AiOutlineArrowRight />{" "}
+              </h1>
+            </div>
+          </a>
           <div
             style={{
               backgroundColor: "white",
@@ -56,42 +87,37 @@ const Desktop8 = () => {
               padding: "0.5vw 1.25vw 0.5vw 1.25vw",
             }}
           >
-            <h1>Menu</h1>
+            <h1>Catalogue</h1>
           </div>
           <ItemCard
             itemname="Item Name"
-            shopname="Lohit Canteen"
+            shopname="Core 1 Stationery"
             cost="$ XXX"
             availability="Available"
-            preptime="20mins"
           />
           <ItemCard
             itemname="Item Name"
-            shopname="Lohit Canteen"
+            shopname="Core 1 Stationery"
             cost="$ XXX"
             availability="Available"
-            preptime="20mins"
           />
           <ItemCard
             itemname="Item Name"
-            shopname="Lohit Canteen"
+            shopname="Core 1 Stationery"
             cost="$ XXX"
             availability="Available"
-            preptime="20mins"
           />
           <ItemCard
             itemname="Item Name"
-            shopname="Lohit Canteen"
+            shopname="Core 1 Stationery"
             cost="$ XXX"
             availability="Available"
-            preptime="20mins"
           />
           <ItemCard
             itemname="Item Name"
-            shopname="Lohit Canteen"
+            shopname="Core 1 Stationery"
             cost="$ XXX"
             availability="Available"
-            preptime="20mins"
           />
         </Container>
       </MainContents>
