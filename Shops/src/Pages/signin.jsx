@@ -3,6 +3,7 @@ import * as Components from "../components/components";
 import { useState } from 'react'
 import styled from 'styled-components'
 // import MicrosoftLogin from "react-microsoft-login";
+import { Backend_URL } from "../apis/api";
 
 
 const Body = styled.div`
@@ -19,6 +20,13 @@ const Body = styled.div`
 
 function SignIn() {
   const [signIn, toggle] = useState(true);
+
+  const login = (e) => {
+    e.preventDefault();
+    // alert("hello");
+    console.log(`${Backend_URL}/auth/google`);
+    window.location.replace(`${Backend_URL}/auth/google`);
+  };
   
   return (
     <Body>
@@ -36,7 +44,7 @@ function SignIn() {
         <Components.SignInContainer signingIn={signIn}>
           <Components.Form>
             <Components.Title>Sign in</Components.Title>
-           <button> click me</button>
+           <button onClick={login}> click me</button>
             <Components.Anchor href="/recovery">Forgot your password?</Components.Anchor>
             <Components.Button>Shop Sign In</Components.Button>
           </Components.Form>

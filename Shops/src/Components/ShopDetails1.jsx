@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     background: #fff;
@@ -54,10 +55,14 @@ const ShopDetails1 = () => {
         <Header>Add Shop Details</Header>
         <SubHeader>Shop Name</SubHeader>
         <Input type="text" placeholder="Enter Shop Name" />
-        <SubHeader>Category</SubHeader>
-        <Input type="text" placeholder="Enter Category" />
+        <SubHeader>Shop Owner Name</SubHeader>
+        <Input type="text" placeholder="Enter Owner Name" />
         <SubHeader>Shop Contact Number</SubHeader>
         <Input type="text" placeholder="Enter Shop Contact Number" />
+        <SubHeader>GSTIN</SubHeader>
+        <Input type="text" placeholder="Enter Shop GST Number" />
+        <SubHeader>Category</SubHeader>
+        <Input type="text" placeholder="Enter Category" />
         <SubHeader>Shop Address</SubHeader>
         <Input type="text" placeholder="Enter Shop Address" />
         <SubHeader>Landmark</SubHeader>

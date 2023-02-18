@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+// import {FileBase} from  'react-file-base64';
 
 const Page = styled.div`
   background-color: #c8c8c8;
@@ -90,7 +91,7 @@ const ShopDetails2 = () => {
       <Container>
         <Title>Add Shop Details</Title>
         <Items>
-          <Subtitle>Select your working hours</Subtitle>
+          <Subtitle>Select your default working hours</Subtitle>
           <div style={{ display: "flex", gap: "1.4vw",alignItems: "center" }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
@@ -115,7 +116,7 @@ const ShopDetails2 = () => {
             </LocalizationProvider>
           </div>
         </Items>
-        <Items>
+        {/* <Items>
           <Subtitle>Select your working days</Subtitle>
           <div style={{ display: "flex", gap: "0.8vw" }}>
             <Button
@@ -189,14 +190,18 @@ const ShopDetails2 = () => {
               SUN
             </Button>
           </div>
-        </Items>
-        <Items>
+        </Items> */}
+        {/* <Items>
           <Subtitle>List Services</Subtitle>
           <Input placeholder="Enter Services Name (seperated with comma)" />
-        </Items>
+        </Items> */}
         <Items>
-          <Subtitle>Upload Shop Images</Subtitle>
-          <Input type="file" />
+          <Subtitle>Upload Shop Image</Subtitle>
+          {/* <FileBase
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) => console.log(base64)}
+          /> */}
         </Items>
         <button
           style={{backgroundColor: "#9B9B9B",border: "none", borderRadius: "0.5vw", padding: "0.5vw  3vw"}}

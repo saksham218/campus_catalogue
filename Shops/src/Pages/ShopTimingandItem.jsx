@@ -22,7 +22,7 @@ const MainContents = styled.div`
     align-items: center;
 `
 
-const Desktop25 = () => {
+const ShopTimingandItem = () => {
   return (
     <Page>
         <Navbar1 />
@@ -33,4 +33,4 @@ const Desktop25 = () => {
   )
 }
 
-export default Desktop25;
+export default ShopTimingandItem;

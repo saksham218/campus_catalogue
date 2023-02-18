@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Navbar1 from "../Components/Navbar";
 import ShopMainPage from "../Assets/ShopMainPage.png";
@@ -24,7 +25,7 @@ const MainContents = styled.div`
     gap: 2vw;
 `
 
-const Desktop22 = () => {
+const Home = () => {
   return (
     <Page>
         <Navbar1 />
@@ -32,11 +33,13 @@ const Desktop22 = () => {
             <VendorProfile/>
             <div style={{display: "flex", flexDirection: "column", gap: "2vw", justifyContent: "flex-end"}} >
             <img src={ShopMainPage} alt="ShopMainPage" />
+            <Link to="/ShopDetails1">
             <button style={{padding: "0.5vw 1vw",border: "none", backgroundColor: "#9B9B9B", width: "24vw"}} > <h3> Add Your Shop to Campus Catalogue </h3> </button>
+            </Link>
             </div>
         </MainContents>
     </Page>
   )
 }
 
-export default Desktop22;
+export default Home;

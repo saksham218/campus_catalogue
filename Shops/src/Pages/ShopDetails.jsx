@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useState } from 'react';
 
 import Navbar1 from "../Components/Navbar";
-import ShopDetails2 from '../Components/ShopDetails2';
-
-import { Backend_URL } from "../../../admin_panel/src/utilities/config";
+import ShopDetails1 from "../Components/ShopDetails1";
+import ShopDetails2 from "../Components/ShopDetails2";
+ 
+import { useSearchParams } from "react-router-dom";
 
 const Page = styled.div`
     display: flex;
@@ -23,15 +24,23 @@ const MainContents = styled.div`
     align-items: center;
 `
 
-const Desktop24 = () => {
+const ShopDetails = () => {
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const [token, setToken] = useState("");
+
+  // const tokenn = searchParams.get("token");
+  // if (tokenn) {
+  //   setToken(tokenn);
+  // }
   return (
     <Page>
         <Navbar1 />
         <MainContents>
-            <ShopDetails2/>
+            <ShopDetails1 />
+            <ShopDetails2 />
         </MainContents>
     </Page>
   )
 }
 
-export default Desktop24;
+export default ShopDetails;
