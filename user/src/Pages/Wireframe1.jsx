@@ -86,7 +86,7 @@ const Wireframe1 = () => {
           {/* {all_shops.map((element,index)=>
             <Cards {...element} key={element.token} />
           )} */}
-          <Cards
+          <Cards 
             name="Core 1 Stationery"
             category="Stationery Store"
             address="Core-1 building near lecture hall, IITG"
@@ -118,22 +118,7 @@ const Wireframe1 = () => {
             distance="800m"
             checkpoint="Central Library"
           />
-          <Cards
-            name="Core 1 Stationery"
-            category="Stationery Store"
-            address="Core-1 building near lecture hall, IITG"
-            status="Open Now"
-            distance="800m"
-            checkpoint="Central Library"
-          />
-          <Cards
-            name="Core 1 Stationery"
-            category="Stationery Store"
-            address="Core-1 building near lecture hall, IITG"
-            status="Open Now"
-            distance="800m"
-            checkpoint="Central Library"
-          />
+        
         </Container>
         <Image>
           <img src={MainPage} alt="" />
