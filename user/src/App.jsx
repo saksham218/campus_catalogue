@@ -12,6 +12,7 @@ import Desktop9 from './Pages/Desktop9';
 import Desktop8 from './Pages/Desktop8';
 import Wireframe1 from './Pages/Wireframe1';
 import SignIn from './pages/Signup';
+import Desktop_5 from './Pages/Desktop-5';
 function App() {
   return (
     <div>
@@ -25,6 +26,8 @@ function App() {
           <Route exact path="/b" element={<Desktop9/>} />
           <Route exact path="/c" element={<Desktop8/>} />
           <Route exact path="/signin" element={<SignIn/>} />
+          <Route exact path="/z" element={<Desktop_5/>} />
+
         </Routes>
       </Router>
     </div>

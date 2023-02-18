@@ -8,7 +8,6 @@ background-color: grey;
 height: 42.3vw;
 width: 41.5vw;
 scale: 1.3;
-/* position: relative; */
 `
 const Title = styled.div`
 height: 5vw;
