@@ -8,7 +8,7 @@ const Container = styled.div`
 display: grid;
 grid-template-columns: 40vw 20vw;
 width: 64.85vw;
-height: 50.3vw;
+height: 60.3vw;
 background-color: #D9D9D9;
 scale: 1.2;
 margin-top: 7vw;
