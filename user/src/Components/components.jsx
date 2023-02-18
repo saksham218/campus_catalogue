@@ -55,6 +55,19 @@ export const Form = styled.form`
 export const Title = styled.h1`
   font-weight: bold;
   margin: 0;
+  margin-left: -2vw;
+`;
+export const Title_2 = styled.h1`
+  font-weight: bold;
+  margin: 0;
+  margin-left: 2vw;
+`;
+export const Title_3 = styled.h1`
+  font-weight: bold;
+  margin: 0;
+  margin-left: -4vw;
+  font-size: 2vw;
+  width: 20vw;
 `;
 
 export const Title_1 = styled.h1`
@@ -93,6 +106,13 @@ export const GhostButton = styled(Button)`
   background-color: transparent;
   border-color: #ffffff;
   margin-top:0.4rem;
+  margin-left: 5vw;
+`;
+export const GhostButton_1 = styled(Button)`
+  background-color: transparent;
+  border-color: #ffffff;
+  margin-top:0.4rem;
+  margin-left: -4vw;
 `;
 
 export const Anchor = styled.a`
@@ -163,4 +183,15 @@ export const Paragraph = styled.p`
   line-height: 1.25rem;
   letter-spacing: 0.031rem;
   margin: 2rem 0 1.875rem;
+  margin-left: 2vw;
+  margin-right: 5vw;
+`;
+
+export const Paragraph_1 = styled.p`
+  font-size:0.875rem;
+  font-weight: 100;
+  line-height: 1.25rem;
+  letter-spacing: 0.031rem;
+  margin: 2rem 0 1.875rem;
+  margin-left:4vw;
 `;
