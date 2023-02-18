@@ -5,9 +5,11 @@ import shop from '../../Assets/shop.jpg';
 const Container = styled.div`
     width: 59.7vw;
     height: 10vw;
-    background-color: #9B9B9B;
+    background-color:#D9D9D9 ;
     display: flex;
     flex-direction: column;
+    margin-left: 19.4vw;
+    margin-top: 9vw;
     align-items: flex-start;
     justify-content: center;
     position: relative;
