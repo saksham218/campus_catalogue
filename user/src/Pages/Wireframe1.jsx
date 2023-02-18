@@ -38,39 +38,39 @@ const Image = styled.div`
 `;
 
 const Wireframe1 = () => {
-  var axios = require("axios");
-  var [customer_data,setCustomer_data] = useState([]);
-  var [all_shops,setAll_shops] = useState([]);
+  // var axios = require("axios");
+  // var [customer_data,setCustomer_data] = useState([]);
+  // var [all_shops,setAll_shops] = useState([]);
 
-  var customer_info = {
-    method: "get",
-    url: `${Backend_URL}/customer/basic_info`,
-    headers: {},
-  };
+  // var customer_info = {
+  //   method: "get",
+  //   url: `${Backend_URL}/customer/basic_info`,
+  //   headers: {},
+  // };
 
-  axios(customer_info)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-        setCustomer_data(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  // axios(customer_info)
+  //   .then(function (response) {
+  //     console.log(JSON.stringify(response.data));
+  //       setCustomer_data(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
 
-  var all_shop = {
-    method: "get",
-    url: `${Backend_URL}/admin/pending-shops`,
-    headers: {},
-  };
+  // var all_shop = {
+  //   method: "get",
+  //   url: `${Backend_URL}/admin/pending-shops`,
+  //   headers: {},
+  // };
 
-  axios(all_shop)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-        setAll_shops(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  // axios(all_shop)
+  //   .then(function (response) {
+  //     console.log(JSON.stringify(response.data));
+  //       setAll_shops(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
 
   return (
     <Page>
@@ -83,9 +83,9 @@ const Wireframe1 = () => {
         <Container>
           <Filterbox status="Open Now" type="Stationery" service="Service" />
 
-          {all_shops.map((element,index)=>
+          {/* {all_shops.map((element,index)=>
             <Cards {...element} key={element.token} />
-          )}
+          )} */}
           <Cards
             name="Core 1 Stationery"
             category="Stationery Store"

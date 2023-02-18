@@ -54,6 +54,7 @@ const Desktop8 = () => {
               textAlign: "left",
               width: "60vw",
               padding: "0.5vw 1.25vw 0.5vw 1.25vw",
+              border: "1px solid black"
             }}
           >
             <h1>Menu</h1>

@@ -4,11 +4,13 @@ import itempic from "../assets/Itempic.png";
 
 const Card = styled.div`
     width: 75vw;
-    height: 15vw;
+    height: 12vw;
     padding: 2vw;
+    border: 1px solid black;
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 2vw;
     background-color: #D9D9D9;`
 
@@ -35,7 +37,8 @@ const Text = styled.div`
 
 const Detatils = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 1vw;
 `
 
 const Item3 = styled.div`
@@ -45,6 +48,7 @@ const Item3 = styled.div`
 
     flex-grow: 1;
     text-align: right;
+    align-items: flex-end;
 
     font-family: 'Inter';
     font-style: normal;
@@ -94,7 +98,7 @@ const RecentOrdersCard = () => {
         </Description>
         <Item3>
             $ XXX
-            <button>Cancel Order</button> 
+            <button style={{width: "12vw", padding: "0.5vw 2vw", borderRadius: "4vw", fontSize: "20px"}} >Cancel Order</button> 
         </Item3>
     </Card>
   )

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import shopimg from "../Assets/Shop.png";
+import shopimg from "../../Assets/Shop.png";
 import { motion,spring } from 'framer-motion';
 
 const container = {
@@ -25,8 +25,8 @@ const container = {
   };
 
 const Card = styled(motion.div)`
-    height: 18vw;
-    width: 28vw;
+    height: 16vw;
+    width: 30vw;
     /* border-radius: 5px; */
     display: flex;
     flex-direction: column;

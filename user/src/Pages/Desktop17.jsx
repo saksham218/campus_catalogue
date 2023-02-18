@@ -9,19 +9,31 @@ import Desktop17img from "../assets/Desktop17.png";
 import { Backend_URL } from "../../../admin_panel/src/utilities/config";
 import PinnedCards from '../Components/pinnedcards/pinnedcards';
 import TrendingShopCard from '../Components/TrendingShopCard';
-import { IoArrowRedoOutline } from "react-icons/io";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import RecentOrdersCard from '../Components/RecentOrdersCard';
 
 const Page = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2vw;
     background-color: #c8c8c8;
-    justify-content: center;
+    /* justify-content: center; */
+    /* align-items: center; */
+`
+
+const MainContents = styled.div`
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+    background-color: #c8c8c8;
+
+  gap: 2vw;
 `
 
 const Container1 = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: center;
     gap: 2vw;
 `
 
@@ -38,6 +50,10 @@ const Container2 = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1vw;
+    align-items: center;
+    background-color: white;
+    padding: 1vw;
+    /* width: fit-content; */
 `
 
 const Grid = styled.div`
@@ -50,11 +66,15 @@ const Grid = styled.div`
 const Container3 = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 1vw;
+    background-color: white;
+    padding: 1.5vw;
 `
 
 const Title = styled.div`
     font-family: 'Inter',sans-serif;
     font-style: normal;
+    font-size: 34px;
     font-weight: 500;
     color: black;
 `
@@ -63,19 +83,22 @@ const Desktop17 = () => {
   return (
     <Page>
         <Navbar1 />
+        <MainContents>
         <Container1>
             <Pinned>
                 <Title>Your Pinned Shops</Title>
                 <PinnedCards/>
                 <PinnedCards/>
-                <div style={{display: "flex", justifyContent: "space-between", padding: "0.3vw 1vw", backgroundColor: "#D9D9D9"}} >
-                    View All 
+                <div style={{display: "flex", justifyContent: "space-between",alignItems: "center", padding: "1vw 2vw", backgroundColor: "#D9D9D9"}} >
+                    <h3>View All</h3> 
                     <div>
-                        <IoArrowRedoOutline/>
+                        <AiOutlineArrowRight/>
                     </div>
                 </div>
             </Pinned>
-            <img src={Desktop17img} alt="Location" />
+            <div>
+            <img src={Desktop17img} alt="Location" style={{width: "45vw", height: "45vw"}}/>
+            </div>
         </Container1>
         <Container2>
             <Title>Trending Shops</Title>
@@ -87,8 +110,15 @@ const Desktop17 = () => {
             </Grid>
         </Container2>
         <Container3>
-
+            <Title>Recent Orders</Title>
+                <RecentOrdersCard/>
+                <RecentOrdersCard/>     
+                <RecentOrdersCard/>     
+                <RecentOrdersCard/>     
+                <RecentOrdersCard/>     
+                <RecentOrdersCard/>     
         </Container3>
+        </MainContents>
     </Page>
   )
 }

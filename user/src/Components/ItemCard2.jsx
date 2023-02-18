@@ -7,9 +7,10 @@ const Box = styled(motion.div)`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 1.25vw;
 
-    height: 6vw;
+    height: 10vw;
     width: 60vw;
 
     background: #D9D9D9;
@@ -56,7 +57,7 @@ const ItemCard = (props) => {
   return (
     <Box>
         <Item>
-            <img src={Itempic} alt="" />
+            <img src={Itempic} alt="" style={{width: "8vw"}}/>
             <Description>
                 <HeadingText>
                     {props.itemname}
@@ -68,7 +69,7 @@ const ItemCard = (props) => {
                     {props.preptime?props.preptime:"20mins"}
                 </NormalText>
                 <br></br>
-                <button style={{borderRadius: "0.52vw",backgroundColor: "none",padding: "0.1vw 0.5vw"}} onClick={()=>{text="Added"}} >
+                <button style={{borderRadius: "0.52vw",backgroundColor: "none",padding: "0.3vw 0.5vw"}} onClick={()=>{text="Added"}} >
                     {text}
                 </button>
             </Description>
