@@ -48,7 +48,7 @@ const Text = styled.div`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 2vw;
     color: #000000;
 `
 
@@ -56,23 +56,23 @@ function Navbar1(props) {
   return (
     <Navbar>
         <Description>
-            <img src={Profile} alt={Profile} />
-            <img src={ProfileText} alt={ProfileText} />
+            <img src={Profile} alt={Profile} style={{height:"4vw",width:"5vw"}}/>
+            <img src={ProfileText} alt={ProfileText} style={{height:"3vw",width:"28vw"}}/>
         </Description>
         <Option>
-            <img src= {Cart} alt={Cart} />
+            <img src= {Cart} alt={Cart} style={{height:"2vw",width:"2vw"}}/>
             <Text>
                 Cart
             </Text>
         </Option>
         <Option>
-            <img src= {Notifications} alt={Notifications} />
+            <img src= {Notifications} alt={Notifications} style={{height:"2vw",width:"2vw"}}/>
             <Text>
                 Notifications
             </Text>
         </Option>
         <Option>
-            <img src= {User} alt={User} />
+            <img src= {User} alt={User} style={{height:"2vw",width:"2vw"}}/>
             <Text>
                 User Name
             </Text>
