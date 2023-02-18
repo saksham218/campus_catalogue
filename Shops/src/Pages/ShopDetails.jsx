@@ -32,11 +32,28 @@ const ShopDetails = () => {
   // if (tokenn) {
   //   setToken(tokenn);
   // }
+  const [name, setName] = useState("");
+  const [owner_name, setOwnerName] = useState("");
+  const [phone, setPhone] = useState(0);
+  const [address, setAddress] = useState("");
+  const [landmark, setLandmark] = useState("");
+  const [gstin, setGstin] = useState("");
+  const [category, setCategory] = useState("");
+  const [open, setOpen] = useState(0);
+  const [close, setClose] = useState(0);
+  const [image, setImage] = useState("");
+  const [bank_details, setBankDetails] = useState({
+            accno: "",
+            ifsc: "",
+            acc_holder_name: "",
+            is_default: true
+  });
+  const [VPA, setVPA] = useState("");
   return (
     <Page>
         <Navbar1 />
         <MainContents>
-            <ShopDetails1 />
+            <ShopDetails1 name={name} setName={setName} owner_name={owner_name} setOwnerName={setOwnerName} phone={phone} setPhone={setPhone} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} gstin={gstin} setGstin={setGstin} category={category} setCategory={setCategory}/>
             <ShopDetails2 />
         </MainContents>
     </Page>

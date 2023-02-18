@@ -13,7 +13,8 @@ const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 const MICROSOFT_CLIENT_ID = process.env.MICROSOFT_CLIENT_ID
 const MICROSOFT_CLIENT_SECRET = process.env.MICROSOFT_CLIENT_SECRET
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000'
+const C_FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5174'
+const S_FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:5000'
 
 var instance = new Razorpay({
@@ -32,6 +33,7 @@ module.exports = {
     GOOGLE_CLIENT_SECRET,
     MICROSOFT_CLIENT_ID,
     MICROSOFT_CLIENT_SECRET,
-    FRONTEND_URL,
+    C_FRONTEND_URL,
+    S_FRONTEND_URL,
     BACKEND_URL
 };

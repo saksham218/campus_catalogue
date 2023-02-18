@@ -31,7 +31,7 @@ const Container = styled.div`
   /* gap: 2vw; */
 `;
 
-const Desktop8 = () => {
+const shopMenu = () => {
   return (
     <Page>
       <Navbar1 />
@@ -100,4 +100,4 @@ const Desktop8 = () => {
   );
 };
 
-export default Desktop8;
+export default shopMenu;

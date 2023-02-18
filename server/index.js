@@ -31,11 +31,13 @@ const StartServer = () => {
     /** Log the request */
     router.use((req, res, next) => {
         /** Log the req */
-        Logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+        // Logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+        Logging.info(`Incomming - [${req.method}] - [${req.url}]`);
 
         res.on('finish', () => {
             /** Log the res */
-            Logging.info(`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`);
+            // Logging.info(`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`);
+            Logging.info(`Result : [${req.method}][${req.url}] - STATUS: [${res.statusCode}]`);
         });
 
         next();

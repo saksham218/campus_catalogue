@@ -116,7 +116,7 @@ function Cards(props) {
         className='item'
         variants= {item}
         >
-            {props.distance?props.distance:"800"} away from {props.checkpoint?props.checkpoint:"Library"}
+            {props.distance?props.distance:"800"} away from {props.landmark?props.landmark:"Library"}
         </Other_Text>
     </Card>
   );

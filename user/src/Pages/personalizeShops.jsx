@@ -79,7 +79,7 @@ const Title = styled.div`
     color: black;
 `
 
-const Desktop17 = () => {
+const personalizeShops = () => {
   return (
     <Page>
         <Navbar1 />
@@ -123,4 +123,4 @@ const Desktop17 = () => {
   )
 }
 
-export default Desktop17;
+export default personalizeShops;

@@ -56,8 +56,8 @@ function Navbar1(props) {
   return (
     <Navbar>
         <Description>
-            <img src={Profile} alt={Profile} />
-            <img src={ProfileText} alt={ProfileText} />
+            <img src={Profile} alt={Profile} style={{width: "4.44vw", height: "4.44vw"}} />
+            <img src={ProfileText} alt={ProfileText} style={{width: "25.347vw", height: "2.91vw"}} />
         </Description>
         <Option>
             <img src= {Cart} alt={Cart} />

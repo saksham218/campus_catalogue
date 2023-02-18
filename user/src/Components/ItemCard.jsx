@@ -36,7 +36,7 @@ const CostDescript = styled.div`
 
 const HeadingText = styled.div`
     font-family: Inter;
-    font-size: 24px;
+    font-size: 1.25vw;
     font-weight: 500;
     color: black;
 `
@@ -45,7 +45,7 @@ const NormalText = styled.div`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1.041vw;
     color: black;
 `
 

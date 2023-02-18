@@ -86,4 +86,15 @@ const getShopMenu = async (req, res) => {
     }
 };
 
-module.exports = { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop, getShopMenu, getAllShop };
+const getShop = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const shop = await Shop.findById(id);
+        res.status(200).json(shop);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+
+module.exports = { getBasicInfo, getCart, getFavShops, updateBasicInfo, addFavoriteShop, getShopMenu, getAllShop,getShop };

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Navbar1 from "../Components/Navbar/Navbar";
 import LocationStatusCard from "../Components/Locationcard/LocationStatusCard";
@@ -9,7 +9,9 @@ import Cards from "../Components/cards/Cards";
 import Filterbox from "../Components/Filterbox/Filterbox";
 
 import MainPage from "../Assets/MainPage.png";
-import { Backend_URL } from "../../../admin_panel/src/utilities/config";
+import { useSearchParams } from "react-router-dom";
+import { getAllShops, getFavShops } from "../apis/api";
+
 
 const Page = styled.div`
   display: flex;
@@ -37,40 +39,32 @@ const Image = styled.div`
   width: 670px;
 `;
 
-const Wireframe1 = () => {
-  // var axios = require("axios");
-  // var [customer_data,setCustomer_data] = useState([]);
-  // var [all_shops,setAll_shops] = useState([]);
+const Home = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // var customer_info = {
-  //   method: "get",
-  //   url: `${Backend_URL}/customer/basic_info`,
-  //   headers: {},
-  // };
+  const token = searchParams.get("token");
+  if (token) {
+    localStorage.setItem("user_token", token);
+  }
 
-  // axios(customer_info)
-  //   .then(function (response) {
-  //     console.log(JSON.stringify(response.data));
-  //       setCustomer_data(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
+  const [all_shops, setAllShops] = useState([]);
+  const [fav_shops, setFavShops] = useState([]);
 
-  // var all_shop = {
-  //   method: "get",
-  //   url: `${Backend_URL}/admin/pending-shops`,
-  //   headers: {},
-  // };
+  useEffect(() => {
+    getAllShops().then((res) => {
+      setAllShops(res.data);
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+    getFavShops().then((res) => {
+      setFavShops(res.data);
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
 
-  // axios(all_shop)
-  //   .then(function (response) {
-  //     console.log(JSON.stringify(response.data));
-  //       setAll_shops(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
 
   return (
     <Page>
@@ -83,16 +77,18 @@ const Wireframe1 = () => {
         <Container>
           <Filterbox status="Open Now" type="Stationery" service="Service" />
 
-          {/* {all_shops.map((element,index)=>
-            <Cards {...element} key={element.token} />
-          )} */}
-          <Cards 
+          {all_shops.map((element,index)=>
+            <Cards 
+              {...element}
+            />
+          )}
+          <Cards
             name="Core 1 Stationery"
             category="Stationery Store"
             address="Core-1 building near lecture hall, IITG"
             status="Open Now"
             distance="800m"
-            checkpoint="Central Library"
+            landmark="Central Library"
           />
           <Cards
             name="Core 1 Stationery"
@@ -100,7 +96,7 @@ const Wireframe1 = () => {
             address="Core-1 building near lecture hall, IITG"
             status="Open Now"
             distance="800m"
-            checkpoint="Central Library"
+            landmark="Central Library"
           />
           <Cards
             name="Core 1 Stationery"
@@ -108,7 +104,7 @@ const Wireframe1 = () => {
             address="Core-1 building near lecture hall, IITG"
             status="Open Now"
             distance="800m"
-            checkpoint="Central Library"
+            landmark="Central Library"
           />
           <Cards
             name="Core 1 Stationery"
@@ -116,9 +112,9 @@ const Wireframe1 = () => {
             address="Core-1 building near lecture hall, IITG"
             status="Open Now"
             distance="800m"
-            checkpoint="Central Library"
+            landmark="Central Library"
           />
-        
+
         </Container>
         <Image>
           <img src={MainPage} alt="" />
@@ -128,4 +124,4 @@ const Wireframe1 = () => {
   );
 };
 
-export default Wireframe1;
+export default Home;

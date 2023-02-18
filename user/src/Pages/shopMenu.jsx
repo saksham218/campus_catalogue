@@ -31,7 +31,7 @@ const Container = styled.div`
   /* gap: 2vw; */
 `;
 
-const Desktop9 = () => {
+const shopMenu = () => {
   return (
     <Page>
       <Navbar1 />
@@ -49,7 +49,7 @@ const Desktop9 = () => {
         />
         <Container>
           <a
-            href="#"
+            href="/print"
             style={{
               textDecoration: "none",
               height: "4vw",
@@ -125,4 +125,4 @@ const Desktop9 = () => {
   );
 };
 
-export default Desktop9;
+export default shopMenu;

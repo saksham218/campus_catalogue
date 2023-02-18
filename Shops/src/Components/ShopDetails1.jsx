@@ -49,24 +49,33 @@ const Input = styled.input`
     height: 4vw;
 `
 
-const ShopDetails1 = () => {
+const ShopDetails1 = (props) => {
   return (
     <Container>
         <Header>Add Shop Details</Header>
         <SubHeader>Shop Name</SubHeader>
-        <Input type="text" placeholder="Enter Shop Name" />
+        <Input type="text" placeholder="Enter Shop Name" value={props.name} onChange={(e)=>{props.setName(e.target.value)}}/>
         <SubHeader>Shop Owner Name</SubHeader>
-        <Input type="text" placeholder="Enter Owner Name" />
+        <Input type="text" placeholder="Enter Owner Name" value={props.owner_name} onChange={(e)=>{props.setOwnerName(e.target.value)}}/>
         <SubHeader>Shop Contact Number</SubHeader>
-        <Input type="text" placeholder="Enter Shop Contact Number" />
+        <Input type="number" placeholder="Enter Shop Contact Number" value={props.phone} onChange={(e)=>{props.setPhone(e.target.value)}}/>
         <SubHeader>GSTIN</SubHeader>
-        <Input type="text" placeholder="Enter Shop GST Number" />
+        <Input type="text" placeholder="Enter Shop GST Number" value={props.gstin} onChange={(e)=>{props.setGstin(e.target.value)}}/>
         <SubHeader>Category</SubHeader>
-        <Input type="text" placeholder="Enter Category" />
+        <select placeholder="Enter Category" id="category" value={props.category} onChange={(e)=>{props.setGstin(e.target.value)}}>
+            <option value="Canteen">Canteen</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Stationary">Stationary</option>
+            <option value="Juice Center">Juice Center</option>
+            <option value="Rental">Rental</option>
+            <option value="Bakery">Bakery</option>
+            <option value="Other">Other</option>
+        </select>
+
         <SubHeader>Shop Address</SubHeader>
-        <Input type="text" placeholder="Enter Shop Address" />
+        <Input type="text" placeholder="Enter Shop Address" value={props.address} onChange={(e)=>{props.setAddress(e.target.value)}}/>
         <SubHeader>Landmark</SubHeader>
-        <Input type="text" placeholder="Enter nearest Landmark" />
+        <Input type="text" placeholder="Enter nearest Landmark" value={props.landmark} onChange={(e)=>{props.setLandmark(e.target.value)}}/>
     </Container>
   )
 }

@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-// import {FileBase} from  'react-file-base64';
+import FileBase64 from 'react-file-base64';
 
 const Page = styled.div`
   background-color: #c8c8c8;
@@ -78,6 +78,7 @@ const Button = styled.button`
 const ShopDetails2 = () => {
   const [value1, setValue1] = useState(null);
   const [value2, setValue2] = useState(null);
+  const [bank, setBank] = useState(true);
 
   const [day1, setday1] = useState(false);
   const [day2, setday2] = useState(false);
@@ -98,6 +99,7 @@ const ShopDetails2 = () => {
                 label="Start Time"
                 value={value1}
                 onChange={(newValue) => {
+                  console.log(newValue)
                   setValue1(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}
@@ -197,11 +199,27 @@ const ShopDetails2 = () => {
         </Items> */}
         <Items>
           <Subtitle>Upload Shop Image</Subtitle>
-          {/* <FileBase
+          <div>
+          <FileBase64
                         type="file"
                         multiple={false}
                         onDone={({ base64 }) => console.log(base64)}
-          /> */}
+                        />
+                        </div>
+        </Items>
+        <Items>
+          <Subtitle>Add payment methods</Subtitle>
+          <div style={{display:"flex",flexDirection:"row",gap: "0.8vw"}}>
+            <div onClick={()=>setBank(true)}>Bank Account</div>
+            <div onClick={()=>setBank(false)}>UPI</div>
+          </div>
+          {bank?<div>
+            <Input placeholder="Enter Account Number" />
+            <Input placeholder="Enter IFSC Code" />
+            <Input placeholder="Enter Account Holder Name" />
+          </div>:<div>
+            <Input placeholder="Enter UPI ID" />
+          </div>}
         </Items>
         <button
           style={{backgroundColor: "#9B9B9B",border: "none", borderRadius: "0.5vw", padding: "0.5vw  3vw"}}

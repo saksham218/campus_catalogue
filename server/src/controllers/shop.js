@@ -7,7 +7,7 @@ const config = require('../config/config');
 const { debug } = require('../utilities/logging.js');
 
 const firstDetails = async (req, res) => {
-    let { name, owner_name, phone, address, gstin, lat, lon, open, close, image, category, payment, token } = req.body;
+    let { name, owner_name, phone, address,landmark, gstin, lat, lon, open, close, image, category, payment, token } = req.body;
     /*
         payment: {
             vpa :[{
@@ -37,6 +37,7 @@ const firstDetails = async (req, res) => {
                     email: email,
                     phone: phone,
                     address: address,
+                    landmark: landmark,
                     gstin: gstin,
                     map_coordinates: {
                         lat: lat,
@@ -69,11 +70,12 @@ const firstDetails = async (req, res) => {
 
 const secondDetails = async (req, res) => {
     const shop = req.shop;
-    const { name, owner_name, phone, address, lat, lon, open, close, image } = req.body;
+    const { name, owner_name, phone, address,landmark, lat, lon, open, close, image } = req.body;
     shop.basic_info.name = name || shop.basic_info.name;
     shop.basic_info.owner_name = owner_name || shop.basic_info.owner_name;
     shop.basic_info.phone = phone || shop.basic_info.phone;
     shop.basic_info.address = address || shop.basic_info.address;
+    shop.basic_info.landmark = landmark || shop.basic_info.landmark;
     shop.basic_info.map_coordinates.lat = lat || shop.basic_info.map_coordinates.lat;
     shop.basic_info.map_coordinates.lon = lon || shop.basic_info.map_coordinates.lon;
     shop.basic_info.default_timings.open = open || shop.basic_info.default_timings.open;

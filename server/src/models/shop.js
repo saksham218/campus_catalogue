@@ -8,6 +8,7 @@ const Shop_Schema = mongoose.Schema(
             email: { type: String, required: true, unique: true },
             phone: { type: Number, required: true, unique: true },
             address: { type: String, required: true },
+            landmark: { type: String, required: true },
             gstin: { type: String, required: true, unique: true },
             map_coordinates: {
                 lat: { type: String },

@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from "../../Assets/Profile.png";
-import ProfileText from "../../Assets/ProfileText.png";
+import Profile from "../../assets/PILogo.png";
+import ProfileText from "../../assets/PIText.png";
 import Cart from "../../Assets/Cart.png";
 import Notifications from "../../Assets/Notifications.png";
 import User from "../../Assets/User.png";
+import { Link } from 'react-router-dom';
 
 const Navbar = styled.div`
     /* width: 82vw; */
@@ -53,7 +54,9 @@ const Text = styled.div`
 `
 
 function Navbar1(props) {
-  return (
+
+
+return (
     <Navbar>
         <Description>
             <img src={Profile} alt={Profile} style={{height:"4vw",width:"5vw"}}/>
@@ -62,7 +65,7 @@ function Navbar1(props) {
         <Option>
             <img src= {Cart} alt={Cart} style={{height:"2vw",width:"2vw"}}/>
             <Text>
-                Cart
+                <Link to="/ShoppingCart">Cart</Link>
             </Text>
         </Option>
         <Option>

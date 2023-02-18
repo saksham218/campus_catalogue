@@ -2,6 +2,7 @@ import * as Components from "../components/components";
 // import "../css/signup.css";
 import { useState } from 'react'
 import styled from 'styled-components'
+import { Backend_URL } from "../apis/api";
 // import MicrosoftLogin from "react-microsoft-login";
 
 
@@ -19,7 +20,14 @@ const Body = styled.div`
 
 function Signup() {
   const [signIn, toggle] = useState(true);
-  
+
+  const login = (e) => {
+    e.preventDefault();
+    // alert("hello");
+    console.log(`${Backend_URL}/auth/microsoft`);
+    window.location.replace(`${Backend_URL}/auth/microsoft`);
+  };
+
   return (
     <Body>
       <Components.Container>
@@ -36,7 +44,7 @@ function Signup() {
         <Components.SignInContainer signingIn={signIn}>
           <Components.Form>
             <Components.Title>Sign in</Components.Title>
-           <button> click me</button>
+            <button onClick={login}> click me</button>
             <Components.Anchor href="/recovery">Forgot your password?</Components.Anchor>
             <Components.Button>Sign In</Components.Button>
           </Components.Form>
