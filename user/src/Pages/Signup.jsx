@@ -2,6 +2,8 @@ import * as Components from "../components/components";
 // import "../css/signup.css";
 import { useState } from 'react'
 import styled from 'styled-components'
+// import MicrosoftLogin from "react-microsoft-login";
+
 
 const Body = styled.div`
     background: #f6f5f7;
@@ -17,6 +19,7 @@ const Body = styled.div`
 
 function Signup() {
   const [signIn, toggle] = useState(true);
+  
   return (
     <Body>
       <Components.Container>
@@ -33,8 +36,7 @@ function Signup() {
         <Components.SignInContainer signingIn={signIn}>
           <Components.Form>
             <Components.Title>Sign in</Components.Title>
-            <Components.Input type="email" placeholder="Email" />
-            <Components.Input type="password" placeholder="Password" />
+           <button> click me</button>
             <Components.Anchor href="/recovery">Forgot your password?</Components.Anchor>
             <Components.Button>Sign In</Components.Button>
           </Components.Form>
