@@ -18,6 +18,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2vw;
+  padding: 2vw;
+  border-radius: 1.6vw;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 80vw;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Items = styled.div`
@@ -43,7 +49,7 @@ const Subtitle = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 50vw;
   height: 4.8vw;
   border: 1px solid #c8c8c8;
   border-radius: 0.8vw;
@@ -66,6 +72,7 @@ const Button = styled.button`
   font-weight: 500;
   color: #000000;
   font-family: "Inter", sans-serif;
+  border: 1px solid #000000;
 `;
 
 const ShopDetails2 = () => {
@@ -118,7 +125,6 @@ const ShopDetails2 = () => {
   );
 
   return (
-    <Page>
       <Container>
         <Title>Add Shop Details</Title>
         <Items>
@@ -223,12 +229,11 @@ const ShopDetails2 = () => {
           </div>
         </Items>
         <Title>Add Items to catalogue</Title>
-        <hr width="110%"></hr>
+        <hr width="100%"></hr>
         {contents}
-        <button>Add more items</button>
-        <button>SAVE</button>
+        <button style={{padding: "1vw 2vw", backgroundColor: "white", fontSize: "2vw", borderRadius: "1.6vw"}} >Add more items</button>
+        <button style={{padding: "1vw 2vw", backgroundColor: "white", fontSize: "2vw", borderRadius: "1.6vw"}} >SAVE</button>
       </Container>
-    </Page>
   );
 };
 
