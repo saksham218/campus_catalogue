@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import Typography from '@mui/material/Typography';
 import profile from '../../Assets/Shop.jpg';
+import {motion,spring} from 'framer-motion';
 
 
 function TabPanel(props) {
@@ -47,6 +48,8 @@ function a11yProps(index) {
 const List_screen = (props) => {
     const theme = useTheme();
     const [value, setValue] = useState(0);
+    const [accepted, setAccepted] = useState('Accept');
+    const [completed, setCompleted] = useState('Mark as Complete');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -56,11 +59,29 @@ const List_screen = (props) => {
         setValue(index);
     };
 
-    const Tab_section = styled.div`
+    const drop={
+        hidden: { opacity: 0, scale: 0.5,y:"-50vh" },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            y:"0",
+            transition: {
+                duration: 0.3,
+                type: "spring",
+                damping:25,
+                stiffness:200,
+            }
+        }
+    };
+
+
+    const Tab_section = styled(motion.div)`
    left: 20vw;
     top: 10vw;
     position: absolute;
-    `;
+    /* scale: 1.4; */
+   ` 
+
     const Profile = styled.img`
     width: 7vw;
    height: 7vw;  
@@ -123,7 +144,7 @@ const List_screen = (props) => {
     font-size: 1.4vw;
     `
 
-    const Mark = styled.button`
+    const Mark = styled(motion.button)`
     position: absolute;
     left: 10.5vw;
     top: 25vw;
@@ -139,7 +160,7 @@ const List_screen = (props) => {
     border-color:black;
     `
 
-    const Accept = styled.button`
+const Accept = styled(motion.button)`
 position: absolute;
 left: 10.5vw;
 top: 25vw;
@@ -152,10 +173,13 @@ font-size: 1.2vw;
 font-weight: 500;
 font-style: normal;
 color: white;
-/* border-color:black; */
+/* :hover{
+    transform: scale(1.3);
+    transition: 0.6s;
+} */
 `
 
-    const Cancel = styled.button`
+    const Cancel = styled(motion.button)`
     position: absolute;
     left: 30vw;
     top: 25vw;
@@ -232,11 +256,12 @@ color: white;
     const Contents=styled.div`
     position: relative;
     display: flexbox;
+    margin-top: -6vw;
     `
 
     return (
 
-        <Tab_section>
+        <Tab_section variants={drop} initial="hidden" animate="visible">
             <Box sx={{ bgcolor: 'background.paper', width: "59.7vw", }}>
                 <AppBar position="static" variant="fullWidth" sx={{ bgcolor: "#D9D9D9" }}>
                     <Tabs
@@ -269,10 +294,10 @@ color: white;
                         <Location>
                             {props.location ? props.location : "Location"}
                         </Location>
-                        <Accept>
-                            {props.mark ? props.mark : "Accept"}
+                        <Accept onClick={()=>{setAccepted('Accepted!')}} whileHover={{scale:1.2}} whileTap={{scale:0.8}}>
+                            {accepted}
                         </Accept>
-                        <Cancel>
+                        <Cancel whileHover={{scale:1.2}} whileTap={{scale:0.8}}>
                             {props.cancel ? props.cancel : "Cancel"}
                         </Cancel>
                         <Order_no>
@@ -310,11 +335,10 @@ color: white;
                     <Number>
                         {props.number ? props.number : "123456"}
                     </Number>
-                    <Mark>
-                        {props.mark ? props.mark : "Mark as Completed"}
-
+                    <Mark whileHover={{scale:1.2}} whileTap={{scale:0.8}} onClick={()=>setCompleted('Completed!')}>
+                       {completed}
                     </Mark>
-                    <Cancel>
+                    <Cancel whileHover={{scale:1.2}} whileTap={{scale:0.8}}>
                         {props.cancel ? props.cancel : "Cancel"}
                     </Cancel>
                     <Order_no>
