@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
 
-import Navbar1 from "../Components/Navbar/Navbar";
+import Navbar1 from "../Components/Navbar";
 import ShopMainPage from "../Assets/ShopMainPage.png";
 import VendorProfile from "../Components/VendorProfile";
 
@@ -14,6 +14,7 @@ const Page = styled.div`
     flex-direction: column;
     gap: 2vw;
     background-color: #c8c8c8;
+    height: 102vh;
 `
 
 const MainContents = styled.div`
@@ -29,7 +30,10 @@ const Desktop22 = () => {
         <Navbar1 />
         <MainContents>
             <VendorProfile/>
+            <div style={{display: "flex", flexDirection: "column", gap: "2vw", justifyContent: "flex-end"}} >
             <img src={ShopMainPage} alt="ShopMainPage" />
+            <button style={{padding: "0.5vw 1vw",border: "none", backgroundColor: "#9B9B9B", width: "24vw"}} > <h3> Add Your Shop to Campus Catalogue </h3> </button>
+            </div>
         </MainContents>
     </Page>
   )

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
 
-import Navbar1 from "../Components/Navbar/Navbar";
+import Navbar1 from "../Components/Navbar";
 import ShopDetails3 from '../Components/ShopDetails3';
 
 import { Backend_URL } from "../../../admin_panel/src/utilities/config";
