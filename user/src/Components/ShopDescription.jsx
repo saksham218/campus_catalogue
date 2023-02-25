@@ -28,7 +28,7 @@ const container = {
 
 const Container = styled.div`
     width: 20vw;
-    height: 58.5vw;
+    /* height: 58.5vw; */
     /* position: fixed; */
     display: flex;
     flex-direction: column;
@@ -36,6 +36,7 @@ const Container = styled.div`
     align-items: center;
     /* justify-content: center; */
     padding: 1vw;
+    padding-bottom: 5vw ;
     background-color: white;
     border-radius: 3px;
 `
@@ -115,6 +116,9 @@ const Pin = styled.button`
 `
 
 const ShopDescription = (props) => {
+  console.log("ShopDescription")
+  console.log(props)
+  
   return (
     <Container
     className='container'
@@ -123,22 +127,22 @@ const ShopDescription = (props) => {
         className='item'
         variants= {item}
         >
-            <img src={shopimg} alt={props.shopname} />
-            <Heading_Text>{props.shopname}</Heading_Text>
+            <img src={shopimg} alt={props.name} style={{width: "18vw"}} />
+            <Heading_Text>{props.name}</Heading_Text>
         </Header>
         <Description
         className='item'
         variants= {item}
         >
             <Other_Text>
-                {props.shoptype}
+                {props.category}
             </Other_Text>
             <br></br>
             <Heading_Text>
                 {props.phone}
             </Heading_Text>
             <Heading_Text>
-                {props.adress}
+                {props.address}
             </Heading_Text>
             <br></br>
             <div style={{display: 'flex',alignItems: "center",justifyContent: "center"}} >

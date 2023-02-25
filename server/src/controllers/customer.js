@@ -58,7 +58,8 @@ const addFavoriteShop = async (req, res) => {
 const getCart = async (req, res) => {
     const { _id } = req.customer;
     try {
-        cust_orders = await Order.find({ customer: _id, status: 'Unplaced' });
+        cust_orders = await Order.find({ customer: _id, status: 'Unplaced' }).populate('shop').populate('items.item');
+        
         res.status(200).json(cust_orders);
     } catch (error) {
         res.status(404).json({ message: error.message });

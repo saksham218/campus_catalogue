@@ -62,7 +62,7 @@ const ShopDetails1 = (props) => {
         <SubHeader>GSTIN</SubHeader>
         <Input type="text" placeholder="Enter Shop GST Number" value={props.gstin} onChange={(e)=>{props.setGstin(e.target.value)}}/>
         <SubHeader>Category</SubHeader>
-        <select placeholder="Enter Category" id="category" value={props.category} onChange={(e)=>{props.setGstin(e.target.value)}}>
+        <select placeholder="Enter Category" id="category" value={props.category} onChange={(e)=>{props.setCategory(e.target.value)}}>
             <option value="Canteen">Canteen</option>
             <option value="Restaurant">Restaurant</option>
             <option value="Stationary">Stationary</option>

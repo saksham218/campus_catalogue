@@ -60,7 +60,7 @@ const firstDetails = async (req, res) => {
                     res.status(200).json({ message: 'Shop created successfully', result });
                 })
                 .catch((error) => {
-                    res.status(500).json({ message: 'Error creating shop' });
+                    res.status(500).json({ message: 'Error creating shop',error });
                 });
         }
     } catch (err) {
@@ -96,7 +96,7 @@ const getMenu = async (req, res) => {
 };
 
 const getShop = async (req, res) => {
-    const shop = await Shop.findById(req.shop._id).populate('menu').populate('approved.approver');
+    const shop = await Shop.findById(req.shop._id).populate('approved.approver');
     res.status(200).json({ message: 'Shop fetched successfully', shop: shop });
 };
 

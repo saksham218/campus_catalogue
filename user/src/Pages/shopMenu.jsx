@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useParams } from "react-router-dom";
 import ShopDescription from "../Components/ShopDescription";
 import ItemCard from "../Components/ItemCard";
 import Navbar1 from "../Components/Navbar/Navbar";
-
+import { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+
+import { getShop } from "../apis/api";
 
 const Page = styled.div`
   display: flex;
@@ -31,21 +33,33 @@ const Container = styled.div`
   /* gap: 2vw; */
 `;
 
-const shopMenu = () => {
+const ShopMenu = () => {
+  
+  const {id} = useParams();
+  console.log(id)
+  const [shop, setShop] = useState({})
+  useEffect(() => getShop(id).then(res => setShop(res.data)),[])
+
+  console.log("-----shopmenu",shop)
+  console.log(shop?.basic_info?.name)
+
   return (
     <Page>
       <Navbar1 />
       <MainContents>
         <ShopDescription
-          shopname="Core 1 Stationery"
-          shoptype="Stationery Store"
-          phone="1234567890"
-          adress="Core-1 building near lecture hall, IITG"
-          status="Open Now"
-          distance="800m"
-          checkpoint="Central Library"
-          noofreviews="14"
-          services={["Color Printing", "Framing", "Paper Cutting"]}
+          name={shop?.basic_info?.name||"Core 3 Stationery"}
+          // ownername={shop.basic_info.owner||"Mr. XYZ"}
+          // email={shop.basic_info.email||"ab@iitg.ac.in"}
+          phone={shop?.basic_info?.phone||"1234567890"}
+          category={shop?.basiv_info?.category||"Stationery"}
+          address={shop?.basic_info?.address||"Core 1 Stationery, IITG"}
+          //TODO:get status
+          status={shop?.status||"Open Now"}
+          distance={shop?.distance||"800m"}
+          checkpoint={shop?.basic_landmark||"Central Library"}
+          noofreviews={shop?.reviews||"14"}
+          services={shop?.services||["Color Printing", "Framing", "Paper Cutting"]}
         />
         <Container>
           <a
@@ -121,8 +135,12 @@ const shopMenu = () => {
           />
         </Container>
       </MainContents>
+      <br></br>
+      <div style={{display: "flex",justifyContent: "center",alignItems: "center"}} >
+      <button style={{padding: "1vw 2vw",borderRadius: "2vw",backgroundColor: "white",fontSize: "1.6vw",width: "20vw"}} > Add To Cart </button>
+      </div>
     </Page>
   );
 };
 
-export default shopMenu;
+export default ShopMenu;

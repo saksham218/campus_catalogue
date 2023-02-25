@@ -51,7 +51,7 @@ const Heading_Text = styled(motion.div)`
 `
 
 const Button = styled(motion.div)`
-    /* cursor: pointer; */
+    cursor: pointer;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;

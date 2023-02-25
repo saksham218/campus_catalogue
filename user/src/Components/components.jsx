@@ -50,6 +50,7 @@ export const Form = styled.form`
   padding: 0 50px;
   height: 100%;
   text-align: center;
+  cursor: pointer;
 `;
 
 export const Title = styled.h1`
@@ -94,6 +95,7 @@ export const Button = styled.button`
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+  cursor: pointer;
   &:active {
     transform: scale(0.95);
   }

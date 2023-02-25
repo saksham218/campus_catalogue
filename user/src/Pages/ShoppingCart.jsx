@@ -20,12 +20,12 @@ const Cart = styled.div`
 
 const ShoppingCart= () => {
 
-    const cartItem_ = getCartItems().then((response) =>{console.log("-----------");console.log(response.data)} )
+    //const cartItem_ = getCartItems().then((response) =>{console.log("-----------");console.log(response.data)} )
 
     return (
         <Page>
             <Navbar1 />
-            <Searchbar1 />
+            {/* <Searchbar1 /> */}
             <Checkout />
             <Cart>
                 <Shopping_cart  />

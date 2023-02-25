@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion,spring } from "framer-motion";
 
-const Container_1 = styled.div`
+const Container_1 = styled(motion.div)`
 width: 17.2vw;
 height: 42.4vw;
 background-color: #D9D9D9;
@@ -41,7 +42,7 @@ opacity: 0.5;
 
 `
 
-const Button = styled.button`
+const Button = styled(motion.button)`
 height: 2vw;
 width: 10vw;
 background-color: #484848;
@@ -64,10 +65,13 @@ overflow: hidden;
 position: absolute;
 top: 9vw;
  left:1.5vw;
+ display: flex;
+    flex-direction: column;
+    gap: 2vw;
  `
 
 
-const Item = styled.div`
+const Item = styled(motion.div)`
 font-size: 1vw;
 line-height: 2vw;
 `
@@ -81,6 +85,11 @@ position: absolute;
 left: 13vw;
 top: 9vw;
 line-height: 2vw;
+
+display: flex;
+    flex-direction: column;
+    gap: 2vw;
+
 `
 const Cost = styled.div`
 font-size: 1vw;
@@ -88,7 +97,8 @@ font-size: 1vw;
 
 const Checkout = (props) => {
     return (
-        <Container_1>
+        <Container_1 transition={{type:"spring"}}
+        whileHover={{scale:1.01}}>
             <Title>
                 {props.Subtotal ? props.Subtotal : "Subtotal"}
 
@@ -99,21 +109,22 @@ const Checkout = (props) => {
             <Subtitle>
                 {props.Subtitle ? props.Subtitle : "(3 items)"}
             </Subtitle>
-            <Button>
+            <Button whileTap={{scale:0.8}} transition={{type:"spring"}}
+    whileHover={{scale:1.1}}>
                 {props.Button ? props.Button : "Proceed to Pay"}
             </Button>
             <ItemList>
 
-                <Item>
-                    {props.Item ? props.Item : "Item1"}
+                <Item  whileHover={{scale:1.08}}>
+                    {props.Item ? props.Item : "Order1"}
+                </Item>
+
+                <Item >
+                    {props.Item ? props.Item : "Order2"}
                 </Item>
 
                 <Item>
-                    {props.Item ? props.Item : "Item2"}
-                </Item>
-
-                <Item>
-                    {props.Item ? props.Item : "Item3"}
+                    {props.Item ? props.Item : "Order3"}
                 </Item>
             </ItemList>
             <PriceList>

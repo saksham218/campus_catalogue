@@ -13,7 +13,8 @@ const Page = styled.div`
     flex-direction: column;
     gap: 2vw;
     background-color: #c8c8c8;
-    height: 140vh;
+    /* height: 140vh; */
+    padding-bottom: 5vw;
 `
 
 const MainContents = styled.div`

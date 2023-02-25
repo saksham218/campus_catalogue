@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { BsSearch } from "react-icons/bs";
 
 const Searchbar = styled.input`
-  width: 100%;
+  /* width: 100%; */
   height: 3.5vw;
 
   text-align: left;
-  padding-left: 15vw;
+  padding-left: 8vw;
 
   font-family: 'Inter';
     font-style: normal;
@@ -16,7 +17,7 @@ const Searchbar = styled.input`
 `
 
 export const Searchbar1 = () => {
-  return <Searchbar placeholder="Search for shops nearby" />;
+  return <Searchbar placeholder=" Search for shops nearby" />;
 };
 
 export const Searchbar2 = () => {

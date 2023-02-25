@@ -56,25 +56,28 @@ function Navbar1(props) {
   return (
     <Navbar>
         <Description>
+        <Link to="/" style={{display: "flex",flexDirection: "row",alignItems: "center",gap: "1vw"}}>
+
             <img src={Profile} alt={Profile} style={{width: "4.44vw", height: "4.44vw"}} />
             <img src={ProfileText} alt={ProfileText} style={{width: "25.347vw", height: "2.91vw"}} />
+        </Link>
         </Description>
         <Option>
-            <img src= {Cart} alt={Cart} />
+            <img src= {Cart} alt={Cart} style={{width: "3vw",height: "3vw"}} />
             <Text>
                 Cart
             </Text>
         </Option>
         <Option>
-            <img src= {Notifications} alt={Notifications} />
+            <img src= {Notifications} alt={Notifications} style={{width: "3vw",height: "3vw"}} />
             <Text>
                 Notifications
             </Text>
         </Option>
         <Option>
-            <img src= {User} alt={User} />
+            <img src= {props.shop.basic_info.image?props.shop.basic_info.image:User} alt={User}  style={{width: "3vw",height: "3vw"}} />
             <Text>
-                User Name
+            {props.shop.basic_info.name?props.shop.basic_info.name:"User Name"}
             </Text>
         </Option>
     </Navbar>

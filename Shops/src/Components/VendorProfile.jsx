@@ -40,13 +40,16 @@ const NormalText = styled.div`
 `
 
 const VendorProfile = (props) => {
+  const shop = props.shop;
   return (
     <Box>
-        <img src={VendorPic} alt="" />
-        <h1>{props.name?props.name:"Vendor Name"}</h1>
+      
+
+        <img src={shop.basic_info.image?shop.basic_info.image :VendorPic} alt="" />
+        <h1>{shop.basic_info.name?shop.basic_info.name:"Vendor Name"}</h1>
         <br></br>
-        <Title>PH No.--- <NormalText>{props.phone?props.phone:"1234567890"}</NormalText></Title>
-        <Title>EMAIL--- <NormalText>{props.email?props.email:"xxxxxxxxxxxx@gmail.com"}</NormalText></Title>
+        <Title>PH No.--- <NormalText>{shop.basic_info.phone?shop.basic_info.phone:"1234567890"}</NormalText></Title>
+        <Title>EMAIL--- <NormalText>{shop.basic_info.email?shop.basic_info.email:"xxxxxxxxxxxx@gmail.com"}</NormalText></Title>
     </Box>
   )
 }

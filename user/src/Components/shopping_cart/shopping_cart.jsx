@@ -1,8 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
 import cart from '../../assets/shop.jpg';
 import remove from '../../assets/Path.png'
-import {getOrders} from '../../apis/api';
+import {getCartItems} from '../../apis/api';
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
 background-color: grey;
@@ -72,7 +72,7 @@ const Count =styled.div`
     text-align: center;
 `
 
-const Delete=styled.div`
+const Delete=styled.button`
     height: 1.7vw;
     width: 1.7vw;
     background-color: white;
@@ -88,29 +88,29 @@ const Delete_btn=styled.img`
     left:0.4vw;
 `
 const shopping_cart = (props) => {
-    const [counter,setcounter]=useState(1)
 
-    props.title
+    const [counter,setcounter] = useState(1);
+
     return (
         <Container>
             <Title>
                 <Heading>
-                    {props.title?props.title : "shopping cart"}
+                    {props.title?props.title : "Shopping cart"}
                 </Heading>
             </Title>
             <List>
                 <Item src={cart}/>
-                <Item_name>{props.Item_name?props.Item_name:"Item 1 name"}</Item_name>
+                <Item_name>{props.Item_name?props.Item_name:"Order 1"}</Item_name>
                 <Shop_name>{props.Shop_name?props.Shop_name:"Shop name"}</Shop_name>
                 <Price>{props.price?props.price:"$ 25"}</Price>
-                <Counter>
+                {/* <Counter>
                     <button disabled={counter<2} onClick={()=>setcounter(counter-1)}>-</button>
                     <button >{counter}</button>
                     <button onClick={()=>setcounter(counter+1)}>+</button>
                 </Counter>
-                <Delete>
+                <Delete onClick={()=> setcounter(0)} >
                     <Delete_btn src={remove}/>
-                </Delete>
+                </Delete> */}
             </List>
         </Container>
     );

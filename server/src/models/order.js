@@ -16,7 +16,7 @@ const Order_Schema = mongoose.Schema(
             required: true
         },
         total: { type: Number, required: true, default: 0 },
-        items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+        items: [{item:{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' },quantity: { type: Number, required: true, default: 1  }}],
         status: {
             type: String,
             enum: ['Unplaced', 'Pending', 'Accepted', 'Ready', 'Rejected', 'Delivered', 'Cancelled'],

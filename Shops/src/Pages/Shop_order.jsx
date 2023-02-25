@@ -8,14 +8,14 @@ const Pages = styled.div`
     flex-direction: column;
     `
 
-const Shop_Order = () => {
+const Shop_Order = (props) => {
 
     return (
 
         <Pages>
-            <Navbar1 />
-            <Shop_available />
-            <List_screen />
+            <Navbar1 shop={props.shop}/>
+            <Shop_available shop={props.shop}/>
+            <List_screen shop={props.shop}/>
         </Pages>
 
     );

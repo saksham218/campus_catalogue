@@ -3,6 +3,9 @@ import * as Components from "../components/components";
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Backend_URL } from "../apis/api";
+import { SiMicrosoftoutlook } from "react-icons/si";
+import { FaGoogle } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
 // import MicrosoftLogin from "react-microsoft-login";
 
 
@@ -16,6 +19,7 @@ const Body = styled.div`
   height: 100vh;
   margin: -20px 0 50px;
   scale: 1.3;
+  overflow: hidden;
   `
 
 function Signup() {
@@ -28,33 +32,41 @@ function Signup() {
     window.location.replace(`${Backend_URL}/auth/microsoft`);
   };
 
+  const login_G = (e) => {
+    e.preventDefault();
+    // alert("hello");
+    console.log(`${Backend_URL}/auth/google`);
+    window.location.replace(`${Backend_URL}/auth/google`);
+  };
+
   return (
     <Body>
       <Components.Container>
         <Components.SignUpContainer signingIn={signIn}>
           <Components.Form>
-            <Components.Title>Create Account</Components.Title>
-            <Components.Input type="text" placeholder="Name" />
-            <Components.Input type="email" placeholder="Email" />
-            <Components.Input type="password" placeholder="Password" />
-            <Components.Input type="password" placeholder="Confirm Password" />
-            <Components.Button>Sign In</Components.Button>
+          <Components.Title>Sign in for Vendors</Components.Title>
+            <br></br>
+            <br></br>
+            <Components.Button onClick={login_G} ><FaGoogle/> &nbsp;  Sign In with Google</Components.Button>
           </Components.Form>
         </Components.SignUpContainer>
         <Components.SignInContainer signingIn={signIn}>
           <Components.Form>
-            <Components.Title>Sign in</Components.Title>
-            <button onClick={login}> click me</button>
-            <Components.Anchor href="/recovery">Forgot your password?</Components.Anchor>
-            <Components.Button>Sign In</Components.Button>
+            <Components.Title>Sign in For Students</Components.Title>
+            <br></br>
+            {/* <Components.Input type="email" placeholder="Email" /> */}
+            {/* <button onClick={login}> click me</button> */}
+            {/* <Components.Anchor href="/recovery">Forgot your password?</Components.Anchor> */}
+            <br></br>
+            <Components.Button onClick={login} ><SiMicrosoftoutlook/> &nbsp;  Sign In with Outlook</Components.Button>
           </Components.Form>
         </Components.SignInContainer>
         <Components.OverlayContainer signingIn={signIn}>
           <Components.Overlay signingIn={signIn}>
             <Components.LeftOverlayPanel signingIn={signIn}>
-              <Components.Title>Welcome Back!</Components.Title>
+              <Components.Title>Hey There!!!</Components.Title>
               <Components.Paragraph>
-                To keep connected with us please login with your personal info
+                Campus Residents or Students click below ...
               </Components.Paragraph>
               <Components.GhostButton_1 onClick={() => toggle(true)}>
                 Sign In
@@ -63,7 +75,7 @@ function Signup() {
             <Components.RightOverlayPanel signingIn={signIn}>
               <Components.Title_2>Hello, Friend!</Components.Title_2>
               <Components.Paragraph_1>
-                Enter your personal details and start journey with us
+                SH0p_OwNerS click below ...
               </Components.Paragraph_1>
               <Components.GhostButton onClick={() => toggle(false)}>
                 Sign In with other options

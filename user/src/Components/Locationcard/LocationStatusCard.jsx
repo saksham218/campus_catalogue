@@ -32,6 +32,7 @@ const Container = styled(motion.div)`
     flex-direction: column;
     gap: 2.6vw;
     /* justify-content: center; */
+    align-items: center;
     padding: 1.3vw;
     background-color: white;
     border-radius: 3px;
@@ -105,7 +106,8 @@ const LocationStatusCard = (props) => {
     variants={container}
     initial="hidden"
     animate="visible"
-    transition={{ease: easeOut}}
+    transition={{ease: easeOut,type:"spring"}}
+    whileTap={{scale:1.01}}
     >
         <Box
         className='item'

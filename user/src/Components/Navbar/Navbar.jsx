@@ -6,6 +6,8 @@ import Cart from "../../Assets/Cart.png";
 import Notifications from "../../Assets/Notifications.png";
 import User from "../../Assets/User.png";
 import { Link } from 'react-router-dom';
+import { getBasicInfo } from "../../apis/api"
+import { useState } from 'react';
 
 const Navbar = styled.div`
     /* width: 82vw; */
@@ -49,25 +51,32 @@ const Text = styled.div`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 2vw;
+    font-size: 1.4vw;
     color: #000000;
+    text-decoration: none;
 `
 
 function Navbar1(props) {
 
+    const [userName, setUserName] = useState('User Name')
+    getBasicInfo().then((res) => setUserName(res.data.name))
 
-return (
+  return (
     <Navbar>
         <Description>
-            <img src={Profile} alt={Profile} style={{height:"4vw",width:"5vw"}}/>
-            <img src={ProfileText} alt={ProfileText} style={{height:"3vw",width:"28vw"}}/>
+        <Link to="/" style={{display: "flex",flexDirection: "row",alignItems: "center",gap: "1vw"}}>
+            <img src={Profile} alt={Profile} style={{height:"3.5vw",width:"3.5vw"}}/>
+            <img src={ProfileText} alt={ProfileText} style={{height:"2.5vw",width:"13vw"}}/>
+        </Link>
         </Description>
+        <Link to="/ShoppingCart" style={{textDecoration: "none"}} >
         <Option>
             <img src= {Cart} alt={Cart} style={{height:"2vw",width:"2vw"}}/>
             <Text>
-                <Link to="/ShoppingCart">Cart</Link>
+                Cart
             </Text>
         </Option>
+        </Link>
         <Option>
             <img src= {Notifications} alt={Notifications} style={{height:"2vw",width:"2vw"}}/>
             <Text>
@@ -75,9 +84,9 @@ return (
             </Text>
         </Option>
         <Option>
-            <img src= {User} alt={User} style={{height:"2vw",width:"2vw"}}/>
+            <img src= {User} alt={User} style={{height:"3vw",width:"3vw"}}/>
             <Text>
-                User Name
+                {userName}
             </Text>
         </Option>
     </Navbar>

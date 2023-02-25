@@ -76,10 +76,10 @@ const updateOrderCustomer = async (req, res) => {
 
         var total = 0;
         for (let i = 0; i < items.length; i++) {
-            const item = await Item.findById(items[i]);
+            const item = await Item.findById(items[i].item);
             if (!item) return res.status(404).json({ message: 'Item not found' });
             if (item.shop.toString() !== orderFromDB.shop.toString()) return res.status(401).json({ message: 'This item does not belong to your shop' });
-            total += item.price;
+            total += item.price * items[i].quantity;
         }
         orderFromDB.total = total;
 

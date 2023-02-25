@@ -75,18 +75,16 @@ const Button = styled.button`
   border: 1px solid #000000;
 `;
 
-const ShopDetails2 = () => {
-  const [value1, setValue1] = useState(null);
-  const [value2, setValue2] = useState(null);
+const ShopDetails2 = (props) => {
   const [bank, setBank] = useState(true);
 
-  const [day1, setday1] = useState(false);
-  const [day2, setday2] = useState(false);
-  const [day3, setday3] = useState(false);
-  const [day4, setday4] = useState(false);
-  const [day5, setday5] = useState(false);
-  const [day6, setday6] = useState(false);
-  const [day7, setday7] = useState(false);
+  // const [day1, setday1] = useState(false);
+  // const [day2, setday2] = useState(false);
+  // const [day3, setday3] = useState(false);
+  // const [day4, setday4] = useState(false);
+  // const [day5, setday5] = useState(false);
+  // const [day6, setday6] = useState(false);
+  // const [day7, setday7] = useState(false);
 
   return (
       <Container>
@@ -97,10 +95,10 @@ const ShopDetails2 = () => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
                 label="Start Time"
-                value={value1}
+                value={props.open}
                 onChange={(newValue) => {
-                  console.log(newValue)
-                  setValue1(newValue);
+                  console.log(newValue.$d);
+                  props.setOpen(newValue.$d);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -109,9 +107,10 @@ const ShopDetails2 = () => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
                 label="End Time"
-                value={value2}
+                value={props.close}
                 onChange={(newValue) => {
-                  setValue2(newValue);
+                  console.log(newValue.$d);
+                  props.setClose(newValue.$d);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -203,26 +202,35 @@ const ShopDetails2 = () => {
           <FileBase64
                         type="file"
                         multiple={false}
-                        onDone={({ base64 }) => console.log(base64)}
+                        onDone={({ base64 }) => props.setImage(base64)}
                         />
                         </div>
         </Items>
         <Items>
           <Subtitle>Add payment methods</Subtitle>
           <div style={{display:"flex",flexDirection:"row",gap: "0.8vw"}}>
-            <div onClick={()=>setBank(true)}>Bank Account</div>
-            <div onClick={()=>setBank(false)}>UPI</div>
+            <div onClick={()=>props.setIsBank(true)}>Bank Account</div>
+            <div onClick={()=>props.setIsBank(false)}>UPI</div>
           </div>
-          {bank?<div>
-            <Input placeholder="Enter Account Number" />
-            <Input placeholder="Enter IFSC Code" />
-            <Input placeholder="Enter Account Holder Name" />
+          {props.is_bank?<div>
+            <Input placeholder="Enter Account Number" value={props.bank_details.accno} onChange={(e)=>{
+              props.setBankDetails({...props.bank_details,accno:e.target.value})
+            }}/>
+            <Input placeholder="Enter IFSC Code" value={props.bank_details.ifsc} onChange={(e)=>{
+              props.setBankDetails({...props.bank_details,ifsc:e.target.value})
+            }}/>
+            <Input placeholder="Enter Account Holder Name" value={props.bank_details.acc_holder_name} onChange={(e)=>{
+              props.setBankDetails({...props.bank_details,acc_holder_name:e.target.value})
+            }}/>
           </div>:<div>
-            <Input placeholder="Enter UPI ID" />
+            <Input placeholder="Enter UPI ID" value={props.VPA} onChange={(e)=>props.setVPA(e.target.value)}/>
           </div>}
         </Items>
         <button
           style={{backgroundColor: "#9B9B9B",border: "none", borderRadius: "0.5vw", padding: "0.5vw  3vw"}}
+          onClick={(e) => {
+            props.firstdetail(e);
+          }}
         >
           <h2>SAVE</h2>
         </button>

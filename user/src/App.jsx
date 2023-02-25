@@ -8,13 +8,14 @@ import Forgot_password from './pages/ForgotPassword';
 import OpeningPage from './Pages/OpeningPage';
 import personalizeShops from './Pages/personalizeShops';
 import SplashScreen from './Pages/SplashScreen';
-import shopMenu from './Pages/shopMenu1';
-// import shopCatalogue from './Pages/shopCatalogue';
+import ShopMenu1 from './Pages/shopMenu1';
+import ShopCatalogue from './Pages/shopCatalogue';
 import Home from './Pages/Home';
 import SignIn from './pages/Signup';
 import DropPage from './Pages/DropPage';
 import ShoppingCart from './Pages/ShoppingCart';
 // import Review from './Pages/Review_page';
+import "./App.css";
 function App() {
   return (
     <div>
@@ -25,8 +26,8 @@ function App() {
            <Route exact path="/d" element={<OpeningPage/>} />
           <Route exact path="/personalizeShops" element={<personalizeShops/> } />
           <Route exact path="/Splash" element={<SplashScreen/>} />
-          <Route exact path="/shopMenu" element={<shopMenu/>}  />
-          {/* <Route exact path='/ShopCatalogue/:id' element={<shopCatalogue />} /> */}
+          <Route exact path='/ShopCatalogue/:id' element={<ShopCatalogue />} />
+          <Route exact path="/shopMenu/:id" element={<ShopMenu1/>} />
           <Route exact path="/ShoppingCart" element={<ShoppingCart />} />
           <Route exact path="/print" element={<DropPage/>} />
           <Route exact path="/signin" element={<SignIn/>} />

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Itempic from "../Assets/Itempic.png";
+import Checkbox from '@mui/material/Checkbox';
+import { useState } from 'react';
 
 const Box = styled(motion.div)`
     display: flex;
@@ -50,9 +52,34 @@ const NormalText = styled.div`
     color: black;
 `
 
+const Counter=styled.div`
+    /* grid-template-columns: 3.33vw 3.33vw 3.33vw;
+    position: absolute;
+    display: grid;
+    left: 10vw;
+    top:6vw;
+    width: 10vw;
+    height: 2vw;
+    background-color: white; */
+    display: flex;
+
+`
+
 const ItemCard = (props) => {
 
     var text = "Add to Cart";
+
+    const [counter,setcounter] = useState(0);
+
+    const increase = () => {
+        setcounter(counter+1);
+        props.handleIncrement(props.idx)
+    }
+
+    const decrease = () => {
+        setcounter(counter-1);
+        props.handleDecrement(props.idx);
+    }
 
   return (
     <Box>
@@ -69,9 +96,14 @@ const ItemCard = (props) => {
                     {props.preptime?props.preptime:"20mins"}
                 </NormalText>
                 <br></br>
-                <button style={{borderRadius: "0.52vw",backgroundColor: "none",padding: "0.3vw 0.5vw"}} onClick={()=>{text="Added"}} >
+                {/* <button style={{borderRadius: "0.52vw",backgroundColor: "none",padding: "0.3vw 0.5vw"}} onClick={()=>{text="Added"}} >
                     {text}
-                </button>
+                </button> */}
+                <Counter>
+                    <button disabled={counter<1} onClick={()=> decrease()}>-</button>
+                    <button >{counter}</button>
+                    <button onClick={() => increase()}>+</button>
+                </Counter>
             </Description>
         </Item>
         <CostDescript>
@@ -81,6 +113,11 @@ const ItemCard = (props) => {
             <NormalText style={(props.availability=="Unavailable")?{color: "red"}:{color: "black"}} >
                 {props.availability}
             </NormalText>
+            {/* <Checkbox
+            checked={checked}
+            onChange={handleChange}
+            inputProps={{ 'aria-label': 'controlled' }}
+            /> */}
         </CostDescript>
     </Box>
   )

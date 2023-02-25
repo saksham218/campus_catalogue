@@ -110,7 +110,7 @@ function Cards(props) {
                 {props.address}
             </Heading_Text>
             <br></br>
-            <Button whileHover={{scale: 1.05}} transition={{type: spring}} ><Heading_Text >{props.status?props.status:"Open Now"}</Heading_Text></Button>
+            <Button whileHover={{scale: 1.05}} whileTap={{scale:0.8}} transition={{type: spring}} ><Heading_Text >{props.status?props.status:"Open Now"}</Heading_Text></Button>
         </Description>
         <Other_Text
         className='item'
